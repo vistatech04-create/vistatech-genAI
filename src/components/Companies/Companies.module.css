@@ -1,0 +1,192 @@
+/* Two rows of company names sliding past in opposite directions.
+   Twenty names as a static block is a wall; moving, it reads as a list that
+   keeps going, and it takes a fraction of the height. */
+.section {
+  position: relative;
+  z-index: 1;
+  background: var(--sand);
+  padding-block: 48px;
+}
+
+@media (min-width: 900px) { .section { padding-block: 72px; } }
+
+/* Proof on the left, the form on the right. Stacked on a phone, with the
+   form last, so someone reads the evidence before being asked for a number. */
+.split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 34px;
+  align-items: start;
+}
+
+@media (min-width: 940px) {
+  .split { grid-template-columns: 1.08fr 0.92fr; gap: 52px; }
+}
+
+/* A grid column will not shrink below its content by default, and the
+   scrolling rows inside are max-content wide. Without this the column blows
+   the page open sideways. */
+.split > * { min-width: 0; }
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+
+.heading {
+  max-width: 22ch;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(26px, 4.2vw, 40px);
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
+
+.heading b { font-weight: 600; }
+
+.sub {
+  max-width: 54ch;
+  margin-top: 14px;
+  font-size: clamp(15px, 1.8vw, 16.5px);
+  color: var(--ink-soft);
+}
+
+/* ---- the two results ------------------------------------------------
+   Side by side at every width. These are the numbers a visitor came for,
+   so they are the biggest type in the section.                          */
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 620px;
+  margin-top: 30px;
+}
+
+@media (min-width: 700px) { .stats { gap: 28px; margin-top: 38px; } }
+
+.divider {
+  align-self: stretch;
+  background: rgba(40, 8, 32, 0.14);
+}
+
+.stat { text-align: center; }
+
+.num {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(42px, 8.4vw, 72px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The gold stroke, same move as the headline. Its own class, not a
+   descendant selector: `.num span` also matched the unit and drew a second,
+   smaller stroke under the % sign. */
+.stroke {
+  background-image: linear-gradient(var(--gold), var(--gold));
+  background-repeat: no-repeat;
+  background-position: 0 96%;
+  background-size: 100% 0.1em;
+}
+
+.unit { font-size: 0.52em; letter-spacing: -0.02em; }
+
+.star {
+  font-size: 0.38em;
+  font-weight: 700;
+  color: var(--flame);
+  vertical-align: super;
+  background: none;
+}
+
+.lab {
+  margin-top: 10px;
+  font-size: clamp(13px, 1.7vw, 15px);
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.footnote {
+  max-width: 58ch;
+  margin-top: 20px;
+  margin-inline: auto;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-faint);
+  text-align: center;
+}
+
+/* ---- the moving rows ----------------------------------------------- */
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 28px;
+  /* The rows are far wider than the screen, so they have to be clipped here.
+     The mask below only softens the edges; it does not stop the page from
+     scrolling sideways. */
+  overflow: hidden;
+  /* Names fade out at both edges instead of being cut off mid-word. */
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+@media (min-width: 900px) { .rows { gap: 14px; margin-top: 40px; } }
+
+.row {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  animation: slide 46s linear infinite;
+}
+
+/* The second row runs the other way, so the eye has something to catch. */
+.reverse { animation-direction: reverse; animation-duration: 54s; }
+
+.rows:hover .row { animation-play-state: paused; }
+
+/* Each row is rendered twice, so sliding by exactly one copy loops seamlessly. */
+@keyframes slide {
+  to { transform: translateX(calc(-50% - 6px)); }
+}
+
+.chip {
+  flex: none;
+  padding: 12px 22px;
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  border: 1px solid rgba(40, 8, 32, 0.07);
+  box-shadow: 0 8px 20px -16px rgba(40, 8, 32, 0.5);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+@media (min-width: 900px) { .chip { padding: 13px 26px; font-size: 16px; } }
+
+/* No motion: the rows sit still and wrap onto as many lines as they need. */
+@media (prefers-reduced-motion: reduce) {
+  .rows { mask-image: none; -webkit-mask-image: none; }
+  .row { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+}
+
+/* ---- two column overrides ------------------------------------------
+   These share specificity with the base rules above, so they have to sit
+   at the end of the file to take effect. Centred while the content is the
+   full width; left aligned once it becomes a column beside the form.   */
+@media (min-width: 940px) {
+  .head { align-items: flex-start; text-align: left; }
+  .heading { max-width: 17ch; }
+  .stats { margin-inline: 0; }
+  .footnote { margin-inline: 0; text-align: left; }
+}

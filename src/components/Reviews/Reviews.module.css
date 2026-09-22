@@ -1,0 +1,86 @@
+/* Google reviews, kept looking like Google reviews. Proof is most believable
+   in the shape people already recognise it in. */
+.section {
+  position: relative;
+  z-index: 1;
+  background: var(--sand);
+  padding-block: 52px;
+}
+
+@media (min-width: 900px) { .section { padding-block: 80px; } }
+
+.head { display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+.heading {
+  max-width: 18ch;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(27px, 4.4vw, 42px);
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
+
+.accent {
+  font-weight: 600;
+  background-image: linear-gradient(var(--gold), var(--gold));
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.11em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.sub { max-width: 46ch; margin-top: 14px; font-size: clamp(15px, 1.8vw, 16.5px); color: var(--ink-soft); }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+@media (min-width: 680px) { .grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 46px; } }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 20px;
+  border-radius: 18px;
+  background: var(--paper);
+  border: 1px solid rgba(40, 8, 32, 0.09);
+}
+
+.who { display: flex; align-items: center; gap: 12px; }
+
+.avatar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--gold-wash);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15.5px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.meta { display: flex; align-items: center; gap: 8px; margin-top: 3px; }
+
+.stars { display: flex; gap: 2px; color: #E8A317; }
+
+.time { font-size: 12.5px; color: var(--ink-faint); }
+
+.text { font-size: 15px; line-height: 1.55; color: var(--ink-soft); }

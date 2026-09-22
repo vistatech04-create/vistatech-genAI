@@ -1,0 +1,441 @@
+<title>Vista Tech Block System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+Tamil:wght@400;600&display=swap">
+
+<style>
+:root{
+  color-scheme: light;
+
+  /* ---- Colour ---------------------------------------------------- */
+  --ink:      #280820;   /* arrow body, sampled from the logo           */
+  --ink-2:    #452038;   /* lifted plum. dark surfaces                 */
+  --ink-70:   #6A4A61;   /* secondary text on paper                    */
+  --paper:    #F7F2EA;   /* warm oat. the page ground                  */
+  --paper-2:  #EDE4D6;   /* sand. alternate band                       */
+  --white:    #FFFFFF;
+  --flame:    #F85830;   /* arrow tips. THE action colour. buttons only*/
+  --flame-dk: #DE3F19;   /* flame, pressed                             */
+  --gold:     #D8B820;   /* the peak. highlight + marks. never a button*/
+  --gold-soft:#F6E9B6;
+  --money:    #1E7A4F;   /* only for money saved                       */
+  --line:     rgba(40,8,32,.14);
+
+  /* ---- Type ------------------------------------------------------ */
+  --display: "Plus Jakarta Sans", "Noto Sans Tamil", system-ui, sans-serif;
+  --body:    "Nunito Sans", "Noto Sans Tamil", system-ui, sans-serif;
+  --mono:    "JetBrains Mono", ui-monospace, monospace;
+
+  /* ---- Form ------------------------------------------------------ */
+  --r-card: 20px;
+  --r-tile: 12px;
+  --r-pill: 999px;
+  --bd: 2px solid var(--ink);
+  --bd-hair: 1px solid var(--line);
+  --block: 6px 6px 0 var(--ink);          /* solid offset. the motif   */
+  --block-sm: 4px 4px 0 var(--ink);
+  --block-flame: 6px 6px 0 var(--flame);
+  --lift: 0 14px 30px -18px rgba(40,8,32,.45);  /* used sparingly     */
+
+  --gut: 20px;
+  --max: 1140px;
+}
+
+*{ box-sizing: border-box; }
+body{
+  margin:0; background: var(--paper); color: var(--ink);
+  font-family: var(--body); font-size:17px; line-height:1.62;
+  -webkit-font-smoothing: antialiased;
+}
+img{ max-width:100%; display:block; }
+h1,h2,h3,h4{ font-family: var(--display); font-weight:800; line-height:1.08;
+  letter-spacing:-.022em; text-wrap:balance; margin:0; }
+p{ margin:0; }
+a{ color:inherit; }
+:focus-visible{ outline:3px solid var(--flame); outline-offset:3px; border-radius:4px; }
+
+/* ---- shared -------------------------------------------------------- */
+.wrap{ width:100%; max-width:var(--max); margin-inline:auto; padding-inline:var(--gut); }
+.band{ padding-block: 72px; }
+.band--paper{ background:var(--paper); }
+.band--sand { background:var(--paper-2); }
+.band--ink  { background:var(--ink); color:var(--paper); }
+.band--ink h1,.band--ink h2,.band--ink h3{ color:var(--white); }
+
+/* the 4-square block mark, lifted straight off the logo */
+.mark{ display:inline-grid; grid-template-columns:repeat(2,5px); gap:2px; vertical-align:middle; }
+.mark i{ width:5px; height:5px; background:var(--flame); display:block; }
+.mark i:nth-child(2){ background:var(--gold); }
+.mark i:nth-child(3){ background:var(--ink); }
+.mark i:nth-child(4){ background:var(--flame); }
+.band--ink .mark i:nth-child(3){ background:var(--paper); }
+
+.eyebrow{ font-family:var(--mono); font-size:11.5px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-70);
+  display:flex; align-items:center; gap:9px; margin-bottom:16px; }
+.band--ink .eyebrow{ color:var(--gold); }
+
+.h-xl{ font-size: clamp(31px, 7.4vw, 58px); }
+.h-lg{ font-size: clamp(27px, 5.6vw, 40px); }
+.lede{ font-size: clamp(16.5px, 2.1vw, 19px); color:var(--ink-70); max-width:52ch; }
+.band--ink .lede{ color:#D8C6D2; }
+
+/* ---- buttons ------------------------------------------------------- */
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:9px;
+  min-height:54px; padding:0 30px; border-radius:var(--r-pill);
+  font-family:var(--display); font-weight:800; font-size:16px; letter-spacing:-.01em;
+  text-decoration:none; cursor:pointer; border:2px solid transparent;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease; }
+.btn--primary{ background:var(--flame); color:var(--ink); border-color:var(--ink);
+  box-shadow: var(--block-sm); }
+.btn--primary:hover{ background:var(--flame-dk); transform:translate(-2px,-2px);
+  box-shadow: 6px 6px 0 var(--ink); }
+.btn--primary:active{ transform:translate(2px,2px); box-shadow:2px 2px 0 var(--ink); }
+.btn--ghost{ background:transparent; color:var(--ink); border-color:var(--ink); }
+.btn--ghost:hover{ background:var(--ink); color:var(--paper); }
+.band--ink .btn--ghost{ color:var(--white); border-color:rgba(255,255,255,.45); }
+.band--ink .btn--ghost:hover{ background:var(--white); color:var(--ink); border-color:var(--white); }
+.btn--sm{ min-height:44px; font-size:14.5px; padding:0 20px; }
+.btn-note{ font-size:13.5px; color:var(--ink-70); margin-top:12px; }
+
+/* ---- header -------------------------------------------------------- */
+.top{ border-bottom:2px solid var(--ink); background:var(--paper); }
+.top-in{ display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding-block:14px; }
+.top img{ height:52px; width:auto; }
+.top .tag{ font-family:var(--mono); font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-70); }
+
+/* ---- hero ---------------------------------------------------------- */
+.hero-grid{ display:grid; gap:44px; grid-template-columns:1fr; align-items:start; }
+@media (min-width: 900px){ .hero-grid{ grid-template-columns: 1.02fr .98fr; gap:56px; } }
+.hero h1 span{ background:linear-gradient(transparent 62%, var(--gold-soft) 62%);
+  padding-inline:2px; }
+.hero-cta{ display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+.hero-cta .btn{ flex:1 1 240px; }
+.tamil{ font-family:"Noto Sans Tamil",var(--body); font-size:15.5px;
+  color:var(--ink-70); margin-top:20px; display:flex; gap:9px; align-items:center; }
+
+/* the stair: the logo's rising blocks, used as the real 100-day timeline */
+.stair{ background:var(--white); border:var(--bd); border-radius:var(--r-card);
+  box-shadow:var(--block); padding:24px; }
+.stair-h{ font-family:var(--mono); font-size:11px; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--ink-70); margin-bottom:18px; }
+.step{ display:grid; grid-template-columns:1fr; gap:6px; margin-bottom:16px; }
+.step:last-of-type{ margin-bottom:0; }
+.step-bar{ height:26px; border:2px solid var(--ink); border-radius:4px;
+  display:flex; align-items:center; padding-inline:9px;
+  font-family:var(--mono); font-size:10.5px; font-weight:700; letter-spacing:.06em; }
+.step-txt{ font-size:14.5px; line-height:1.4; }
+.step-txt b{ font-family:var(--display); font-weight:800; }
+.s1 .step-bar{ width:34%; min-width:112px; background:var(--paper-2); }
+.s2 .step-bar{ width:58%; min-width:132px; background:var(--ink); color:var(--paper); }
+.s3 .step-bar{ width:78%; background:var(--gold); }
+.s4 .step-bar{ width:100%; background:var(--flame); }
+
+.statbar{ display:grid; grid-template-columns:repeat(2,1fr); gap:0;
+  border:var(--bd); border-radius:var(--r-card); overflow:hidden; margin-top:44px;
+  background:var(--white); }
+@media (min-width:760px){ .statbar{ grid-template-columns:repeat(4,1fr); } }
+.stat{ padding:20px 18px; border-right:2px solid var(--ink); border-bottom:2px solid var(--ink); }
+.stat:nth-child(2n){ border-right:0; }
+.stat:nth-child(n+3){ border-bottom:0; }
+@media (min-width:760px){
+  .stat{ border-bottom:0; } .stat:nth-child(2n){ border-right:2px solid var(--ink); }
+  .stat:last-child{ border-right:0; }
+}
+.stat b{ display:block; font-family:var(--display); font-weight:800;
+  font-size:clamp(26px,3.4vw,34px); letter-spacing:-.03em; font-variant-numeric:tabular-nums; }
+.stat span{ font-size:13px; color:var(--ink-70); line-height:1.35; display:block; margin-top:3px; }
+.stat:nth-child(1) b{ color:var(--flame); }
+.stat:nth-child(3) b{ color:var(--gold); }
+
+/* ---- proof band ---------------------------------------------------- */
+.quotes{ display:grid; gap:18px; grid-template-columns:1fr; margin-top:36px; }
+@media (min-width:820px){ .quotes{ grid-template-columns:repeat(3,1fr); } }
+.quote{ background:var(--ink-2); border:2px solid rgba(255,255,255,.16);
+  border-radius:var(--r-card); padding:24px; display:flex; flex-direction:column; gap:14px; }
+.quote .res{ font-family:var(--display); font-weight:800; font-size:19px;
+  color:var(--gold); line-height:1.22; }
+.quote p{ font-size:15.5px; color:#E4D6E0; line-height:1.58; flex:1; }
+.who{ display:flex; align-items:center; gap:11px; padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.16); }
+.av{ width:38px; height:38px; border-radius:50%; background:var(--flame);
+  display:grid; place-items:center; font-family:var(--display); font-weight:800;
+  color:var(--ink); font-size:15px; flex:none; }
+.who div{ font-size:13.5px; line-height:1.3; }
+.who b{ display:block; color:var(--white); font-weight:700; }
+.who span{ color:#B79FB1; }
+
+/* ---- offer band ---------------------------------------------------- */
+.offers{ display:grid; gap:22px; grid-template-columns:1fr; margin-top:36px; align-items:start; }
+@media (min-width:860px){ .offers{ grid-template-columns:.85fr 1.15fr; gap:26px; } }
+.card{ background:var(--white); border:var(--bd); border-radius:var(--r-card); padding:28px; }
+.card--hero{ box-shadow:var(--block); }
+.flag{ display:inline-block; font-family:var(--mono); font-size:10.5px; font-weight:700;
+  letter-spacing:.12em; text-transform:uppercase; padding:5px 11px; border-radius:var(--r-pill);
+  border:2px solid var(--ink); background:var(--gold); margin-bottom:14px; }
+.flag--flame{ background:var(--flame); color:var(--ink); }
+.card h3{ font-size:23px; margin-bottom:4px; }
+.card .sub{ font-size:14.5px; color:var(--ink-70); margin-bottom:20px; }
+.price{ display:flex; align-items:baseline; gap:4px; font-family:var(--display);
+  font-weight:800; letter-spacing:-.03em; font-variant-numeric:tabular-nums; }
+.price .cur{ font-size:22px; color:var(--ink-70); }
+.price .amt{ font-size:46px; }
+.rows{ margin:20px 0 0; border-top:1px solid var(--line); }
+.row{ display:flex; justify-content:space-between; gap:14px; padding:11px 0;
+  border-bottom:1px solid var(--line); font-size:15px; }
+.row span{ color:var(--ink-70); }
+.row b{ font-variant-numeric:tabular-nums; }
+.row--total{ border-bottom:0; padding-top:14px; }
+.row--total b{ font-family:var(--display); font-size:19px; }
+.row--save span,.row--save b{ color:var(--money); font-weight:700; }
+.ticks{ list-style:none; margin:20px 0 0; padding:0; display:grid; gap:11px; }
+.ticks li{ display:flex; gap:11px; font-size:15px; line-height:1.45; }
+.ticks .mark{ margin-top:6px; flex:none; }
+.adjust{ margin-top:22px; background:var(--gold-soft); border:2px solid var(--ink);
+  border-radius:var(--r-tile); padding:16px 18px; font-size:15px; line-height:1.5; }
+.adjust b{ font-family:var(--display); font-weight:800; }
+
+/* ---- spec sheet ---------------------------------------------------- */
+.spec{ border-top:2px solid var(--ink); background:var(--white); }
+.spec-h{ font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-70); margin:44px 0 16px; }
+.spec-h:first-of-type{ margin-top:0; }
+.swatches{ display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(148px,1fr)); }
+.sw{ border:1px solid var(--line); border-radius:var(--r-tile); overflow:hidden; }
+.sw .chip{ height:62px; }
+.sw .meta{ padding:9px 11px; font-size:12.5px; line-height:1.4; }
+.sw .meta b{ display:block; }
+.sw .meta code{ font-family:var(--mono); font-size:11px; color:var(--ink-70); }
+.specimen{ border:1px solid var(--line); border-radius:var(--r-tile); padding:18px;
+  display:grid; gap:14px; }
+.specimen > div{ display:flex; flex-wrap:wrap; align-items:baseline; gap:14px; }
+.specimen code{ font-family:var(--mono); font-size:10.5px; color:var(--ink-70);
+  letter-spacing:.06em; flex:none; width:128px; }
+.demo-row{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
+.box-row{ display:flex; flex-wrap:wrap; gap:22px; }
+.box{ width:120px; height:78px; background:var(--white); border-radius:var(--r-card);
+  display:grid; place-items:center; font-family:var(--mono); font-size:10px;
+  text-align:center; padding:8px; color:var(--ink-70); }
+.b1{ border:var(--bd); box-shadow:var(--block); }
+.b2{ border:var(--bd); }
+.b3{ border:var(--bd-hair); box-shadow:var(--lift); }
+.b4{ border:var(--bd); box-shadow:var(--block-flame); }
+
+.note{ background:var(--ink); color:var(--paper); font-size:14px; line-height:1.55;
+  padding:16px 18px; border-radius:var(--r-tile); display:flex; gap:12px; align-items:flex-start; }
+.note b{ color:var(--gold); }
+.foot{ border-top:2px solid var(--ink); padding-block:26px; font-size:13.5px;
+  color:var(--ink-70); }
+
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+
+<header class="top">
+  <div class="wrap top-in">
+    <img src="assets/vistatech-logo-tight.png" alt="Vista Tech">
+    <span class="tag">Brand direction &middot; sample</span>
+  </div>
+</header>
+
+<!-- ================= SECTION 1 : HERO ================= -->
+<section class="band band--paper hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow"><span class="mark"><i></i><i></i><i></i><i></i></span> 60 days &middot; Chennai &middot; Full stack analytics</p>
+      <h1 class="h-xl">Learn analytics in 60 days.<br>Pay half your fee <span>only after you get the job.</span></h1>
+      <p class="lede" style="margin-top:20px">
+        You don't need a computer science degree. You don't need to know coding.
+        Start with one week of live classes for &#8377;1,000, and see the teaching yourself
+        before you pay anything more.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn--primary" href="#offer">Start my &#8377;1,000 week</a>
+        <a class="btn btn--ghost" href="#offer">Talk to a mentor first</a>
+      </div>
+      <p class="btn-note">Takes 2 minutes. Classes are live, not recorded videos.</p>
+      <p class="tamil"><span class="mark"><i></i><i></i><i></i><i></i></span> தமிழில் கற்றுக்கொள்ளுங்கள். வகுப்புகள் நேரலையில்.</p>
+    </div>
+
+    <div class="stair">
+      <p class="stair-h">How the 100 days run</p>
+      <div class="step s1">
+        <div class="step-bar">WEEK 1</div>
+        <p class="step-txt"><b>Your trial week.</b> Six live classes for &#8377;1,000. Decide after.</p>
+      </div>
+      <div class="step s2">
+        <div class="step-bar">DAY 1&ndash;60</div>
+        <p class="step-txt"><b>You learn and build.</b> Excel, SQL, Python, Power BI, Tableau. One project that goes in your portfolio.</p>
+      </div>
+      <div class="step s3">
+        <div class="step-bar">DAY 61&ndash;71</div>
+        <p class="step-txt"><b>You meet the HR team.</b> Infinite HR puts your profile in front of real openings.</p>
+      </div>
+      <div class="step s4">
+        <div class="step-bar">OFFER LETTER</div>
+        <p class="step-txt"><b>You get hired.</b> Only now does the second half of your fee become due.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="statbar">
+      <div class="stat"><b>150+</b><span>students placed</span></div>
+      <div class="stat"><b>2,000+</b><span>placements by our HR partner</span></div>
+      <div class="stat"><b>20 yrs</b><span>our HR partner in hiring</span></div>
+      <div class="stat"><b>50%</b><span>of the fee waits till you're hired</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SECTION 2 : PROOF ================= -->
+<section class="band band--ink">
+  <div class="wrap">
+    <p class="eyebrow"><span class="mark"><i></i><i></i><i></i><i></i></span> Students who finished</p>
+    <h2 class="h-lg">Real names. Real companies.<br>Real salaries.</h2>
+    <p class="lede" style="margin-top:16px">Every person here started the same way you would. Most came from a non&#8209;IT background.</p>
+
+    <div class="quotes">
+      <div class="quote">
+        <p class="res">Data Analytics Intern, &#8377;22K stipend</p>
+        <p>Being a fresher, 1:1 training was very useful to me. Got selected as Data Analytics Intern with a stipend of 22K. Thank you Priya mam and Harish sir!</p>
+        <div class="who"><div class="av">R</div><div><b>Ramya S.</b><span>Fresher &middot; B.Com</span></div></div>
+      </div>
+      <div class="quote">
+        <p class="res">Junior Business Analyst, 3.4 LPA</p>
+        <p>Completed training with internship and got placed as Junior Business Analyst at 3.4 LPA. Thank you Naveen sir for your guidance and mentorship.</p>
+        <div class="who"><div class="av">A</div><div><b>Ajay Krishna</b><span>Placed &middot; Digil Technologies</span></div></div>
+      </div>
+      <div class="quote">
+        <p class="res">Junior Data Analyst in 2 months</p>
+        <p>We reached out to Vista Tech for our sister's training. With your guidance she got placed as a Junior Data Analyst within 2 months. Thank you for all your help!</p>
+        <div class="who"><div class="av">D</div><div><b>Deepa Murali</b><span>Google review</span></div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px"><a class="btn btn--primary" href="#offer">Start my &#8377;1,000 week</a></div>
+  </div>
+</section>
+
+<!-- ================= SECTION 3 : THE OFFER ================= -->
+<section class="band band--sand" id="offer">
+  <div class="wrap">
+    <p class="eyebrow"><span class="mark"><i></i><i></i><i></i><i></i></span> What it costs</p>
+    <h2 class="h-lg">Try one week first.<br>Then decide about the rest.</h2>
+    <p class="lede" style="margin-top:16px">Nobody should pay &#8377;15,000 to a place they have never sat in. So don't.</p>
+
+    <div class="offers">
+      <div class="card">
+        <span class="flag">Start here</span>
+        <h3>The trial week</h3>
+        <p class="sub">Six live classes. Same mentor, same batch, same teaching as the full course.</p>
+        <div class="price"><span class="cur">&#8377;</span><span class="amt">1,000</span></div>
+        <ul class="ticks">
+          <li><span class="mark"><i></i><i></i><i></i><i></i></span> Six live classes over one week</li>
+          <li><span class="mark"><i></i><i></i><i></i><i></i></span> Ask the mentor anything, live</li>
+          <li><span class="mark"><i></i><i></i><i></i><i></i></span> Walk away after, with no pressure</li>
+        </ul>
+        <a class="btn btn--primary btn--sm" style="margin-top:22px;width:100%" href="#">Book my week &#8377;1,000</a>
+      </div>
+
+      <div class="card card--hero">
+        <span class="flag flag--flame">The full program</span>
+        <h3>Gen AI Full Stack Analytics</h3>
+        <p class="sub">60 days of live training, one portfolio project, then the HR placement drive.</p>
+        <div class="price"><span class="cur">&#8377;</span><span class="amt">15,000</span></div>
+        <p class="sub" style="margin:6px 0 0">to start. The rest waits.</p>
+        <div class="rows">
+          <div class="row"><span>Before you start</span><b>&#8377;15,000</b></div>
+          <div class="row"><span>After you have the offer letter</span><b>&#8377;15,000</b></div>
+          <div class="row row--total"><span>Total, once you're working</span><b>&#8377;30,000</b></div>
+        </div>
+        <div class="adjust">
+          Did the trial week already? Your <b>&#8377;1,000 comes off the fee.</b>
+          You pay <b>&#8377;14,000</b> to start, not &#8377;15,000. So the trial week costs you
+          nothing if you join.
+        </div>
+        <a class="btn btn--primary" style="margin-top:22px;width:100%" href="#">Talk to a mentor about joining</a>
+        <p class="btn-note" style="text-align:center">If you're never placed, the second &#8377;15,000 is never charged.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SPEC SHEET ================= -->
+<section class="spec">
+  <div class="wrap" style="padding-block:64px">
+    <p class="eyebrow"><span class="mark"><i></i><i></i><i></i><i></i></span> The system behind those three sections</p>
+    <h2 class="h-lg" style="margin-bottom:28px">Every decision, in one place</h2>
+
+    <p class="spec-h">Colour &mdash; pulled from the arrow</p>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#280820"></div><div class="meta"><b>Ink</b><code>#280820</code>Arrow body. All text and borders.</div></div>
+      <div class="sw"><div class="chip" style="background:#452038"></div><div class="meta"><b>Plum</b><code>#452038</code>Cards on dark bands.</div></div>
+      <div class="sw"><div class="chip" style="background:#F7F2EA"></div><div class="meta"><b>Paper</b><code>#F7F2EA</code>The page ground.</div></div>
+      <div class="sw"><div class="chip" style="background:#EDE4D6"></div><div class="meta"><b>Sand</b><code>#EDE4D6</code>The alternate band.</div></div>
+      <div class="sw"><div class="chip" style="background:#F85830"></div><div class="meta"><b>Flame</b><code>#F85830</code>Arrow tips. Buttons only.</div></div>
+      <div class="sw"><div class="chip" style="background:#D8B820"></div><div class="meta"><b>Gold</b><code>#D8B820</code>The peak. Highlights, never a button.</div></div>
+      <div class="sw"><div class="chip" style="background:#1E7A4F"></div><div class="meta"><b>Green</b><code>#1E7A4F</code>Money saved. Nothing else.</div></div>
+    </div>
+    <div class="note" style="margin-top:18px">
+      <span class="mark"><i></i><i></i><i></i><i></i></span>
+      <span>The logo has three warm colours, but a page can only have <b>one action colour</b>.
+      Flame is it &mdash; if it's flame, it's clickable. Gold marks and highlights, never clicks.
+      That way a person's eye always knows where to go next.</span>
+    </div>
+
+    <p class="spec-h">Type</p>
+    <div class="specimen">
+      <div><code>Plus Jakarta 800</code><span style="font-family:var(--display);font-weight:800;font-size:38px;letter-spacing:-.03em">Get hired in 60 days</span></div>
+      <div><code>Plus Jakarta 800</code><span style="font-family:var(--display);font-weight:800;font-size:25px">Section headings sit here</span></div>
+      <div><code>Nunito Sans 400</code><span style="font-size:17px">Body copy is 17px and never smaller than 16px on a phone.</span></div>
+      <div><code>Nunito Sans 600</code><span style="font-size:15px;font-weight:600">Small print and labels, 15px.</span></div>
+      <div><code>JetBrains Mono 700</code><span style="font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.14em">EYEBROWS &middot; DAY NUMBERS &middot; DATA</span></div>
+      <div><code>Noto Sans Tamil</code><span style="font-family:'Noto Sans Tamil',sans-serif;font-size:17px">தமிழ் வரிகள் இங்கே சரியாக வரும்.</span></div>
+    </div>
+
+    <p class="spec-h">Buttons</p>
+    <div class="demo-row">
+      <button class="btn btn--primary" id="d-primary" type="button">Primary &mdash; do the thing</button>
+      <button class="btn btn--ghost" id="d-ghost" type="button">Secondary &mdash; softer step</button>
+      <button class="btn btn--primary btn--sm" id="d-small" type="button">Small, inside a card</button>
+    </div>
+    <div class="note" style="margin-top:18px">
+      <span class="mark"><i></i><i></i><i></i><i></i></span>
+      <span>Buttons are <b>54px tall</b> and full width on a phone, so a thumb can't miss them.
+      Flame with dark text, not white text &mdash; white on orange is hard to read in sunlight,
+      and a lot of your students will open this outdoors on a phone.</span>
+    </div>
+
+    <p class="spec-h">Borders, corners, shadows</p>
+    <div class="box-row">
+      <div class="box b1">2px border<br>6px solid shadow<br><b>main cards</b></div>
+      <div class="box b2">2px border<br>no shadow<br><b>second cards</b></div>
+      <div class="box b3">hairline<br>soft shadow<br><b>quiet panels</b></div>
+      <div class="box b4">2px border<br>flame shadow<br><b>one hero moment</b></div>
+    </div>
+    <div class="note" style="margin-top:18px">
+      <span class="mark"><i></i><i></i><i></i><i></i></span>
+      <span>The shadow is a <b>solid offset block, not a blur</b> &mdash; it's one square sitting behind
+      another, exactly how the logo is built. It also renders sharp on cheap Android screens,
+      where soft shadows turn into grey mud. Corners: 20px on cards, 999px on buttons.</span>
+    </div>
+
+    <p class="spec-h">Spacing</p>
+    <div class="specimen">
+      <div><code>Section gap</code><span>72px on desktop, 56px on a phone</span></div>
+      <div><code>Side padding</code><span>20px, always, at every width</span></div>
+      <div><code>Card padding</code><span>28px on desktop, 24px on a phone</span></div>
+      <div><code>Reading width</code><span>52 characters, so lines never run long</span></div>
+      <div><code>Page width</code><span>1140px maximum</span></div>
+    </div>
+  </div>
+
+  <div class="wrap foot">
+    <p><b>This is a design sample, not the real page.</b> The words are placeholders written
+    to show the tone. The numbers and student quotes are taken from vistatech.org and still
+    need to be confirmed before anything goes live. Real photos of real students will replace
+    the letter circles.</p>
+  </div>
+</section>

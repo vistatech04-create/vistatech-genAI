@@ -1,0 +1,565 @@
+<title>Vista Tech Look and Feel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Karla:wght@400;600;700&family=Outfit:wght@500;600;700&family=Figtree:wght@400;600;700&family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+Tamil:wght@400;600&display=swap">
+
+<style>
+/* ===================================================================
+   BRAND CONSTANTS — sampled from the logo, identical in all three
+   =================================================================== */
+:root{
+  color-scheme: light;
+  --ink:    #280820;
+  --flame:  #F85830;
+  --gold:   #D8B820;
+  --money:  #1E7A4F;
+  --gut: 20px;
+  --max: 1080px;
+}
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{ margin:0; background:#EAE6DF; color:var(--ink);
+  font-family:"IBM Plex Sans",system-ui,sans-serif; font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; }
+img{ max-width:100%; display:block; }
+p{ margin:0; }
+h1,h2,h3,h4{ margin:0; line-height:1.08; text-wrap:balance; }
+a{ color:inherit; }
+:focus-visible{ outline:3px solid var(--flame); outline-offset:3px; border-radius:4px; }
+.wrap{ width:100%; max-width:var(--max); margin-inline:auto; padding-inline:var(--gut); }
+
+/* ---- chrome that is NOT part of any direction ---------------------- */
+.chrome{ background:var(--ink); color:#F3EAF0; }
+.chrome-in{ display:flex; align-items:center; justify-content:space-between;
+  gap:16px; padding-block:16px; flex-wrap:wrap; }
+.chrome img{ height:44px; width:auto; }
+.chrome .t{ font-family:"IBM Plex Mono",monospace; font-size:11px;
+  letter-spacing:.14em; text-transform:uppercase; color:#B79FB1; }
+.intro{ background:#EAE6DF; padding-block:34px; }
+.intro h1{ font-family:"Archivo",sans-serif; font-weight:800; font-size:clamp(24px,4vw,34px);
+  letter-spacing:-.025em; margin-bottom:12px; }
+.intro p{ max-width:60ch; color:#5B4356; font-size:16.5px; }
+.jump{ display:flex; gap:10px; flex-wrap:wrap; margin-top:20px; }
+.jump a{ font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600;
+  letter-spacing:.08em; text-transform:uppercase; text-decoration:none;
+  padding:9px 15px; border-radius:999px; border:1px solid rgba(40,8,32,.25); }
+.jump a:hover{ background:var(--ink); color:#fff; border-color:var(--ink); }
+
+.tab{ background:var(--ink); color:#fff; padding-block:26px; }
+.tab .n{ font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.18em;
+  color:var(--gold); text-transform:uppercase; }
+.tab h2{ font-family:"Archivo",sans-serif; font-weight:800; font-size:clamp(23px,3.6vw,31px);
+  letter-spacing:-.02em; margin:7px 0 9px; }
+.tab p{ color:#CDB9C8; max-width:62ch; font-size:15.5px; }
+.tab .facts{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+.tab .facts span{ font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:500;
+  padding:6px 11px; border-radius:6px; background:rgba(255,255,255,.1); color:#E8DBE5; }
+
+/* ===================================================================
+   SHARED SKELETON — every direction renders the same content through
+   these classes and only re-points the tokens.
+   =================================================================== */
+.dir{ background:var(--ground); color:var(--txt);
+  font-family:var(--fb); font-size:var(--fs-body); line-height:1.62;
+  padding-block:var(--pad) calc(var(--pad) + 8px); }
+.dir h1,.dir h2,.dir h3{ font-family:var(--fd); color:var(--txt); }
+.dir .lede{ color:var(--txt-soft); max-width:50ch; font-size:var(--fs-lede); }
+
+.hero{ display:grid; gap:var(--hero-gap); grid-template-columns:1fr; align-items:start; }
+@media (min-width:880px){ .hero{ grid-template-columns:1.05fr .95fr; } }
+.eyebrow{ font-family:var(--fm); font-size:11px; font-weight:600; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--eyebrow); margin-bottom:var(--eyebrow-gap); }
+.dir h1{ font-size:var(--fs-h1); font-weight:var(--fw-d); letter-spacing:var(--ls-d); }
+.cta{ display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+.b{ display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  min-height:52px; padding:0 26px; font-family:var(--fd); font-weight:var(--fw-btn);
+  font-size:15.5px; text-decoration:none; cursor:pointer; border:0;
+  border-radius:var(--btn-r); transition:transform .12s ease, box-shadow .12s ease, background .12s ease; }
+.b1{ background:var(--flame); color:var(--btn-txt); box-shadow:var(--btn-shadow); }
+.b1:hover{ transform:translateY(-2px); }
+.b2{ background:var(--b2-bg); color:var(--txt); border:var(--b2-border); box-shadow:var(--b2-shadow); }
+.b2:hover{ background:var(--b2-hover); }
+.tiny{ font-size:13.5px; color:var(--txt-soft); margin-top:12px; }
+.tamil{ font-family:"Noto Sans Tamil",var(--fb); font-size:15px; color:var(--txt-soft); margin-top:16px; }
+
+/* the right-hand hero object */
+.panel{ background:var(--panel); border:var(--panel-border); border-radius:var(--r);
+  box-shadow:var(--shadow); padding:var(--panel-pad); }
+.panel-h{ font-family:var(--fm); font-size:10.5px; font-weight:600; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--eyebrow); margin-bottom:16px; }
+
+/* stats */
+.stats{ display:grid; grid-template-columns:repeat(2,1fr); gap:var(--stat-gap);
+  margin-top:var(--block-gap); }
+@media (min-width:720px){ .stats{ grid-template-columns:repeat(4,1fr); } }
+.st{ background:var(--stat-bg); border:var(--stat-border); border-radius:var(--r-sm);
+  padding:var(--stat-pad); box-shadow:var(--stat-shadow); }
+.st b{ display:block; font-family:var(--fd); font-weight:var(--fw-d);
+  font-size:clamp(24px,3.2vw,31px); letter-spacing:-.03em; font-variant-numeric:tabular-nums;
+  color:var(--stat-num); }
+.st span{ display:block; font-size:13px; color:var(--txt-soft); line-height:1.35; margin-top:2px; }
+
+/* testimonial */
+.said{ margin-top:var(--block-gap); background:var(--quote-bg); border:var(--quote-border);
+  border-radius:var(--r); padding:var(--panel-pad); box-shadow:var(--quote-shadow);
+  display:grid; gap:14px; }
+.said .res{ font-family:var(--fd); font-weight:var(--fw-d); font-size:19px;
+  letter-spacing:-.02em; color:var(--quote-res); }
+.said q{ quotes:none; font-size:16px; color:var(--txt-soft); line-height:1.6; }
+.by{ display:flex; align-items:center; gap:11px; }
+.by .av{ width:36px; height:36px; border-radius:50%; flex:none; display:grid; place-items:center;
+  font-family:var(--fd); font-weight:700; font-size:14px; background:var(--av-bg); color:var(--av-txt); }
+.by div{ font-size:13.5px; line-height:1.3; color:var(--txt-soft); }
+.by b{ display:block; color:var(--txt); }
+
+/* offer */
+.offer{ margin-top:var(--block-gap); display:grid; gap:18px; grid-template-columns:1fr; }
+@media (min-width:820px){ .offer{ grid-template-columns:1fr 1fr; } }
+.o{ background:var(--panel); border:var(--panel-border); border-radius:var(--r);
+  padding:var(--panel-pad); box-shadow:var(--shadow); }
+.o.hi{ border:var(--hi-border); box-shadow:var(--hi-shadow); background:var(--hi-bg); }
+.flag{ display:inline-block; font-family:var(--fm); font-size:10px; font-weight:600;
+  letter-spacing:.13em; text-transform:uppercase; padding:5px 10px;
+  border-radius:var(--flag-r); background:var(--flag-bg); color:var(--flag-txt);
+  border:var(--flag-border); margin-bottom:12px; }
+.flag.f2{ background:var(--flame); color:var(--btn-txt); border-color:transparent; }
+.o h3{ font-size:20px; font-weight:var(--fw-d); letter-spacing:-.02em; margin-bottom:4px; }
+.o .sub{ font-size:14px; color:var(--txt-soft); margin-bottom:18px; }
+.amt{ font-family:var(--fd); font-weight:var(--fw-d); letter-spacing:-.035em;
+  font-variant-numeric:tabular-nums; display:flex; align-items:baseline; gap:3px; }
+.amt i{ font-style:normal; font-size:20px; color:var(--txt-soft); }
+.amt s{ text-decoration:none; font-size:40px; }
+.rows{ margin-top:16px; }
+.rw{ display:flex; justify-content:space-between; gap:12px; padding:10px 0;
+  border-top:1px solid var(--rule); font-size:14.5px; }
+.rw span{ color:var(--txt-soft); } .rw b{ font-variant-numeric:tabular-nums; }
+.adj{ margin-top:16px; background:var(--adj-bg); border:var(--adj-border);
+  border-radius:var(--r-sm); padding:14px 16px; font-size:14.5px; line-height:1.5; }
+.adj b{ font-family:var(--fd); font-weight:var(--fw-d); }
+.lst{ list-style:none; margin:16px 0 0; padding:0; display:grid; gap:9px; }
+.lst li{ display:flex; gap:10px; font-size:14.5px; line-height:1.45; }
+.lst li::before{ content:""; flex:none; margin-top:7px; width:7px; height:7px;
+  background:var(--bullet); border-radius:var(--bullet-r); }
+
+/* ===================================================================
+   DIRECTION A — "The notebook"
+   Paper, ruled lines, highlighter. No filled dark areas at all.
+   =================================================================== */
+[data-dir="a"]{
+  --fd:"Zilla Slab",Georgia,serif; --fb:"Karla",system-ui,sans-serif;
+  --fm:"Karla",system-ui,sans-serif;
+  --fw-d:700; --fw-btn:700; --ls-d:-.015em;
+  --fs-h1:clamp(31px,6.4vw,50px); --fs-body:17px; --fs-lede:17.5px;
+  --ground:#FBF8F1; --panel:transparent; --txt:#280820; --txt-soft:#6B5566;
+  --rule:rgba(40,8,32,.15); --eyebrow:#9A7F55;
+  --r:0px; --r-sm:0px; --pad:58px; --hero-gap:40px; --block-gap:40px;
+  --eyebrow-gap:18px; --panel-pad:0px;
+  --panel-border:0; --shadow:none;
+  --btn-r:999px; --btn-txt:#fff; --btn-shadow:none;
+  --b2-bg:transparent; --b2-border:1.5px solid rgba(40,8,32,.3); --b2-hover:rgba(40,8,32,.05); --b2-shadow:none;
+  --stat-bg:transparent; --stat-border:0; --stat-pad:0 14px 0 0; --stat-shadow:none;
+  --stat-num:#280820; --stat-gap:22px;
+  --quote-bg:transparent; --quote-border:0; --quote-shadow:none; --quote-res:#280820;
+  --av-bg:var(--gold); --av-txt:#280820;
+  --hi-bg:transparent; --hi-border:0; --hi-shadow:none;
+  --flag-r:0px; --flag-bg:transparent; --flag-txt:#9A7F55; --flag-border:0;
+  --adj-bg:transparent; --adj-border:0; --bullet:var(--flame); --bullet-r:0;
+}
+/* ruled-paper structure: everything is separated by lines, not boxes */
+[data-dir="a"] .panel{ border-top:2px solid var(--ink); padding-top:20px; }
+[data-dir="a"] .rule-list > div{ padding:14px 0; border-bottom:1px solid var(--rule);
+  display:grid; grid-template-columns:62px 1fr; gap:14px; align-items:baseline; }
+[data-dir="a"] .rule-list > div:first-child{ border-top:1px solid var(--rule); }
+[data-dir="a"] .rule-list .k{ font-family:"Karla",sans-serif; font-weight:700; font-size:12px;
+  letter-spacing:.06em; text-transform:uppercase; color:#9A7F55; }
+[data-dir="a"] .rule-list .v{ font-size:15.5px; line-height:1.45; }
+[data-dir="a"] .rule-list .v b{ font-family:"Zilla Slab",serif; font-weight:700; }
+[data-dir="a"] .hl{ background:linear-gradient(transparent 58%, #F4E7A8 58%); padding-inline:1px; }
+[data-dir="a"] .st{ border-left:3px solid var(--gold); padding-left:14px; }
+[data-dir="a"] .st:nth-child(1){ border-left-color:var(--flame); }
+[data-dir="a"] .said{ border-left:3px solid var(--flame); padding-left:20px; }
+[data-dir="a"] .o{ border-top:2px solid var(--ink); padding-top:22px; }
+[data-dir="a"] .o.hi{ border-top:2px solid var(--flame); }
+[data-dir="a"] .adj{ border-left:3px solid var(--gold); padding-left:14px; padding-block:2px; }
+[data-dir="a"] .eyebrow{ padding-bottom:12px; border-bottom:1px solid var(--rule); }
+[data-dir="a"] .b2{ background:transparent; border:0; border-bottom:2px solid var(--ink);
+  border-radius:0; padding:0 2px; min-height:auto; padding-bottom:5px; }
+[data-dir="a"] .b2:hover{ background:transparent; color:var(--flame); border-color:var(--flame); }
+
+/* ===================================================================
+   DIRECTION B — "Bright and friendly"
+   White, soft tinted panels, round corners, soft shadows. One dark tile.
+   =================================================================== */
+[data-dir="b"]{
+  --fd:"Outfit",system-ui,sans-serif; --fb:"Figtree",system-ui,sans-serif;
+  --fm:"Figtree",system-ui,sans-serif;
+  --fw-d:700; --fw-btn:600; --ls-d:-.028em;
+  --fs-h1:clamp(31px,6.6vw,52px); --fs-body:16.5px; --fs-lede:17.5px;
+  --ground:#FFFCF8; --panel:#FFFFFF; --txt:#2E1428; --txt-soft:#776072;
+  --rule:rgba(46,20,40,.1); --eyebrow:#E06A3C;
+  --r:26px; --r-sm:18px; --pad:60px; --hero-gap:40px; --block-gap:36px;
+  --eyebrow-gap:14px; --panel-pad:26px;
+  --panel-border:1px solid rgba(46,20,40,.07);
+  --shadow:0 18px 40px -22px rgba(46,20,40,.35);
+  --btn-r:16px; --btn-txt:#fff; --btn-shadow:0 12px 24px -10px rgba(248,88,48,.65);
+  --b2-bg:#fff; --b2-border:1px solid rgba(46,20,40,.14); --b2-hover:#FFF4EF;
+  --b2-shadow:0 10px 22px -16px rgba(46,20,40,.4);
+  --stat-bg:#FFF3E9; --stat-border:0; --stat-pad:18px; --stat-shadow:none;
+  --stat-num:#E0501F; --stat-gap:14px;
+  --quote-bg:#FDF6E3; --quote-border:0; --quote-shadow:none; --quote-res:#B8880E;
+  --av-bg:var(--flame); --av-txt:#fff;
+  --hi-bg:#FFF6EF; --hi-border:2px solid var(--flame);
+  --hi-shadow:0 22px 44px -24px rgba(248,88,48,.55);
+  --flag-r:999px; --flag-bg:#FBEFD4; --flag-txt:#8A6608; --flag-border:0;
+  --adj-bg:#FCF3D6; --adj-border:0; --bullet:var(--flame); --bullet-r:50%;
+}
+[data-dir="b"] .stats .st:nth-child(2){ background:#FDF3DB; }
+[data-dir="b"] .stats .st:nth-child(2) b{ color:#A9800C; }
+[data-dir="b"] .stats .st:nth-child(3){ background:#F3EDF6; }
+[data-dir="b"] .stats .st:nth-child(3) b{ color:#6A4A78; }
+/* the single dark moment in direction B */
+[data-dir="b"] .stats .st:nth-child(4){ background:var(--ink); }
+[data-dir="b"] .stats .st:nth-child(4) b{ color:var(--gold); }
+[data-dir="b"] .stats .st:nth-child(4) span{ color:#C6AFC0; }
+[data-dir="b"] .chip{ display:flex; gap:13px; align-items:center; padding:13px;
+  border-radius:16px; background:#FFF6EF; margin-bottom:10px; }
+[data-dir="b"] .chip:last-child{ margin-bottom:0; background:#FCF3D6; }
+[data-dir="b"] .chip .dot{ width:34px; height:34px; border-radius:12px; flex:none;
+  display:grid; place-items:center; background:#fff; font-family:var(--fm);
+  font-weight:700; font-size:11px; color:var(--flame); box-shadow:0 4px 10px -4px rgba(46,20,40,.3); }
+[data-dir="b"] .chip:last-child .dot{ color:#A9800C; }
+[data-dir="b"] .chip p{ font-size:14.5px; line-height:1.4; }
+[data-dir="b"] .chip b{ font-family:var(--fd); font-weight:700; }
+
+/* ===================================================================
+   DIRECTION C — "The result board"
+   Grid rules, mono labels, tabular figures. One slim dark results band.
+   =================================================================== */
+[data-dir="c"]{
+  --fd:"Archivo",system-ui,sans-serif; --fb:"IBM Plex Sans",system-ui,sans-serif;
+  --fm:"IBM Plex Mono",ui-monospace,monospace;
+  --fw-d:800; --fw-btn:700; --ls-d:-.035em;
+  --fs-h1:clamp(30px,6.2vw,49px); --fs-body:16px; --fs-lede:17px;
+  --ground:#F6F4EF; --panel:#FFFFFF; --txt:#231A21; --txt-soft:#6A5F68;
+  --rule:rgba(35,26,33,.13); --eyebrow:#8A7F88;
+  --r:10px; --r-sm:8px; --pad:58px; --hero-gap:38px; --block-gap:34px;
+  --eyebrow-gap:16px; --panel-pad:24px;
+  --panel-border:1px solid rgba(35,26,33,.15); --shadow:none;
+  --btn-r:8px; --btn-txt:#fff; --btn-shadow:none;
+  --b2-bg:transparent; --b2-border:1px solid rgba(35,26,33,.4); --b2-hover:rgba(35,26,33,.06); --b2-shadow:none;
+  --stat-bg:#FFFFFF; --stat-border:1px solid rgba(35,26,33,.15); --stat-pad:17px; --stat-shadow:none;
+  --stat-num:#231A21; --stat-gap:0px;
+  --quote-bg:#FFFFFF; --quote-border:1px solid rgba(35,26,33,.15); --quote-shadow:none;
+  --quote-res:#231A21;
+  --av-bg:#231A21; --av-txt:#fff;
+  --hi-bg:#FFFFFF; --hi-border:1px solid rgba(35,26,33,.15); --hi-shadow:none;
+  --flag-r:4px; --flag-bg:transparent; --flag-txt:#6A5F68; --flag-border:1px solid rgba(35,26,33,.25);
+  --adj-bg:#FBF3D8; --adj-border:1px solid rgba(216,184,32,.55); --bullet:var(--flame); --bullet-r:0;
+}
+[data-dir="c"] .stats{ border:1px solid rgba(35,26,33,.15); border-radius:10px;
+  overflow:hidden; background:#fff; }
+[data-dir="c"] .st{ border:0; border-right:1px solid rgba(35,26,33,.13);
+  border-bottom:1px solid rgba(35,26,33,.13); border-radius:0; }
+[data-dir="c"] .st:nth-child(2n){ border-right:0; }
+[data-dir="c"] .st:nth-child(n+3){ border-bottom:0; }
+@media (min-width:720px){
+  [data-dir="c"] .st{ border-bottom:0; }
+  [data-dir="c"] .st:nth-child(2n){ border-right:1px solid rgba(35,26,33,.13); }
+  [data-dir="c"] .st:last-child{ border-right:0; }
+}
+[data-dir="c"] .st b{ font-size:clamp(23px,3vw,29px); }
+[data-dir="c"] .grid-rows{ border-top:1px solid var(--rule); }
+[data-dir="c"] .grid-rows > div{ display:grid; grid-template-columns:84px 1fr;
+  gap:12px; padding:12px 0; border-bottom:1px solid var(--rule); align-items:baseline; }
+[data-dir="c"] .grid-rows .k{ font-family:var(--fm); font-size:10.5px; font-weight:600;
+  letter-spacing:.04em; color:#8A7F88; }
+[data-dir="c"] .grid-rows .v{ font-size:14.5px; line-height:1.45; }
+[data-dir="c"] .grid-rows .v b{ font-family:var(--fd); font-weight:700; }
+[data-dir="c"] .grid-rows > div:last-child .k{ color:var(--flame); }
+/* the single dark moment in direction C */
+[data-dir="c"] .board{ margin-top:var(--block-gap); background:var(--ink); border-radius:10px;
+  padding:22px 24px; display:grid; gap:16px; grid-template-columns:1fr; }
+@media (min-width:720px){ [data-dir="c"] .board{ grid-template-columns:repeat(3,1fr); } }
+[data-dir="c"] .board .bi{ color:#fff; }
+[data-dir="c"] .board .bl{ font-family:var(--fm); font-size:10px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:5px; }
+[data-dir="c"] .board .bv{ font-family:var(--fd); font-weight:700; font-size:17px;
+  letter-spacing:-.02em; }
+[data-dir="c"] .board .bs{ font-size:13px; color:#B9A9B6; margin-top:2px; }
+[data-dir="c"] .hi .flag{ background:var(--flame); color:#fff; border-color:transparent; }
+
+@media (prefers-reduced-motion:reduce){ *{ transition:none !important; } }
+</style>
+
+<header class="chrome">
+  <div class="wrap chrome-in">
+    <img src="assets/vistatech-logo-tight.png" alt="Vista Tech">
+    <span class="t">Look and feel &middot; three routes</span>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <h1>Same colours. Same words. Three different feelings.</h1>
+    <p>Every route below uses the colours straight out of the logo, and the exact same
+      sentences, so the only thing you are judging is the look. All three are light-led.
+      Each one uses dark in exactly one place, and I have marked where.</p>
+    <div class="jump">
+      <a href="#a">A &middot; The notebook</a>
+      <a href="#b">B &middot; Bright and friendly</a>
+      <a href="#c">C &middot; The result board</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= A ======================= -->
+<div class="tab" id="a">
+  <div class="wrap">
+    <p class="n">Route A</p>
+    <h2>The notebook</h2>
+    <p>Everything sits on paper. Sections are separated by lines, not boxes. Gold behaves like
+      a highlighter pen and orange like a pen underline. There are no dark blocks anywhere &mdash;
+      dark is only ever the text. Calm, honest, a little bit academic.</p>
+    <div class="facts">
+      <span>Zilla Slab + Karla</span><span>no cards, only rules</span>
+      <span>square corners</span><span>no shadows at all</span><span>0 dark blocks</span>
+    </div>
+  </div>
+</div>
+<section class="dir" data-dir="a">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">60 days &middot; Chennai &middot; Full stack analytics</p>
+        <h1>Learn analytics in 60 days. Pay half your fee <span class="hl">only after you get the job.</span></h1>
+        <p class="lede" style="margin-top:20px">You don't need a computer science degree. You don't need to know coding. Start with one week of live classes for &#8377;1,000, and see the teaching yourself before you pay anything more.</p>
+        <div class="cta">
+          <a class="b b1" href="#">Start my &#8377;1,000 week</a>
+          <a class="b b2" href="#">Talk to a mentor first &rarr;</a>
+        </div>
+        <p class="tiny">Takes 2 minutes. Classes are live, not recorded videos.</p>
+        <p class="tamil">தமிழில் கற்றுக்கொள்ளுங்கள். வகுப்புகள் நேரலையில்.</p>
+      </div>
+      <div class="panel">
+        <p class="panel-h">How the 100 days run</p>
+        <div class="rule-list">
+          <div><span class="k">Week 1</span><span class="v"><b>Your trial week.</b> Six live classes for &#8377;1,000. Decide after.</span></div>
+          <div><span class="k">Day 1&ndash;60</span><span class="v"><b>You learn and build.</b> Excel, SQL, Python, Power BI, Tableau. One project for your portfolio.</span></div>
+          <div><span class="k">Day 61&ndash;71</span><span class="v"><b>You meet the HR team.</b> Infinite HR puts your profile in front of real openings.</span></div>
+          <div><span class="k">Offer</span><span class="v"><b>You get hired.</b> Only now is the second half of your fee due.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="st"><b>150+</b><span>students placed</span></div>
+      <div class="st"><b>2,000+</b><span>placements by our HR partner</span></div>
+      <div class="st"><b>20 yrs</b><span>our HR partner in hiring</span></div>
+      <div class="st"><b>50%</b><span>of the fee waits till you're hired</span></div>
+    </div>
+
+    <div class="said">
+      <p class="res">Junior Business Analyst, 3.4 LPA</p>
+      <q>Completed training with internship and got placed as Junior Business Analyst at 3.4 LPA. Thank you Naveen sir for your guidance and mentorship.</q>
+      <div class="by"><span class="av">A</span><div><b>Ajay Krishna</b>Placed &middot; Digil Technologies</div></div>
+    </div>
+
+    <div class="offer">
+      <div class="o">
+        <span class="flag">Start here</span>
+        <h3>The trial week</h3>
+        <p class="sub">Six live classes. Same mentor, same batch, same teaching as the full course.</p>
+        <p class="amt"><i>&#8377;</i><s>1,000</s></p>
+        <ul class="lst">
+          <li>Six live classes over one week</li>
+          <li>Ask the mentor anything, live</li>
+          <li>Walk away after, with no pressure</li>
+        </ul>
+      </div>
+      <div class="o hi">
+        <span class="flag">The full program</span>
+        <h3>Gen AI Full Stack Analytics</h3>
+        <p class="sub">60 days of live training, one portfolio project, then the HR placement drive.</p>
+        <p class="amt"><i>&#8377;</i><s>15,000</s></p>
+        <div class="rows">
+          <div class="rw"><span>Before you start</span><b>&#8377;15,000</b></div>
+          <div class="rw"><span>After the offer letter</span><b>&#8377;15,000</b></div>
+        </div>
+        <p class="adj">Did the trial week? Your <b>&#8377;1,000 comes off the fee.</b> You pay &#8377;14,000 to start. So the trial costs nothing if you join.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= B ======================= -->
+<div class="tab" id="b">
+  <div class="wrap">
+    <p class="n">Route B</p>
+    <h2>Bright and friendly</h2>
+    <p>White paper, soft tinted panels in peach and gold, round corners, gentle shadows.
+      This is what a 22 year old expects an app to look like, so it feels the easiest to trust
+      and the least like a coaching centre. Dark appears once, in a single stat tile.</p>
+    <div class="facts">
+      <span>Outfit + Figtree</span><span>26px round corners</span>
+      <span>soft coloured shadows</span><span>tinted panels</span><span>1 dark tile</span>
+    </div>
+  </div>
+</div>
+<section class="dir" data-dir="b">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">60 days &middot; Chennai &middot; Full stack analytics</p>
+        <h1>Learn analytics in 60 days. Pay half your fee only after you get the job.</h1>
+        <p class="lede" style="margin-top:18px">You don't need a computer science degree. You don't need to know coding. Start with one week of live classes for &#8377;1,000, and see the teaching yourself before you pay anything more.</p>
+        <div class="cta">
+          <a class="b b1" href="#">Start my &#8377;1,000 week</a>
+          <a class="b b2" href="#">Talk to a mentor first</a>
+        </div>
+        <p class="tiny">Takes 2 minutes. Classes are live, not recorded videos.</p>
+        <p class="tamil">தமிழில் கற்றுக்கொள்ளுங்கள். வகுப்புகள் நேரலையில்.</p>
+      </div>
+      <div class="panel">
+        <p class="panel-h">How the 100 days run</p>
+        <div class="chip"><span class="dot">W1</span><p><b>Your trial week.</b> Six live classes for &#8377;1,000. Decide after.</p></div>
+        <div class="chip"><span class="dot">60</span><p><b>You learn and build.</b> Excel, SQL, Python, Power BI, Tableau.</p></div>
+        <div class="chip"><span class="dot">71</span><p><b>You meet the HR team.</b> Real openings, not a job board.</p></div>
+        <div class="chip"><span class="dot">&#10003;</span><p><b>You get hired.</b> Only now is the second half due.</p></div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="st"><b>150+</b><span>students placed</span></div>
+      <div class="st"><b>2,000+</b><span>placements by our HR partner</span></div>
+      <div class="st"><b>20 yrs</b><span>our HR partner in hiring</span></div>
+      <div class="st"><b>50%</b><span>of the fee waits till you're hired</span></div>
+    </div>
+
+    <div class="said">
+      <p class="res">Junior Business Analyst, 3.4 LPA</p>
+      <q>Completed training with internship and got placed as Junior Business Analyst at 3.4 LPA. Thank you Naveen sir for your guidance and mentorship.</q>
+      <div class="by"><span class="av">A</span><div><b>Ajay Krishna</b>Placed &middot; Digil Technologies</div></div>
+    </div>
+
+    <div class="offer">
+      <div class="o">
+        <span class="flag">Start here</span>
+        <h3>The trial week</h3>
+        <p class="sub">Six live classes. Same mentor, same batch, same teaching as the full course.</p>
+        <p class="amt"><i>&#8377;</i><s>1,000</s></p>
+        <ul class="lst">
+          <li>Six live classes over one week</li>
+          <li>Ask the mentor anything, live</li>
+          <li>Walk away after, with no pressure</li>
+        </ul>
+      </div>
+      <div class="o hi">
+        <span class="flag f2">The full program</span>
+        <h3>Gen AI Full Stack Analytics</h3>
+        <p class="sub">60 days of live training, one portfolio project, then the HR placement drive.</p>
+        <p class="amt"><i>&#8377;</i><s>15,000</s></p>
+        <div class="rows">
+          <div class="rw"><span>Before you start</span><b>&#8377;15,000</b></div>
+          <div class="rw"><span>After the offer letter</span><b>&#8377;15,000</b></div>
+        </div>
+        <p class="adj">Did the trial week? Your <b>&#8377;1,000 comes off the fee.</b> You pay &#8377;14,000 to start. So the trial costs nothing if you join.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= C ======================= -->
+<div class="tab" id="c">
+  <div class="wrap">
+    <p class="n">Route C</p>
+    <h2>The result board</h2>
+    <p>Built like a results sheet, because that is what students are actually buying. Fine grid
+      lines, numbers that line up, small mono labels. It reads as serious and checkable rather
+      than cheerful, which suits a family deciding whether to spend &#8377;30,000. Dark appears once,
+      in a slim outcome strip.</p>
+    <div class="facts">
+      <span>Archivo + IBM Plex</span><span>8&ndash;10px corners</span>
+      <span>hairline grid rules</span><span>tabular numbers</span><span>1 dark strip</span>
+    </div>
+  </div>
+</div>
+<section class="dir" data-dir="c">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">60 days &middot; Chennai &middot; Full stack analytics</p>
+        <h1>Learn analytics in 60 days. Pay half your fee only after you get the job.</h1>
+        <p class="lede" style="margin-top:18px">You don't need a computer science degree. You don't need to know coding. Start with one week of live classes for &#8377;1,000, and see the teaching yourself before you pay anything more.</p>
+        <div class="cta">
+          <a class="b b1" href="#">Start my &#8377;1,000 week</a>
+          <a class="b b2" href="#">Talk to a mentor first</a>
+        </div>
+        <p class="tiny">Takes 2 minutes. Classes are live, not recorded videos.</p>
+        <p class="tamil">தமிழில் கற்றுக்கொள்ளுங்கள். வகுப்புகள் நேரலையில்.</p>
+      </div>
+      <div class="panel">
+        <p class="panel-h">How the 100 days run</p>
+        <div class="grid-rows">
+          <div><span class="k">WEEK 01</span><span class="v"><b>Your trial week.</b> Six live classes for &#8377;1,000. Decide after.</span></div>
+          <div><span class="k">DAY 01&ndash;60</span><span class="v"><b>You learn and build.</b> Excel, SQL, Python, Power BI, Tableau.</span></div>
+          <div><span class="k">DAY 61&ndash;71</span><span class="v"><b>You meet the HR team.</b> Real openings, not a job board.</span></div>
+          <div><span class="k">OFFER</span><span class="v"><b>You get hired.</b> Only now is the second half due.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="st"><b>150+</b><span>students placed</span></div>
+      <div class="st"><b>2,000+</b><span>placements by our HR partner</span></div>
+      <div class="st"><b>20 yrs</b><span>our HR partner in hiring</span></div>
+      <div class="st"><b>50%</b><span>of the fee waits till you're hired</span></div>
+    </div>
+
+    <div class="board">
+      <div class="bi"><p class="bl">Fresher, B.Com</p><p class="bv">Data Analytics Intern</p><p class="bs">&#8377;22,000 stipend</p></div>
+      <div class="bi"><p class="bl">Career switch</p><p class="bv">Junior Business Analyst</p><p class="bs">3.4 LPA &middot; Digil Technologies</p></div>
+      <div class="bi"><p class="bl">Fresher</p><p class="bv">Junior Data Analyst</p><p class="bs">hired within 2 months</p></div>
+    </div>
+
+    <div class="said">
+      <p class="res">Junior Business Analyst, 3.4 LPA</p>
+      <q>Completed training with internship and got placed as Junior Business Analyst at 3.4 LPA. Thank you Naveen sir for your guidance and mentorship.</q>
+      <div class="by"><span class="av">A</span><div><b>Ajay Krishna</b>Placed &middot; Digil Technologies</div></div>
+    </div>
+
+    <div class="offer">
+      <div class="o">
+        <span class="flag">Start here</span>
+        <h3>The trial week</h3>
+        <p class="sub">Six live classes. Same mentor, same batch, same teaching as the full course.</p>
+        <p class="amt"><i>&#8377;</i><s>1,000</s></p>
+        <ul class="lst">
+          <li>Six live classes over one week</li>
+          <li>Ask the mentor anything, live</li>
+          <li>Walk away after, with no pressure</li>
+        </ul>
+      </div>
+      <div class="o hi">
+        <span class="flag">The full program</span>
+        <h3>Gen AI Full Stack Analytics</h3>
+        <p class="sub">60 days of live training, one portfolio project, then the HR placement drive.</p>
+        <p class="amt"><i>&#8377;</i><s>15,000</s></p>
+        <div class="rows">
+          <div class="rw"><span>Before you start</span><b>&#8377;15,000</b></div>
+          <div class="rw"><span>After the offer letter</span><b>&#8377;15,000</b></div>
+        </div>
+        <p class="adj">Did the trial week? Your <b>&#8377;1,000 comes off the fee.</b> You pay &#8377;14,000 to start. So the trial costs nothing if you join.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="chrome">
+  <div class="wrap" style="padding-block:26px">
+    <p style="font-size:14.5px;line-height:1.6;color:#CDB9C8;max-width:62ch">
+      Words and numbers are placeholders taken from vistatech.org and still need confirming.
+      Real student photos will replace the letter circles. Pick a route, or tell me to mix
+      two &mdash; for example route C's numbers inside route B's soft panels.
+    </p>
+  </div>
+</footer>

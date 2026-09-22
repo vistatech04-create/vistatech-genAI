@@ -1,0 +1,62 @@
+/* Warm wash plus slowly rising certificate marks. Gold carries more of the
+   wash here than on the course page: this page's promise is a certificate,
+   and gold is the colour of one. Nothing moves fast enough to pull the eye
+   off the headline. */
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 620px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+
+  background:
+    radial-gradient(52% 44% at 12% 14%, rgba(216, 184, 32, 0.16), transparent 70%),
+    radial-gradient(50% 44% at 88% 10%, rgba(248, 88, 48, 0.11), transparent 72%),
+    radial-gradient(46% 40% at 80% 64%, rgba(216, 184, 32, 0.13), transparent 74%),
+    radial-gradient(42% 36% at 6% 74%, rgba(248, 88, 48, 0.07), transparent 74%);
+
+  mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 95%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 95%);
+}
+
+@media (min-width: 900px) { .backdrop { height: 700px; } }
+
+.block {
+  position: absolute;
+  display: block;
+  opacity: 0;
+  color: var(--gold);
+  will-change: transform, opacity;
+  animation: drift linear infinite;
+}
+
+/* Everything sits out at the sides so the middle, where the headline and
+   the button live, stays clear. */
+.b1 { width: 40px; height: 40px; left: 5%;  top: 58%; animation-duration: 46s; animation-delay: -7s;  --tilt: 7deg;   --peak: 0.24; }
+.b2 { width: 30px; height: 30px; left: 16%; top: 26%; animation-duration: 58s; animation-delay: -26s; --tilt: -9deg;  --peak: 0.26; color: var(--flame); }
+.b3 { width: 44px; height: 44px; left: 2%;  top: 22%; animation-duration: 64s; animation-delay: -40s; --tilt: -6deg;  --peak: 0.15; }
+.b4 { width: 32px; height: 32px; left: 88%; top: 50%; animation-duration: 50s; animation-delay: -13s; --tilt: 11deg;  --peak: 0.24; }
+.b5 { width: 42px; height: 42px; left: 78%; top: 20%; animation-duration: 61s; animation-delay: -33s; --tilt: -8deg;  --peak: 0.19; color: var(--flame); }
+.b6 { width: 28px; height: 28px; left: 93%; top: 14%; animation-duration: 42s; animation-delay: -20s; --tilt: 13deg;  --peak: 0.26; }
+.b7 { width: 32px; height: 32px; left: 26%; top: 80%; animation-duration: 55s; animation-delay: -46s; --tilt: 6deg;   --peak: 0.2;  }
+.b8 { width: 34px; height: 34px; left: 68%; top: 84%; animation-duration: 67s; animation-delay: -10s; --tilt: -11deg; --peak: 0.17; }
+
+/* Negative delays start every mark mid-flight, so the page is already
+   alive on the first frame. */
+@keyframes drift {
+  0%   { opacity: 0;            transform: translate3d(0, 34px, 0) rotate(0deg); }
+  18%  { opacity: var(--peak); }
+  82%  { opacity: var(--peak); }
+  100% { opacity: 0;            transform: translate3d(0, -96px, 0) rotate(var(--tilt)); }
+}
+
+@media (max-width: 700px) {
+  .b2, .b5, .b7 { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .block { animation: none; opacity: calc(var(--peak) * 0.8); }
+}

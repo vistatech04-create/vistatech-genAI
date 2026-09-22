@@ -1,0 +1,35 @@
+/* Logo on the left, one action on the right. Deliberately no menu:
+   on a paid landing page every extra link is a way out.
+
+   Transparent, so the warm backdrop runs behind it with no seam. */
+.header {
+  position: relative;
+  z-index: 1;
+  background: none;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block: 12px;
+}
+
+.logo { height: 42px; width: auto; flex: none; }
+
+/* The action sits top right at every width, phones included. It tightens
+   rather than disappearing, and never drops below a 44px tap target. */
+.action { display: inline-flex; flex: none; }
+
+/* On the narrowest phones, trim the padding and type so the pill and the
+   logo sit comfortably instead of crowding each other. */
+@media (max-width: 420px) {
+  .logo { height: 38px; }
+  .action > a { padding-inline: 15px; font-size: 13.5px; }
+}
+
+@media (min-width: 700px) {
+  .inner { padding-block: 14px; gap: 14px; }
+  .logo { height: 46px; }
+}

@@ -1,0 +1,202 @@
+/* Section 03. The week.
+
+   Deliberately not the vertical numbered rail the course page uses for the
+   60-day journey: that rail is about a long road. Here the heading and the
+   curve hold still on the left while the seven days climb past them on the
+   right, stacking as they go, so the reader always knows where in the week
+   they are.
+
+   No overflow on this section, or position: sticky stops working. */
+.section {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  padding-block: 44px 46px;
+}
+
+@media (min-width: 900px) { .section { padding-block: 72px 80px; } }
+
+.split { display: grid; grid-template-columns: 1fr; gap: 28px; }
+
+@media (min-width: 1000px) {
+  .split {
+    grid-template-columns: 0.92fr 1.08fr;
+    gap: 56px;
+    align-items: start;
+  }
+}
+
+/* ---- the left side ------------------------------------------------- */
+@media (min-width: 1000px) {
+  .left {
+    position: sticky;
+    top: 40px;
+  }
+}
+
+.heading {
+  max-width: 18ch;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(30px, 5vw, 50px);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+/* The one word that matters, in the weight and the stroke used for every
+   other accent on both pages. */
+.accent {
+  font-weight: 600;
+  background-image: linear-gradient(var(--gold), var(--gold));
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.11em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.sub {
+  max-width: 44ch;
+  margin-top: 14px;
+  color: var(--ink-soft);
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+@media (min-width: 900px) { .sub { font-size: 16.5px; margin-top: 16px; } }
+
+/* ---- the stack ----------------------------------------------------- */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  position: sticky;
+  top: var(--stick);
+  /* Top padding is tuned to the 44px stacking step: the day label has to sit
+     inside the strip that stays visible when the next card covers this one. */
+  padding: 18px 20px 22px;
+  border-radius: var(--radius-lg);
+  background: var(--flame-wash);
+  border: 1px solid rgba(248, 88, 48, 0.16);
+  /* The shadow is what makes a stacked card read as sitting on top of the
+     one behind it rather than merging into it. */
+  box-shadow: 0 -2px 0 rgba(255, 255, 255, 0.9), 0 14px 34px -26px rgba(40, 8, 32, 0.75);
+}
+
+@media (min-width: 700px) { .card { padding: 20px 28px 28px; } }
+
+/* Alternating tints, so a pile of seven cards has a rhythm. */
+.card:nth-child(even) {
+  background: #f4f7fb;
+  border-color: rgba(40, 8, 32, 0.08);
+}
+
+/* Day seven is where the certificate arrives, so it is the gold one. One
+   coloured card in the stack does the work a paragraph would. */
+.cardGold,
+.cardGold:nth-child(even) {
+  background: var(--gold-wash);
+  border-color: rgba(216, 184, 32, 0.5);
+}
+
+.dayLabel {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.title {
+  max-width: 22ch;
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3.4vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.14;
+}
+
+/* ---- the pills ----------------------------------------------------- */
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px 8px 11px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(40, 8, 32, 0.07);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.pillCert { background: rgba(216, 184, 32, 0.24); color: #6b5a08; border-color: transparent; }
+
+.pillIcon { display: block; width: 14px; height: 14px; color: currentColor; }
+
+/* The live dot: this is a class with a person in it, not a recording. */
+.pillDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--flame);
+  box-shadow: 0 0 0 3px rgba(248, 88, 48, 0.18);
+}
+
+/* ---- what you do that day ------------------------------------------ */
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.point {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+@media (min-width: 700px) { .point { font-size: 15.5px; } }
+
+.check { flex: none; width: 19px; height: 19px; margin-top: 2px; }
+
+/* ---- the last tile ------------------------------------------------- */
+.ctaTile {
+  position: relative; /* sits above the stack, not in it */
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  margin-top: 4px;
+  padding: 28px 22px 30px;
+  border-radius: var(--radius-lg);
+  background: var(--ink);
+  color: #fff;
+}
+
+.ctaLead {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3vw, 26px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.ctaNote { color: rgba(255, 255, 255, 0.66); font-size: 13px; line-height: 1.45; }

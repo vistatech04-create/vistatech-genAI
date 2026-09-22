@@ -1,0 +1,77 @@
+/* Section 04. One question, one video, one button.
+
+   White ground like the week above it — the dark video frame is what breaks
+   the page up here, so the section does not need a colour of its own. */
+.section {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  padding-block: 8px 44px;
+}
+
+@media (min-width: 900px) { .section { padding-block: 16px 76px; } }
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.heading {
+  max-width: 22ch;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(27px, 4.4vw, 42px);
+  letter-spacing: -0.028em;
+  line-height: 1.11;
+}
+
+.accent {
+  font-weight: 600;
+  background-image: linear-gradient(var(--gold), var(--gold));
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.11em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.sub {
+  margin-top: 12px;
+  color: var(--ink-soft);
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+@media (min-width: 900px) { .sub { font-size: 17px; } }
+
+/* The player caps itself; this only keeps the landscape cut from running
+   the full 1140px, which would dwarf the heading above it. */
+.stage { width: 100%; max-width: 780px; margin: 24px auto 0; }
+
+@media (min-width: 900px) { .stage { margin-top: 32px; } }
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+/* Stacked on a phone so neither button is a half-width tap target, side by
+   side once there is room. Same pair, same order, as the hero. */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 340px;
+}
+
+@media (min-width: 601px) {
+  .buttons { flex-direction: row; justify-content: center; width: auto; max-width: none; gap: 14px; }
+}
+
+.note { color: var(--ink-faint); font-size: 13px; text-align: center; }

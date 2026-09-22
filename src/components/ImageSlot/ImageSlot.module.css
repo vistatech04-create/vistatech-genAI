@@ -1,0 +1,28 @@
+/* Renders the real image once a path exists, and a clearly marked
+   frame until then, so layout can be judged before the photo arrives. */
+.slot { position: relative; width: 100%; height: 100%; }
+.image { width: 100%; height: 100%; object-fit: contain; object-position: bottom center; }
+
+.empty {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 22px;
+  border: 2px dashed rgba(248, 88, 48, 0.55);
+  border-radius: var(--radius-md);
+  background: var(--flame-wash);
+  color: #a8442a;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.hint { font-size: 13px; line-height: 1.5; color: #b4634c; }

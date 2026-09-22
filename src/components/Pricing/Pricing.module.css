@@ -1,0 +1,352 @@
+/* Section 11. The fee.
+
+   White, after the sand of the starter week above it, so the price section
+   reads as the page clearing its throat. Two cards, the online one lifted.
+   Each card says the full fee, then halves it underneath — the halves are
+   what the eye is meant to land on, so they carry the heavy type. */
+.section {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  padding-block: 52px;
+}
+
+@media (min-width: 900px) { .section { padding-block: 84px; } }
+
+.head { display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 15px;
+  margin: 14px 0 16px;
+  border-radius: var(--radius-pill);
+  background: var(--gold-wash);
+  border: 1px solid rgba(216, 184, 32, 0.34);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.heading {
+  max-width: 21ch;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(28px, 4.6vw, 44px);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.accent {
+  font-weight: 600;
+  background-image: linear-gradient(var(--gold), var(--gold));
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.11em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.sub {
+  max-width: 50ch;
+  margin-top: 14px;
+  color: var(--ink-soft);
+  font-size: 15.5px;
+  line-height: 1.62;
+}
+
+@media (min-width: 900px) { .sub { font-size: 16.5px; } }
+
+/* ---- the mechanic, in three beats ---------------------------------- */
+/* A band rather than cards: these are steps in one sentence, not three
+   separate things to weigh up. */
+.beats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  width: 100%;
+  max-width: 940px;
+  margin: 30px auto 0;
+  padding: 0;
+  list-style: none;
+  border-radius: var(--radius-md);
+  background: var(--rule);
+  overflow: hidden;
+}
+
+@media (min-width: 760px) {
+  .beats { grid-template-columns: repeat(3, 1fr); margin-top: 40px; }
+}
+
+.beat {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px;
+  background: var(--sand);
+}
+
+.beatStep {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--flame);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.beatText { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+
+.beatTitle {
+  font-family: var(--font-display);
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.25;
+}
+
+.beatBody { color: var(--ink-soft); font-size: 13px; line-height: 1.5; }
+
+/* ---- the three plans ----------------------------------------------- */
+.plans {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Two cards, held to a width where each still reads as a card rather than
+   a banner, and centred in the container.
+
+   align-items: stretch is the grid default, and it is stated here because
+   it is load bearing: it makes both cards the height of the taller one, so
+   the two grounds end level and neither looks like it ran out of content.
+   The points list inside carries flex: 1, which pushes both buttons to the
+   bottom of that shared height. */
+@media (min-width: 760px) {
+  .plans {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 780px;
+    margin: 26px auto 0;
+    align-items: stretch;
+  }
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  padding: 22px 20px 24px;
+  border-radius: var(--radius-lg);
+  background: var(--sand);
+  border: 1px solid rgba(40, 8, 32, 0.08);
+}
+
+/* The one this page's ads sell. Lifted with the flame border and a white
+   ground so it reads as the default rather than the expensive option. */
+.planFeatured {
+  background: var(--paper);
+  border: 2px solid var(--flame);
+  box-shadow: 0 18px 40px -24px rgba(40, 8, 32, 0.35);
+}
+
+/* The lift is a transform, not a negative margin. A margin would make the
+   featured card taller than its neighbour, which is the thing the stretch
+   above just equalised; a transform moves the same box up and leaves its
+   height alone. */
+@media (min-width: 760px) {
+  .planFeatured { transform: translateY(-10px); }
+}
+
+.pick {
+  align-self: flex-start;
+  padding: 5px 12px;
+  margin-bottom: 12px;
+  border-radius: var(--radius-pill);
+  background: var(--flame);
+  color: var(--paper);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.planHead { min-height: 62px; }
+
+/* Sits between what the plan is and what it costs. */
+.planLive { margin-top: 12px; }
+
+.planName {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+}
+
+.planNote { margin-top: 5px; color: var(--ink-soft); font-size: 13.5px; line-height: 1.45; }
+
+/* ---- the split ----------------------------------------------------- */
+/* Two halves with the word "then" between them, so the sequence is read
+   before either number is. */
+.split {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: var(--flame-wash);
+  border: 1px solid rgba(248, 88, 48, 0.2);
+}
+
+.half { display: flex; flex-direction: column; gap: 1px; }
+
+.halfLabel {
+  color: var(--ink-soft);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+.halfValue {
+  font-family: var(--font-display);
+  font-size: clamp(27px, 4.6vw, 33px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+  color: var(--flame);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The balance, in words. Set in the display face at a readable size but
+   nothing like the weight of the figure above it — it is the half the
+   reader is NOT being asked for, and it should not compete with the half
+   they are. */
+.halfLater {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  line-height: 1.15;
+  color: var(--ink);
+  opacity: 0.68;
+}
+
+.halfNote {
+  margin-top: 3px;
+  color: var(--ink-soft);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.then {
+  align-self: flex-start;
+  padding: 2px 9px;
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  border: 1px solid rgba(248, 88, 48, 0.24);
+  color: var(--ink-soft);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+/* The full fee, stated before the split arrives to soften it. Ink, not
+   flame: flame on this page means something you can press. */
+.total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(40, 8, 32, 0.1);
+}
+
+.totalLabel {
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.totalValue {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: clamp(25px, 3.6vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.032em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- what is in the plan ------------------------------------------- */
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  /* Pushes every card's button to the bottom, so three cards of unequal
+     text still line their actions up. */
+  flex: 1;
+}
+
+.point {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+/* A tick drawn in CSS: two borders on a rotated box. No icon file for
+   something this small. */
+.tick {
+  flex: none;
+  width: 14px;
+  height: 8px;
+  margin-top: 5px;
+  border-left: 2px solid var(--money);
+  border-bottom: 2px solid var(--money);
+  border-radius: 1px;
+  transform: rotate(-45deg);
+}
+
+.planCta { margin-top: 20px; }
+
+/* ---- the three answers beside the price ---------------------------- */
+.assurances {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 30px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 760px) {
+  .assurances { grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 44px; }
+}
+
+.assurance {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 14px;
+  border-left: 2px solid var(--gold);
+}
+
+.assuranceTitle {
+  font-family: var(--font-display);
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+
+.assuranceBody { color: var(--ink-soft); font-size: 13.5px; line-height: 1.55; }

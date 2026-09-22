@@ -1,0 +1,166 @@
+/* The download. White card on the sand ground so it reads as a thing you
+   can take away, not another block of page. */
+.card {
+  padding: 20px 20px 22px;
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  border: 1px solid rgba(40, 8, 32, 0.08);
+  box-shadow: 0 18px 44px -34px rgba(40, 8, 32, 0.8);
+}
+
+@media (min-width: 700px) { .card { padding: 26px 28px 28px; } }
+
+/* The bundle shot. Full card width and landscape, which is the shape a
+   product shot wants — a 112px portrait thumbnail made the download look
+   like an attachment. Keeps its frame whether the real image has arrived
+   or not. */
+.cover {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--sand);
+}
+
+.head { margin-top: 16px; }
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--money);
+}
+
+.eyebrowIcon { display: block; width: 15px; height: 15px; color: currentColor; }
+
+.title {
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-size: clamp(21px, 3vw, 26px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+}
+
+.body {
+  margin-top: 9px;
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+/* ---- what is in it ------------------------------------------------- */
+.bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 18px 0 0;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--rule);
+  list-style: none;
+}
+
+.bullet {
+  position: relative;
+  padding-left: 15px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.bullet::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(216, 184, 32, 0.9);
+}
+
+/* ---- the form ------------------------------------------------------- */
+.form { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+
+.label {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink-soft);
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid rgba(40, 8, 32, 0.14);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15.5px; /* 16px or under and iOS zooms the page on focus */
+}
+
+.input::placeholder { color: var(--ink-faint); }
+.input:focus-visible { border-color: var(--flame); outline: none; box-shadow: 0 0 0 3px rgba(248, 88, 48, 0.16); }
+
+/* ---- the chip questions -------------------------------------------- */
+.chipField { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+
+.chipField .label { padding: 0; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.chip {
+  appearance: none;
+  min-height: 42px;
+  padding: 0 15px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid rgba(40, 8, 32, 0.14);
+  background: var(--paper);
+  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.16s var(--ease), background 0.16s var(--ease),
+    color 0.16s var(--ease);
+}
+
+.chip:hover { border-color: var(--flame); color: var(--ink); }
+
+/* Chosen. Flame outline rather than flame fill: the only filled flame in
+   this card is the submit, and two flames would compete. */
+.chipOn {
+  border-color: var(--flame);
+  background: var(--flame-wash);
+  color: var(--ink);
+}
+
+.error { color: var(--flame-dark); font-size: 12.5px; line-height: 1.4; }
+
+.note { margin-top: 2px; color: var(--ink-faint); font-size: 12.5px; line-height: 1.45; }
+
+/* ---- after it is sent ----------------------------------------------- */
+.done {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: var(--radius-md);
+  background: rgba(30, 122, 79, 0.08);
+}
+
+.doneHeading {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--money);
+}
+
+.doneBody { margin-top: 6px; color: var(--ink-soft); font-size: 14px; line-height: 1.5; }

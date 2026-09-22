@@ -1,0 +1,253 @@
+/* The last ask, then the footer.
+
+   The same picture as the hero: white ground, warm flame and gold washes,
+   the course's tools drifting up. The page ends where it started, which is
+   what an ending looks like.
+
+   This used to be a near-black band. It read as a panel from another site
+   — nothing here is dark but the video frames — so the weight now comes
+   from the headline size and the flame button, the way it does everywhere
+   else on the page. */
+.section {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background: var(--paper);
+  padding-block: 56px;
+}
+
+@media (min-width: 900px) { .section { padding-block: 96px; } }
+
+/* The wash. Same four-gradient recipe as the hero backdrop, mirrored so
+   the warmth gathers at the bottom of the page rather than the top, and
+   masked at the top edge so there is no seam against the sand above. */
+.wash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(52% 44% at 12% 82%, rgba(248, 88, 48, 0.14), transparent 70%),
+    radial-gradient(46% 40% at 88% 90%, rgba(216, 184, 32, 0.18), transparent 72%),
+    radial-gradient(42% 36% at 74% 24%, rgba(248, 88, 48, 0.08), transparent 74%),
+    radial-gradient(38% 32% at 20% 14%, rgba(216, 184, 32, 0.1), transparent 74%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 100%);
+}
+
+/* The tools, drifting upward like the ones behind the headline. Four, not
+   nine: this section is shorter, and the eye has a button to find. */
+.glyphs { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+
+.glyph {
+  position: absolute;
+  display: block;
+  opacity: 0;
+  color: var(--flame);
+  will-change: transform, opacity;
+  animation: rise linear infinite;
+}
+
+.g1 { width: 34px; height: 34px; left: 7%;  top: 62%; animation-duration: 46s; animation-delay: -8s;  --tilt: 9deg;   --peak: 0.2; }
+.g2 { width: 26px; height: 26px; left: 18%; top: 22%; animation-duration: 57s; animation-delay: -26s; --tilt: -11deg; --peak: 0.22; color: var(--gold); }
+.g3 { width: 38px; height: 38px; left: 84%; top: 54%; animation-duration: 52s; animation-delay: -14s; --tilt: -7deg;  --peak: 0.16; color: var(--gold); }
+.g4 { width: 28px; height: 28px; left: 91%; top: 20%; animation-duration: 63s; animation-delay: -35s; --tilt: 12deg;  --peak: 0.18; }
+
+/* Negative delays start each one mid-flight, so the section is alive on
+   the first frame instead of fading up from nothing. */
+@keyframes rise {
+  0%   { opacity: 0;            transform: translate3d(0, 30px, 0) rotate(0deg); }
+  20%  { opacity: var(--peak); }
+  80%  { opacity: var(--peak); }
+  100% { opacity: 0;            transform: translate3d(0, -84px, 0) rotate(var(--tilt)); }
+}
+
+@media (max-width: 700px) { .g2, .g3 { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .glyph { animation: none; opacity: calc(var(--peak) * 0.8); }
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* The strip sits above the headline and needs its own breathing room. */
+.inner > :first-child { margin-bottom: 20px; }
+
+.heading {
+  max-width: 26ch;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(30px, 5.4vw, 54px);
+  letter-spacing: -0.038em;
+  line-height: 1.04;
+}
+
+.body {
+  max-width: 50ch;
+  margin-top: 18px;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+@media (min-width: 900px) { .body { font-size: 17.5px; } }
+
+/* ---- the offer, restated -------------------------------------------- */
+/* Stacked, or all three across — never two. There are exactly three of
+   these, so an auto-fitting grid spends most phone widths putting two on
+   one row and orphaning the third, which reads as a broken layout rather
+   than a summary. One breakpoint is the honest way to say "three or one". */
+.recap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  width: 100%;
+  max-width: 620px;
+  margin: 26px auto 0;
+  padding: 0;
+  list-style: none;
+  border-radius: var(--radius-md);
+  background: var(--rule);
+  overflow: hidden;
+}
+
+@media (min-width: 600px) {
+  .recap { grid-template-columns: repeat(3, 1fr); }
+}
+
+.recapItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  background: var(--sand);
+}
+
+.recapBig {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2.6vw, 23px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.recapSmall {
+  color: var(--ink-soft);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+/* ---- the two actions ------------------------------------------------ */
+/* Wraps on its own rather than switching direction at a breakpoint, so a
+   long phone number never forces a half-width tap target. */
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 340px;
+  margin-top: 28px;
+}
+
+@media (min-width: 601px) {
+  .buttons { width: auto; max-width: none; gap: 14px; }
+}
+
+/* The phone number should not break across two lines mid-number. */
+.buttons > * { white-space: nowrap; }
+
+.note {
+  max-width: 46ch;
+  margin-top: 18px;
+  color: var(--ink-faint);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ---- what holds after the button ------------------------------------ */
+.trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 20px;
+  margin: 22px 0 0;
+  padding: 22px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+  width: 100%;
+  max-width: 720px;
+}
+
+.trustItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-soft);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+/* A tick drawn from two borders on a rotated box — no icon file for
+   something this small. */
+.check {
+  flex: none;
+  width: 11px;
+  height: 6px;
+  margin-top: -3px;
+  border-left: 2px solid var(--money);
+  border-bottom: 2px solid var(--money);
+  border-radius: 1px;
+  transform: rotate(-45deg);
+}
+
+/* ---- the footer ---------------------------------------------------- */
+.footer {
+  position: relative;
+  z-index: 1;
+  background: var(--sand);
+  border-top: 1px solid var(--rule);
+  padding-block: 28px 32px;
+}
+
+.footInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.footBrand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.footMark { flex: none; }
+
+.footMeta {
+  color: var(--ink-soft);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.footLink { border-bottom: 1px solid rgba(40, 8, 32, 0.22); }
+.footLink:hover { color: var(--flame); border-color: var(--flame); }
+
+.dot { padding-inline: 7px; color: var(--ink-faint); }
+
+.legal {
+  max-width: 58ch;
+  margin-top: 4px;
+  color: var(--ink-faint);
+  font-size: 11.5px;
+  line-height: 1.5;
+}

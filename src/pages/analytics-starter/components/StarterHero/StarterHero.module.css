@@ -1,0 +1,266 @@
+/* The ₹999 hero. Same family as the course page hero — same light display
+   type, same gold stroke — but tighter, because this page has one job and
+   the button should be on screen almost immediately.
+
+   What is different here is the certificate frame around it. The page
+   promises a certificate, so the hero is printed like one. */
+.hero { position: relative; background: none; }
+
+/* The container the frame measures itself against, so the frame grows and
+   shrinks with the copy instead of guessing a height. */
+.stage { position: relative; }
+
+/* ---- the certificate frame ---------------------------------------- */
+.frame {
+  position: absolute;
+  inset: 2px 8px 10px;
+  border: 1px solid rgba(216, 184, 32, 0.5);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* The inner of the two rules. Every printed certificate has two. */
+.frame::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(216, 184, 32, 0.26);
+  border-radius: calc(var(--radius-lg) - 5px);
+}
+
+@media (min-width: 900px) {
+  .frame { inset: 4px 0 14px; }
+  .frame::before { inset: 7px; border-radius: calc(var(--radius-lg) - 7px); }
+}
+
+/* The logo's gold diamond, once at each corner, sitting on the outer rule. */
+.corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  opacity: 0.55;
+  transform: rotate(45deg);
+}
+
+.tl { top: -4px; left: 26px; }
+.tr { top: -4px; right: 26px; }
+.bl { bottom: -4px; left: 26px; }
+.br { bottom: -4px; right: 26px; }
+
+@media (min-width: 900px) {
+  .corner { width: 10px; height: 10px; }
+  .tl, .tr { top: -5px; }
+  .bl, .br { bottom: -5px; }
+  .tl, .bl { left: 40px; }
+  .tr, .br { right: 40px; }
+}
+
+/* The seal only appears where the frame has genuinely empty canvas: bottom
+   right on a desktop, beside the facts. A phone has no such gap — the seal
+   would sit on the badge — so it is left off there and the frame, the corner
+   diamonds and the drifting marks carry the certificate on their own. */
+.seal { display: none; }
+
+@media (min-width: 900px) {
+  .seal {
+    display: block;
+    position: absolute;
+    bottom: 22px;
+    right: 46px;
+    width: 104px;
+    color: var(--gold);
+    opacity: 0.34;
+    animation: breathe 22s var(--ease) infinite;
+  }
+}
+
+/* Foil catching the light. One slow pass, faint enough that you notice it
+   without watching it. */
+.sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    104deg,
+    transparent 38%,
+    rgba(216, 184, 32, 0.13) 50%,
+    transparent 62%
+  );
+  transform: translateX(-60%);
+  animation: sheen 17s linear infinite;
+}
+
+@keyframes sheen {
+  0%   { transform: translateX(-60%); }
+  55%  { transform: translateX(60%); }
+  100% { transform: translateX(60%); }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.22; }
+  50%      { opacity: 0.4; }
+}
+
+.copy {
+  position: relative; /* above the backdrop and the frame */
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-block: 26px 40px;
+}
+
+@media (min-width: 900px) { .copy { padding-block: 34px 52px; } }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--gold-wash);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.badgeMark { flex: none; }
+
+.headline {
+  max-width: 20ch;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(30px, 5.6vw, 52px);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+@media (min-width: 900px) { .headline { max-width: 26ch; } }
+
+.line { display: block; }
+
+/* The price is the offer, so the second line carries the weight and the
+   gold stroke lands under ₹999. */
+.lineBold { display: block; font-weight: 600; }
+
+.accent {
+  background-image: linear-gradient(var(--gold), var(--gold));
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 0% 0.11em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  animation: drawStroke 0.8s var(--ease) 0.9s both;
+}
+
+.sub {
+  max-width: 54ch;
+  margin-top: 18px;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.62;
+}
+
+@media (min-width: 900px) { .sub { font-size: 17.5px; margin-top: 20px; } }
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 340px;
+  margin-top: 26px;
+}
+
+@media (min-width: 601px) {
+  .actions {
+    flex-direction: row;
+    justify-content: center;
+    width: auto;
+    max-width: none;
+    gap: 14px;
+  }
+}
+
+.ctaEdge { display: block; width: 1px; height: 1px; }
+
+.reassure {
+  margin-top: 16px;
+  color: var(--ink-faint);
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+/* ---- the three facts ---------------------------------------------- */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  width: 100%;
+  max-width: 560px;
+  margin: 32px 0 0;
+  padding: 18px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-inline: 8px;
+}
+
+/* A hairline between the facts, not around them, so the row stays quiet. */
+.fact + .fact { border-left: 1px solid var(--rule); }
+
+.factBig {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 5.4vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* The Tamil word needs its own face and sits a touch smaller than digits. */
+.factBig:lang(ta) { font-family: var(--font-tamil); font-size: clamp(19px, 4.6vw, 26px); }
+
+.factSmall {
+  max-width: 16ch;
+  color: var(--ink-soft);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+@media (min-width: 700px) { .factSmall { font-size: 13.5px; } }
+
+/* ---- the load-in -------------------------------------------------- */
+.rise { animation: rise 0.6s var(--ease) both; }
+.d1 { animation-delay: 0.05s; }
+.d2 { animation-delay: 0.14s; }
+.d3 { animation-delay: 0.30s; }
+.d4 { animation-delay: 0.44s; }
+.d5 { animation-delay: 0.54s; }
+.d6 { animation-delay: 0.62s; }
+.d7 { animation-delay: 0.70s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes drawStroke {
+  to { background-size: 100% 0.11em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; opacity: 1; transform: none; }
+  .accent { animation: none; background-size: 100% 0.11em; }
+  .sheen { animation: none; opacity: 0; }
+  .seal { animation: none; opacity: 0.3; }
+}

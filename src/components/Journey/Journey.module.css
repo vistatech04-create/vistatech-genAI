@@ -1,0 +1,188 @@
+/* The program, start to offer letter, as one continuous rail.
+   Vertical at every width on purpose: a numbered list running downwards is
+   the format everyone already knows how to read, and it works identically
+   on a 360px phone and a laptop. */
+.section {
+  position: relative;
+  z-index: 1;
+  background: var(--sand);
+  padding-block: 52px;
+}
+
+@media (min-width: 900px) { .section { padding-block: 80px; } }
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.heading {
+  max-width: 20ch;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(27px, 4.4vw, 42px);
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
+
+.accent {
+  font-weight: 600;
+  background-image: linear-gradient(var(--gold), var(--gold));
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.11em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* ---- the rail ------------------------------------------------------
+   Numbers run down the left on a connecting line, each one beside its own
+   card. The line is what makes it read as one journey rather than six
+   unrelated boxes.                                                       */
+.steps {
+  width: 100%;
+  max-width: 720px;
+  margin: 36px auto 0;
+  display: grid;
+  gap: 18px;
+}
+
+@media (min-width: 900px) { .steps { margin-top: 48px; gap: 20px; } }
+
+.step {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 700px) { .step { grid-template-columns: 52px 1fr; gap: 20px; } }
+
+/* The number, and the line running from it down to the next one. */
+.marker {
+  position: relative;
+  padding-top: 12px;
+}
+
+@media (min-width: 700px) { .marker { padding-top: 14px; } }
+
+.num {
+  position: relative;
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  border: 1.5px solid rgba(40, 8, 32, 0.16);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 700px) { .num { width: 52px; height: 52px; font-size: 19px; } }
+
+/* Lit once you have scrolled to it. The rail fills in behind you, so how
+   far through the journey you are is visible without a progress bar. */
+.num {
+  transition:
+    background 0.45s var(--ease),
+    border-color 0.45s var(--ease),
+    color 0.45s var(--ease);
+}
+
+.numOn {
+  background: var(--flame);
+  border-color: var(--flame);
+  color: #fff;
+}
+
+.marker::after {
+  content: '';
+  position: absolute;
+  left: 22px;
+  top: 56px;
+  bottom: -18px;
+  width: 2px;
+  transform: translateX(-50%);
+  background: rgba(40, 8, 32, 0.16);
+  transition: background 0.45s var(--ease);
+}
+
+/* The segment below a step turns once the next step is reached. */
+.railOn::after { background: var(--flame); }
+
+@media (min-width: 700px) {
+  .marker::after { left: 26px; top: 66px; bottom: -20px; }
+}
+
+.step:last-child .marker::after { display: none; }
+
+/* ---- the card ------------------------------------------------------ */
+.card {
+  min-width: 0;
+  padding: 22px 20px;
+  border-radius: 20px;
+  background: var(--paper);
+  border: 1px solid rgba(40, 8, 32, 0.1);
+  box-shadow: 0 14px 30px -26px rgba(40, 8, 32, 0.45);
+  transition: box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
+}
+
+/* The one you are reading sits slightly forward. */
+.cardOn {
+  border-color: rgba(40, 8, 32, 0.16);
+  box-shadow: 0 22px 46px -26px rgba(40, 8, 32, 0.6);
+}
+
+@media (min-width: 700px) { .card { padding: 26px 28px; } }
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(17px, 2.2vw, 20px);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.text {
+  max-width: 52ch;
+  margin-top: 7px;
+  font-size: clamp(14.5px, 1.8vw, 16px);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ---- the line that sums it up --------------------------------------- */
+.summary {
+  width: 100%;
+  max-width: 720px;
+  margin: 32px auto 0;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: var(--paper);
+  border: 1px solid rgba(40, 8, 32, 0.1);
+  text-align: center;
+  font-size: clamp(15px, 2vw, 17px);
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.summary b {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.cta { display: flex; justify-content: center; margin-top: 28px; }
+
+/* Colour still changes for anyone who asked for less motion. Only the
+   easing between states is dropped. */
+@media (prefers-reduced-motion: reduce) {
+  .num, .card, .marker::after { transition: none; }
+}

@@ -1,0 +1,302 @@
+<title>Vista Tech Hero Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@700;800&family=Figtree:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;600&display=swap">
+
+<style>
+:root{
+  color-scheme:light;
+  --ink:#280820; --flame:#F85830; --gold:#D8B820;
+  --ink-soft:#6A4A61; --rule:rgba(40,8,32,.12);
+  --body:"Figtree",system-ui,sans-serif;
+  --tamil:"Noto Sans Tamil","Figtree",sans-serif;
+  --gut:20px; --max:1140px;
+}
+*{ box-sizing:border-box; }
+body{ margin:0; background:#fff; color:var(--ink); font-family:var(--body);
+  font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+img{ max-width:100%; display:block; }
+p{ margin:0; } h1,h2,h3{ margin:0; line-height:1.06; text-wrap:balance; }
+a{ color:inherit; text-decoration:none; }
+:focus-visible{ outline:3px solid var(--flame); outline-offset:3px; border-radius:6px; }
+.wrap{ width:100%; max-width:var(--max); margin-inline:auto; padding-inline:var(--gut); }
+
+/* ---- comparison chrome (not part of either design) ----------------- */
+.tab{ background:var(--ink); color:#fff; padding-block:22px; }
+.tab .n{ font-family:var(--body); font-size:11px; font-weight:700; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--gold); }
+.tab h2{ font-family:"Plus Jakarta Sans",sans-serif; font-weight:800;
+  font-size:clamp(21px,3.2vw,28px); letter-spacing:-.025em; margin:6px 0 8px; }
+.tab p{ color:#CDB9C8; max-width:64ch; font-size:15px; }
+.tab .facts{ display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
+.tab .facts span{ font-size:11.5px; font-weight:600; padding:5px 10px; border-radius:6px;
+  background:rgba(255,255,255,.1); color:#E8DBE5; }
+
+/* ---- shared header: logo left, ONE action right. no menu. ---------- */
+.bar{ display:flex; align-items:center; justify-content:space-between; gap:14px;
+  padding-block:18px; }
+.bar img{ height:46px; width:auto; }
+
+/* ---- buttons ------------------------------------------------------- */
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:9px;
+  min-height:54px; padding:0 28px; border-radius:999px; font-size:16px;
+  font-weight:700; cursor:pointer; border:0; transition:transform .14s ease, box-shadow .14s ease; }
+.btn:hover{ transform:translateY(-2px); }
+.btn-f{ background:var(--flame); color:#fff; box-shadow:0 14px 28px -12px rgba(248,88,48,.7); }
+.btn-o{ background:#fff; color:var(--ink); border:1.5px solid rgba(40,8,32,.18); }
+.btn-o:hover{ background:#FFF4F0; border-color:var(--flame); }
+.btn-sm{ min-height:44px; padding:0 20px; font-size:14.5px; box-shadow:none; }
+.cta{ display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+@media (max-width:600px){ .cta .btn{ width:100%; } }
+.note{ font-size:14px; color:var(--ink-soft); margin-top:13px; }
+.tam{ font-family:var(--tamil); font-size:15px; color:var(--ink-soft); margin-top:14px; }
+
+/* ---- image placeholders -------------------------------------------- */
+.ph{ position:relative; border:2px dashed rgba(248,88,48,.55); background:#FFF6F2;
+  border-radius:var(--ph-r,24px); display:grid; place-items:center; text-align:center;
+  padding:22px; color:#A8442A; }
+.ph b{ display:block; font-size:13px; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; margin-bottom:6px; }
+.ph span{ font-size:13px; line-height:1.5; color:#B4634C; }
+
+/* ===================================================================
+   HERO A — AIRY   (the Sinau read: light weight, big air, cut-out on shapes)
+   =================================================================== */
+.A{ background:#fff; font-family:"Outfit",system-ui,sans-serif; }
+.A .wrap{ padding-bottom:0; }
+.A-grid{ display:grid; grid-template-columns:1fr; gap:34px; align-items:center;
+  padding-block:44px 0; }
+@media (min-width:920px){ .A-grid{ grid-template-columns:1.06fr .94fr; gap:44px;
+  padding-block:60px 0; } }
+.A-pill{ display:inline-flex; align-items:center; gap:9px; font-family:var(--body);
+  font-size:13px; font-weight:600; color:var(--ink); background:#FDF6DC;
+  border-radius:999px; padding:8px 16px; margin-bottom:22px; }
+.A-pill i{ width:7px; height:7px; border-radius:50%; background:var(--flame);
+  flex:none; font-style:normal; }
+.A h1{ font-family:"Outfit",sans-serif; font-weight:300;
+  font-size:clamp(34px,6.8vw,60px); letter-spacing:-.025em; line-height:1.1; }
+.A h1 b{ font-weight:600; }
+.A .sub{ font-family:var(--body); font-size:clamp(16.5px,2vw,18.5px);
+  color:var(--ink-soft); max-width:46ch; margin-top:20px; }
+.A .btn{ font-family:var(--body); }
+
+/* the oversized brand shapes, built from CSS. no image needed. */
+.A-stage{ position:relative; min-height:380px; display:grid; place-items:end center; }
+@media (min-width:920px){ .A-stage{ min-height:460px; } }
+.A-shapes{ position:absolute; inset:0; overflow:hidden; border-radius:30px; }
+.A-shapes i{ position:absolute; display:block; border-radius:999px; background:var(--flame); }
+.sh1{ width:46%; height:74px; top:12%; left:6%; transform:rotate(-38deg); opacity:.92; }
+.sh2{ width:34%; height:74px; top:34%; left:0%; transform:rotate(-38deg); opacity:.55; }
+.sh3{ width:58%; height:74px; top:4%; right:-8%; transform:rotate(38deg); background:var(--gold); }
+.sh4{ width:30%; height:74px; bottom:24%; right:2%; transform:rotate(38deg); opacity:.85; }
+.sh5{ width:74px; height:74px; bottom:12%; left:16%; background:var(--gold); opacity:.8; }
+.sh6{ width:44px; height:44px; top:8%; left:44%; background:var(--flame); }
+.A-cut{ position:relative; width:min(78%,330px); aspect-ratio:9/11; --ph-r:18px; }
+
+.A-trust{ border-top:1px solid var(--rule); margin-top:40px; padding-block:22px 44px;
+  display:flex; flex-wrap:wrap; align-items:center; gap:14px 30px; }
+.A-trust p{ font-family:var(--body); font-size:13px; font-weight:600; color:var(--ink-soft);
+  letter-spacing:.02em; }
+.A-trust .m{ display:flex; flex-wrap:wrap; gap:12px 26px; }
+.A-trust .m span{ font-family:"Outfit",sans-serif; font-weight:500; font-size:15px;
+  color:var(--ink); opacity:.72; }
+
+/* ===================================================================
+   HERO B — PUNCHY  (the Courssins read: heavy type, marker swipe,
+   photo card with floating proof, full-bleed dark stat band)
+   =================================================================== */
+.B{ background:#fff; }
+.B-grid{ display:grid; grid-template-columns:1fr; gap:36px; align-items:center;
+  padding-block:40px 52px; }
+@media (min-width:920px){ .B-grid{ grid-template-columns:1.04fr .96fr; gap:46px;
+  padding-block:52px 64px; } }
+.B-pill{ display:inline-flex; align-items:center; gap:8px; font-size:12.5px; font-weight:700;
+  letter-spacing:.04em; text-transform:uppercase; color:var(--ink); background:var(--gold);
+  border-radius:999px; padding:8px 16px; margin-bottom:20px; }
+.B h1{ font-family:"Plus Jakarta Sans",sans-serif; font-weight:800;
+  font-size:clamp(33px,6.6vw,58px); letter-spacing:-.04em; line-height:1.04; }
+/* the highlighter swipe — a skewed gold block sitting behind the words */
+.mark{ position:relative; display:inline; }
+.mark::before{ content:""; position:absolute; left:-.1em; right:-.1em; bottom:.02em;
+  height:.42em; background:var(--gold); opacity:.85; z-index:-1;
+  border-radius:3px 9px 4px 10px; transform:rotate(-.6deg); }
+.B .sub{ font-size:clamp(16.5px,2vw,18px); color:var(--ink-soft); max-width:46ch; margin-top:20px; }
+
+.B-stage{ position:relative; }
+.B-photo{ --ph-r:28px; aspect-ratio:4/5; width:100%; max-width:440px; margin-inline:auto; }
+/* floating proof card, lifted from the reference's stat widget */
+.B-float{ position:absolute; left:-4px; bottom:44px; background:var(--ink); color:#fff;
+  border-radius:16px; padding:15px 17px; width:min(74%,255px);
+  box-shadow:0 24px 44px -20px rgba(40,8,32,.65); }
+@media (min-width:920px){ .B-float{ left:-26px; } }
+.B-float .l{ font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--gold); }
+.B-float .v{ font-family:"Plus Jakarta Sans",sans-serif; font-weight:800; font-size:17px;
+  letter-spacing:-.02em; margin-top:5px; }
+.B-float .s{ font-size:12.5px; color:#B9A2B4; margin-top:2px; }
+.B-float .bars{ display:flex; align-items:flex-end; gap:4px; height:24px; margin-top:11px; }
+.B-float .bars i{ flex:1; background:var(--flame); border-radius:2px; display:block; }
+.B-float .bars i:nth-child(1){ height:38%; } .B-float .bars i:nth-child(2){ height:62%; }
+.B-float .bars i:nth-child(3){ height:48%; } .B-float .bars i:nth-child(4){ height:84%; }
+.B-float .bars i:nth-child(5){ height:100%; background:var(--gold); }
+/* rotating seal */
+.B-seal{ position:absolute; right:2px; top:14px; width:104px; height:104px; }
+@media (min-width:920px){ .B-seal{ right:-14px; } }
+.B-seal svg{ width:100%; height:100%; animation:spin 22s linear infinite; }
+.B-seal text{ font-family:"Figtree",sans-serif; font-size:10.4px; font-weight:700;
+  letter-spacing:.12em; fill:var(--ink); text-transform:uppercase; }
+.B-seal .disc{ fill:var(--gold); }
+.B-seal .core{ position:absolute; inset:0; display:grid; place-items:center;
+  font-family:"Plus Jakarta Sans",sans-serif; font-weight:800; font-size:17px; color:var(--ink); }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+/* full-bleed dark stat band, straight off the reference */
+.B-band{ background:var(--ink); color:#fff; }
+.B-band .in{ display:grid; grid-template-columns:repeat(2,1fr); gap:0; padding-block:6px; }
+@media (min-width:760px){ .B-band .in{ grid-template-columns:repeat(4,1fr); } }
+.B-band .c{ padding:24px 18px; text-align:center; border-right:1px solid rgba(255,255,255,.14);
+  border-bottom:1px solid rgba(255,255,255,.14); }
+.B-band .c:nth-child(2n){ border-right:0; }
+.B-band .c:nth-child(n+3){ border-bottom:0; }
+@media (min-width:760px){
+  .B-band .c{ border-bottom:0; } .B-band .c:nth-child(2n){ border-right:1px solid rgba(255,255,255,.14); }
+  .B-band .c:last-child{ border-right:0; }
+}
+.B-band b{ display:block; font-family:"Plus Jakarta Sans",sans-serif; font-weight:800;
+  font-size:clamp(27px,4vw,38px); letter-spacing:-.035em; font-variant-numeric:tabular-nums; }
+.B-band .c:nth-child(1) b{ color:var(--flame); }
+.B-band .c:nth-child(3) b{ color:var(--gold); }
+.B-band span{ display:block; font-size:12.5px; color:#BFA9BA; margin-top:4px; line-height:1.4; }
+
+@media (prefers-reduced-motion:reduce){
+  *{ transition:none !important; animation:none !important; }
+}
+</style>
+
+<!-- ============================ A ============================ -->
+<div class="tab">
+  <div class="wrap">
+    <p class="n">Hero A</p>
+    <h2>Airy</h2>
+    <p>The Sinau read. Very large headline at <b>light weight</b>, a lot of white space, and a cut-out
+      student standing on oversized brand shapes. Calm and premium. The shapes are built in code,
+      so only the cut-out is a real photo.</p>
+    <div class="facts"><span>Outfit Light 300</span><span>white ground</span>
+      <span>CSS shapes, no image</span><span>1 photo needed</span><span>no dark block</span></div>
+  </div>
+</div>
+
+<section class="A">
+  <div class="wrap">
+    <div class="bar">
+      <img src="assets/vistatech-logo-tight.png" alt="Vista Tech">
+      <a class="btn btn-f btn-sm" href="#">Start my &#8377;1,000 week</a>
+    </div>
+
+    <div class="A-grid">
+      <div>
+        <p class="A-pill"><i></i> Half your fee waits till you are placed</p>
+        <h1>Learn analytics in 60 days.<br><b>Pay half only after you get the job.</b></h1>
+        <p class="sub">You don't need a computer science degree. You don't need to know coding.
+          Start with one week of live classes for &#8377;1,000, and see the teaching yourself
+          before you pay anything more.</p>
+        <div class="cta">
+          <a class="btn btn-f" href="#">Start my &#8377;1,000 week</a>
+          <a class="btn btn-o" href="#">Talk to a mentor first</a>
+        </div>
+        <p class="note">Takes 2 minutes. Classes are live, not recorded videos.</p>
+        <p class="tam">தமிழில் கற்றுக்கொள்ளுங்கள். வகுப்புகள் நேரலையில்.</p>
+      </div>
+
+      <div class="A-stage">
+        <div class="A-shapes">
+          <i class="sh1"></i><i class="sh2"></i><i class="sh3"></i>
+          <i class="sh4"></i><i class="sh5"></i><i class="sh6"></i>
+        </div>
+        <div class="ph A-cut">
+          <div><b>Image 01</b><span>Cut-out student, transparent PNG.<br>Roughly 900 &times; 1100.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="A-trust">
+      <p>Our students have been hired at</p>
+      <div class="m">
+        <span>Digil Technologies</span><span>Hansiba Technologies</span>
+        <span>Zillion Technologies</span><span>Orion Systems</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ B ============================ -->
+<div class="tab">
+  <div class="wrap">
+    <p class="n">Hero B</p>
+    <h2>Punchy</h2>
+    <p>The Courssins read. <b>Heavy tight headline</b> with a gold highlighter swipe, a rounded photo
+      card of a real student, a floating proof card showing an actual placement, a rotating seal,
+      and a full-bleed dark stat band underneath. Loud and confident.</p>
+    <div class="facts"><span>Plus Jakarta 800</span><span>gold marker swipe</span>
+      <span>floating proof card</span><span>1 photo needed</span><span>1 dark band</span></div>
+  </div>
+</div>
+
+<section class="B">
+  <div class="wrap">
+    <div class="bar">
+      <img src="assets/vistatech-logo-tight.png" alt="Vista Tech">
+      <a class="btn btn-f btn-sm" href="#">Start my &#8377;1,000 week</a>
+    </div>
+
+    <div class="B-grid">
+      <div>
+        <p class="B-pill">150+ students already placed</p>
+        <h1>Learn analytics in 60 days. Pay half your fee
+          <span class="mark">only after you get the job.</span></h1>
+        <p class="sub">You don't need a computer science degree. You don't need to know coding.
+          Start with one week of live classes for &#8377;1,000, and see the teaching yourself
+          before you pay anything more.</p>
+        <div class="cta">
+          <a class="btn btn-f" href="#">Start my &#8377;1,000 week &rarr;</a>
+          <a class="btn btn-o" href="#">Talk to a mentor first</a>
+        </div>
+        <p class="note">Takes 2 minutes. Classes are live, not recorded videos.</p>
+        <p class="tam">தமிழில் கற்றுக்கொள்ளுங்கள். வகுப்புகள் நேரலையில்.</p>
+      </div>
+
+      <div class="B-stage">
+        <div class="ph B-photo">
+          <div><b>Image 02</b><span>Student at a laptop, rounded photo card.<br>4:5, roughly 1000 &times; 1250.</span></div>
+        </div>
+
+        <div class="B-float">
+          <p class="l">Placed</p>
+          <p class="v">Junior Business Analyst</p>
+          <p class="s">3.4 LPA &middot; Digil Technologies</p>
+          <div class="bars"><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+
+        <div class="B-seal">
+          <svg viewBox="0 0 110 110" aria-hidden="true">
+            <circle class="disc" cx="55" cy="55" r="55"></circle>
+            <defs><path id="sealpath" d="M55,55 m-40,0 a40,40 0 1,1 80,0 a40,40 0 1,1 -80,0"></path></defs>
+            <text><textPath href="#sealpath" startOffset="0">Try one week &#183; &#8377;1,000 &#183; Try one week &#183; &#8377;1,000 &#183; </textPath></text>
+          </svg>
+          <span class="core">&#8377;1000</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="B-band">
+    <div class="wrap">
+      <div class="in">
+        <div class="c"><b>150+</b><span>students placed</span></div>
+        <div class="c"><b>2,000+</b><span>placements by our HR partner</span></div>
+        <div class="c"><b>20 yrs</b><span>our HR partner in hiring</span></div>
+        <div class="c"><b>50%</b><span>of the fee waits till you're hired</span></div>
+      </div>
+    </div>
+  </div>
+</section>

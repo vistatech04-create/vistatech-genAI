@@ -1,0 +1,162 @@
+/* A record of every placed student. Deliberately built as a list of rows
+   rather than testimonial cards: rows read as evidence someone could check,
+   cards read as marketing. */
+.section {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  padding-block: 52px;
+}
+
+@media (min-width: 900px) { .section { padding-block: 80px; } }
+
+.head { display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+.heading {
+  max-width: 20ch;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(27px, 4.4vw, 42px);
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
+
+.accent {
+  font-weight: 600;
+  background-image: linear-gradient(var(--gold), var(--gold));
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.11em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.sub { max-width: 46ch; margin-top: 14px; font-size: clamp(15px, 1.8vw, 16.5px); color: var(--ink-soft); }
+
+.table { max-width: 900px; margin: 32px auto 0; }
+
+@media (min-width: 900px) { .table { margin-top: 44px; } }
+
+/* Column headings only make sense once the rows are actually in columns. */
+.headRow { display: none; }
+
+@media (min-width: 820px) {
+  .headRow {
+    display: grid;
+    grid-template-columns: 40px 1.1fr 1.1fr 1fr auto;
+    gap: 16px;
+    padding: 0 18px 10px;
+    border-bottom: 1px solid rgba(40, 8, 32, 0.12);
+  }
+  .headRow span {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .headRow span:last-child { text-align: right; }
+}
+
+/* The list scrolls by on its own. Fixed height window, the rows rendered
+   twice, and the track slides up by exactly one copy so the loop has no
+   seam. It never pauses: the point is the sense of a list that keeps going. */
+.window {
+  height: 420px;
+  overflow: hidden;
+  mask-image: linear-gradient(180deg, transparent, #000 7%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 7%, #000 92%, transparent);
+}
+
+@media (min-width: 820px) { .window { height: 362px; } }
+
+.rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  animation: scrollRows 46s linear infinite;
+}
+
+
+@keyframes scrollRows {
+  to { transform: translateY(-50%); }
+}
+
+/* No motion: the window opens up and the whole list simply sits there. */
+@media (prefers-reduced-motion: reduce) {
+  .window { height: auto; mask-image: none; -webkit-mask-image: none; }
+  .rows { animation: none; }
+}
+
+.row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  column-gap: 12px;
+  row-gap: 3px;
+  padding: 13px 14px;
+  border-radius: 14px;
+  align-items: center;
+}
+
+.rowAlt { background: var(--sand); }
+
+@media (min-width: 820px) {
+  .row {
+    grid-template-columns: 40px 1.1fr 1.1fr 1fr auto;
+    gap: 16px;
+    padding: 12px 18px;
+    border-radius: 12px;
+  }
+}
+
+/* Phone layout: the face runs down the left, name and salary share the top
+   line, and the job and company sit underneath, indented to the name.
+   Desktop gives all five their own column. */
+.face { grid-column: 1; grid-row: 1 / 4; align-self: start; --avatar-size: 40px; }
+.who { grid-column: 2; grid-row: 1; min-width: 0; }
+.salary { grid-column: 3; grid-row: 1; justify-self: end; }
+.role { grid-column: 2 / -1; grid-row: 2; }
+.company { grid-column: 2 / -1; grid-row: 3; }
+
+@media (min-width: 820px) {
+  .face { grid-column: 1; grid-row: 1; align-self: center; }
+  .who { grid-column: 2; grid-row: 1; }
+  .role { grid-column: 3; grid-row: 1; }
+  .company { grid-column: 4; grid-row: 1; }
+  .salary { grid-column: 5; grid-row: 1; }
+}
+
+.name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15.5px;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+/* What they studied before. This is the line that makes the salary mean
+   something to a commerce graduate reading it. */
+.edu {
+  display: block;
+  font-size: 12.5px;
+  color: var(--ink-faint);
+  margin-top: 1px;
+}
+
+.role { font-size: 14.5px; color: var(--ink); }
+.company { font-size: 14px; color: var(--ink-soft); }
+
+.salary {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14.5px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  padding: 5px 11px;
+  border-radius: var(--radius-pill);
+  background: var(--gold-wash);
+  white-space: nowrap;
+}
+
+

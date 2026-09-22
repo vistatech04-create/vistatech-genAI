@@ -1,0 +1,118 @@
+/* Four fields. Name and phone are the only ones the team actually needs to
+   call someone; the salary question qualifies the lead and makes the visitor
+   picture the outcome before they hit the button. */
+.card {
+  background: var(--paper);
+  border: 1px solid rgba(40, 8, 32, 0.1);
+  border-radius: 22px;
+  box-shadow: 0 26px 50px -32px rgba(40, 8, 32, 0.5);
+  padding: 24px 20px;
+}
+
+@media (min-width: 700px) { .card { padding: 30px 28px; } }
+
+.heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(20px, 2.4vw, 24px);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.sub { margin-top: 7px; font-size: 14.5px; color: var(--ink-soft); }
+
+.fields { display: grid; gap: 14px; margin-top: 22px; }
+
+.field { display: grid; gap: 6px; }
+
+.label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.input {
+  width: 100%;
+  min-height: 50px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(40, 8, 32, 0.16);
+  background: var(--paper);
+  font-family: var(--font-body);
+  font-size: 16px; /* never below 16px, or iOS zooms the page on focus */
+  color: var(--ink);
+  transition: border-color 0.16s var(--ease);
+}
+
+.input::placeholder { color: var(--ink-faint); }
+.input:focus { outline: none; border-color: var(--flame); }
+.input[aria-invalid='true'] { border-color: #c4341a; }
+
+.error { font-size: 13px; color: #c4341a; }
+
+/* Chips beat a dropdown here: one tap instead of three, and the options are
+   visible rather than hidden behind a control. */
+.chips { display: flex; flex-wrap: wrap; gap: 9px; }
+
+.chip {
+  flex: 1 1 auto;
+  min-height: 46px;
+  padding: 0 16px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid rgba(40, 8, 32, 0.16);
+  background: var(--paper);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.16s var(--ease), border-color 0.16s var(--ease);
+}
+
+.chip:hover { border-color: var(--flame); }
+
+.chipOn {
+  background: var(--gold-wash);
+  border-color: var(--ink);
+}
+
+.submit { margin-top: 20px; }
+.submit > button { width: 100%; }
+
+.note {
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: var(--ink-faint);
+  text-align: center;
+}
+
+/* ---- after it is sent ---------------------------------------------- */
+.done { text-align: center; padding: 20px 8px; }
+
+.tick {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: var(--gold-wash);
+  display: grid;
+  place-items: center;
+}
+
+.doneHeading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.doneBody {
+  max-width: 34ch;
+  margin: 8px auto 0;
+  font-size: 15px;
+  color: var(--ink-soft);
+}

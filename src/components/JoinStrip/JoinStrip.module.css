@@ -1,0 +1,130 @@
+/* The batch strip.
+
+   Deliberately small: a pill the height of a line of text, sitting above a
+   section heading rather than competing with it. It appears four times
+   down the page, so anything louder than this would be exhausting by the
+   second one. */
+.strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  max-width: 100%;
+  padding: 5px 14px 5px 11px;
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  border: 1px solid rgba(30, 122, 79, 0.26);
+}
+
+/* ---- the live dot --------------------------------------------------- */
+/* Two rings breathing outward on a slow loop, the idiom a recording light
+   uses. Green here is not the money green: it is the live green, which is
+   why the dot never sits next to a rupee figure. */
+.dot {
+  position: relative;
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--money);
+}
+
+.dot::before,
+.dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--money);
+  animation: pulse 2.4s var(--ease) infinite;
+}
+
+.dot::after { animation-delay: 1.2s; }
+
+@keyframes pulse {
+  from { transform: scale(1); opacity: 0.5; }
+  to   { transform: scale(3.2); opacity: 0; }
+}
+
+/* ---- the faces ------------------------------------------------------ */
+/* Overlapped, so three of them cost the width of about two. */
+.faces { display: inline-flex; align-items: center; }
+
+.face {
+  --avatar-size: 22px;
+  display: inline-flex;
+  margin-left: -7px;
+  border-radius: 50%;
+  /* A ring in the strip's own background colour, which is what separates
+     one face from the one behind it. */
+  box-shadow: 0 0 0 2px var(--paper);
+  /* Each face fades in when the window moves along. Keyed on the person,
+     so React remounts the span and the animation runs again. */
+  animation: faceIn 0.5s var(--ease) both;
+}
+
+.face:first-child { margin-left: 0; }
+
+/* Staggered, so the three do not swap in unison. */
+.face:nth-child(2) { animation-delay: 0.1s; }
+.face:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes faceIn {
+  from { opacity: 0; transform: scale(0.82); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@media (min-width: 700px) { .face { --avatar-size: 24px; } }
+
+/* ---- the line ------------------------------------------------------- */
+.text {
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink-soft);
+  /* The count changes width as it climbs; tabular figures stop the whole
+     line shuffling sideways while it does. */
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 700px) { .text { font-size: 13px; } }
+
+/* ---- inside a plan card --------------------------------------------- */
+/* Smaller, because here it is one element among six in a column rather
+   than the only thing on its line. Sand ground instead of white: the
+   featured card is already white, and a white pill on white would float. */
+.compact {
+  gap: 7px;
+  padding: 4px 11px 4px 9px;
+  background: rgba(30, 122, 79, 0.07);
+  border-color: rgba(30, 122, 79, 0.2);
+}
+
+.compact .face {
+  --avatar-size: 19px;
+  margin-left: -6px;
+  box-shadow: 0 0 0 2px var(--paper);
+}
+
+.compact .face:first-child { margin-left: 0; }
+
+.compact .text { font-size: 11.5px; }
+
+@media (min-width: 700px) { .compact .face { --avatar-size: 20px; } }
+
+/* ---- accessibility -------------------------------------------------- */
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot::before, .dot::after { animation: none; opacity: 0; }
+  .face { animation: none; }
+}

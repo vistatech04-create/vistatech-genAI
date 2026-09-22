@@ -1,0 +1,58 @@
+.wrap { margin: 0; width: 100%; }
+
+.svg { width: 100%; height: auto; overflow: visible; }
+
+.axis {
+  fill: none;
+  stroke: rgba(40, 8, 32, 0.22);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.rule {
+  stroke: rgba(216, 184, 32, 0.4);
+  stroke-width: 1;
+  stroke-dasharray: 3 7;
+}
+
+.curve {
+  fill: none;
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.dot { fill: var(--gold); }
+.dotHalo { fill: rgba(216, 184, 32, 0.25); }
+
+.markDay {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--flame);
+}
+
+.markText {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 500;
+  fill: var(--ink-soft);
+}
+
+.axisLabel {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  fill: var(--ink-faint);
+}
+
+/* On a phone the chart is half the width, so the two middle labels would
+   sit on top of the line. First and last carry the story on their own. */
+@media (max-width: 720px) {
+  .midMark { display: none; }
+  .markText { font-size: 19px; }
+  .markDay { font-size: 14px; }
+}

@@ -1,0 +1,68 @@
+/* Lights the empty white behind the headline.
+   Two parts: a still warm wash so the page is never flat white, and the
+   tools the course teaches drifting slowly upward. The arrow in the logo
+   points up, so everything here goes up. Nothing moves fast enough to pull
+   the eye off the words. */
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 560px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+
+  /* The wash. Warm, wide, and weak enough that text sits on it cleanly. */
+  background:
+    radial-gradient(54% 46% at 14% 16%, rgba(248, 88, 48, 0.13), transparent 70%),
+    radial-gradient(48% 42% at 88% 8%, rgba(216, 184, 32, 0.17), transparent 72%),
+    radial-gradient(44% 38% at 78% 62%, rgba(248, 88, 48, 0.08), transparent 74%),
+    radial-gradient(40% 34% at 8% 72%, rgba(216, 184, 32, 0.1), transparent 74%);
+
+  /* Dissolves into plain white before the cards below, so there is no seam. */
+  mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 94%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 94%);
+}
+
+@media (min-width: 900px) { .backdrop { height: 640px; } }
+
+.block {
+  position: absolute;
+  display: block;
+  opacity: 0;
+  color: var(--flame);
+  will-change: transform, opacity;
+  animation: drift linear infinite;
+}
+
+/* Sizes, places, colours and speeds. Everything sits out at the sides so
+   the middle of the screen, where the headline lives, stays clear. */
+.b1 { width: 38px; height: 38px; left: 6%;  top: 60%; animation-duration: 42s; animation-delay: -6s;  --tilt: 8deg;   --peak: 0.26; }
+.b2 { width: 28px; height: 28px; left: 17%; top: 28%; animation-duration: 55s; animation-delay: -24s; --tilt: -10deg; --peak: 0.3;  color: var(--gold); }
+.b3 { width: 46px; height: 46px; left: 2%;  top: 20%; animation-duration: 61s; animation-delay: -38s; --tilt: -6deg;  --peak: 0.16; }
+.b4 { width: 32px; height: 32px; left: 87%; top: 52%; animation-duration: 47s; animation-delay: -12s; --tilt: 12deg;  --peak: 0.28; color: var(--gold); }
+.b5 { width: 42px; height: 42px; left: 77%; top: 22%; animation-duration: 58s; animation-delay: -31s; --tilt: -9deg;  --peak: 0.2;  }
+.b6 { width: 26px; height: 26px; left: 92%; top: 16%; animation-duration: 39s; animation-delay: -19s; --tilt: 14deg;  --peak: 0.3;  color: var(--ink); }
+.b7 { width: 30px; height: 30px; left: 27%; top: 78%; animation-duration: 52s; animation-delay: -44s; --tilt: 7deg;   --peak: 0.24; color: var(--gold); }
+.b8 { width: 36px; height: 36px; left: 67%; top: 82%; animation-duration: 64s; animation-delay: -9s;  --tilt: -12deg; --peak: 0.18; }
+.b9 { width: 26px; height: 26px; left: 45%; top: 93%; animation-duration: 49s; animation-delay: -27s; --tilt: 10deg;  --peak: 0.26; color: var(--ink); }
+
+/* The negative delays above start every glyph mid-flight, so the page is
+   already alive on the first frame rather than fading in from nothing. */
+@keyframes drift {
+  0%   { opacity: 0;            transform: translate3d(0, 34px, 0) rotate(0deg); }
+  18%  { opacity: var(--peak); }
+  82%  { opacity: var(--peak); }
+  100% { opacity: 0;            transform: translate3d(0, -96px, 0) rotate(var(--tilt)); }
+}
+
+/* Fewer, and further out of the way, on a phone. */
+@media (max-width: 700px) {
+  .b2, .b5, .b7, .b9 { display: none; }
+}
+
+/* Reduced motion keeps the warm wash and stops the glyphs where they are. */
+@media (prefers-reduced-motion: reduce) {
+  .block { animation: none; opacity: calc(var(--peak) * 0.8); }
+}

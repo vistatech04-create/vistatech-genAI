@@ -1,0 +1,100 @@
+/* Section 09. The last ask, then the footer.
+
+   White, centred, and short. Everything has been argued by now; this is
+   the button. */
+.section {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  padding-block: 46px 48px;
+}
+
+@media (min-width: 900px) { .section { padding-block: 76px 80px; } }
+
+.inner { display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+.heading {
+  max-width: 18ch;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(30px, 5.4vw, 52px);
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+}
+
+.body {
+  max-width: 48ch;
+  margin-top: 16px;
+  color: var(--ink-soft);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+@media (min-width: 900px) { .body { font-size: 17.5px; } }
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 340px;
+  margin-top: 26px;
+}
+
+@media (min-width: 601px) {
+  .buttons { flex-direction: row; justify-content: center; width: auto; max-width: none; gap: 14px; }
+}
+
+.note {
+  max-width: 46ch;
+  margin-top: 16px;
+  color: var(--ink-faint);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ---- the footer ---------------------------------------------------- */
+.footer {
+  position: relative;
+  z-index: 1;
+  background: var(--sand);
+  border-top: 1px solid var(--rule);
+  padding-block: 26px 30px;
+}
+
+.footInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.footBrand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.footMark { flex: none; }
+
+.footMeta {
+  color: var(--ink-soft);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.footLink { border-bottom: 1px solid rgba(40, 8, 32, 0.22); }
+.footLink:hover { color: var(--flame); border-color: var(--flame); }
+
+.dot { padding-inline: 7px; color: var(--ink-faint); }
+
+.legal {
+  max-width: 54ch;
+  margin-top: 4px;
+  color: var(--ink-faint);
+  font-size: 11.5px;
+  line-height: 1.5;
+}

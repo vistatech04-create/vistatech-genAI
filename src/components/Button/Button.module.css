@@ -1,0 +1,50 @@
+.btn {
+  /* Resets for when this renders as a real <button>. */
+  appearance: none;
+  background: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 54px;
+  padding-inline: 28px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.16s var(--ease), box-shadow 0.16s var(--ease),
+    background 0.16s var(--ease), border-color 0.16s var(--ease);
+}
+
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+/* Primary is the only flame-coloured thing on the page. If it is flame, it is clickable. */
+.primary {
+  background: var(--flame);
+  color: #fff;
+  box-shadow: 0 14px 28px -12px rgba(248, 88, 48, 0.7);
+}
+.primary:hover { background: var(--flame-dark); }
+
+.secondary {
+  background: var(--paper);
+  color: var(--ink);
+  border: 1.5px solid rgba(40, 8, 32, 0.18);
+}
+.secondary:hover { background: var(--flame-wash); border-color: var(--flame); }
+
+.small {
+  min-height: 44px;
+  padding-inline: 20px;
+  font-size: 14.5px;
+  box-shadow: none;
+}
+
+/* On a phone a button is always full width, so a thumb cannot miss it. */
+@media (max-width: 600px) {
+  .fullOnMobile { width: 100%; }
+}

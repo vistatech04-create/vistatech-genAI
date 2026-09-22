@@ -1,0 +1,217 @@
+/* Section 02. Two numbers, then the reviews behind them.
+   Sand ground, so the white certificate hero above it reads as a sheet of
+   paper laid on the page. */
+.section {
+  position: relative;
+  z-index: 1;
+  background: var(--sand);
+  padding-block: 40px 42px;
+  overflow: hidden; /* the rows are wider than the screen */
+}
+
+@media (min-width: 900px) { .section { padding-block: 56px 54px; } }
+
+/* ---- the two numbers ---------------------------------------------- */
+.stats {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 22px;
+}
+
+@media (min-width: 700px) { .stats { gap: 54px; } }
+
+.stat { flex: 1 1 0; max-width: 260px; text-align: center; }
+
+.num {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(38px, 8.6vw, 64px);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Same gold stroke as the numbers on the course page, so a returning
+   visitor recognises it. */
+.stroke {
+  background-image: linear-gradient(var(--gold), var(--gold));
+  background-repeat: no-repeat;
+  background-position: 0 96%;
+  background-size: 100% 0.1em;
+}
+
+.unit { font-size: 0.52em; letter-spacing: -0.02em; }
+
+/* A hairline between the two, not a box around each. */
+.divider {
+  align-self: stretch;
+  width: 1px;
+  background: var(--rule);
+}
+
+/* 4.8 of five, shown as four and a bit. The grey row sits underneath and
+   the gold row is clipped to the rating, so nothing is rounded up. */
+.stars {
+  position: relative;
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.starsBase { color: rgba(40, 8, 32, 0.16); }
+
+/* Holds exactly the height of a star row, for the stat that has none. */
+.starsSpacer { display: block; margin-top: 8px; height: 15px; }
+
+.starsFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  color: var(--gold);
+}
+
+.lab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 8px;
+  color: var(--ink-soft);
+  font-size: clamp(12.5px, 1.7vw, 15px);
+  line-height: 1.35;
+}
+
+.labMark { flex: none; }
+
+/* ---- the rows ------------------------------------------------------ */
+.rowsLabel {
+  margin: 30px 0 14px;
+  text-align: center;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+@media (min-width: 900px) { .rowsLabel { margin: 40px 0 18px; } }
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  /* Cards fade out at both edges instead of being chopped mid-word. */
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  animation: slide linear infinite;
+}
+
+/* The middle row runs the other way, so the eye has something to catch. */
+.reverse { animation-direction: reverse; }
+
+/* Stop while someone is reading one. */
+.rows:hover .row { animation-play-state: paused; }
+
+@keyframes slide {
+  to { transform: translateX(calc(-50% - 6px)); }
+}
+
+/* ---- one review ---------------------------------------------------- */
+.card {
+  flex: none;
+  width: 286px;
+  margin: 0;
+  padding: 16px 18px 18px;
+  border-radius: var(--radius-md);
+  background: var(--paper);
+  border: 1px solid rgba(40, 8, 32, 0.07);
+  box-shadow: 0 10px 26px -20px rgba(40, 8, 32, 0.55);
+}
+
+@media (min-width: 700px) { .card { width: 330px; } }
+
+.who { display: flex; align-items: center; gap: 10px; }
+
+/* The G sits at the top right of the card, the way every review widget
+   people have already seen places it. */
+.cardMark { flex: none; margin-left: auto; align-self: flex-start; }
+
+/* A real profile photo when there is one. */
+.photo {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-pill);
+  object-fit: cover;
+}
+
+.avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-pill);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.whoText { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+
+.name {
+  font-weight: 600;
+  font-size: 14.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.when { color: var(--ink-faint); font-size: 12px; }
+
+/* The quotes are already cut short in the content file. The clamp is the
+   safety net for a longer one, so no card can ever grow taller than the row. */
+.quote {
+  margin: 12px 0 0;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (min-width: 700px) { .quote { font-size: 14px; } }
+
+/* ---- the link out -------------------------------------------------- */
+.linkWrap { margin-top: 26px; text-align: center; }
+
+.link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 1.5px solid var(--gold);
+  padding-bottom: 2px;
+}
+
+.link:hover { color: var(--flame); border-color: var(--flame); }
+
+/* Anyone who asked their phone to stop moving things gets a still wall.
+   The rows stay where they are, still readable, just not sliding. */
+@media (prefers-reduced-motion: reduce) {
+  .row { animation: none; }
+}

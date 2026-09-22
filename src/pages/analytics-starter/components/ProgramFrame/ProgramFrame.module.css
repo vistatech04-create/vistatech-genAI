@@ -1,0 +1,186 @@
+/* Section 04. The week in its place, and the roadmap for anyone not ready
+   to book today.
+
+   Sand ground again, so the white week stack above it reads as its own
+   chapter. The four stages are a quiet list, not another rail: the course
+   page already owns the numbered-rail shape, and this section is context
+   rather than the main event. */
+.section {
+  position: relative;
+  z-index: 1;
+  background: var(--sand);
+  padding-block: 44px 48px;
+}
+
+@media (min-width: 900px) { .section { padding-block: 74px 80px; } }
+
+.split { display: grid; grid-template-columns: 1fr; gap: 30px; }
+
+@media (min-width: 1000px) {
+  .split {
+    grid-template-columns: 1.06fr 0.94fr;
+    gap: 52px;
+    align-items: start;
+  }
+}
+
+.heading {
+  max-width: 24ch;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(27px, 4.2vw, 42px);
+  letter-spacing: -0.028em;
+  line-height: 1.11;
+}
+
+.accent {
+  font-weight: 600;
+  background-image: linear-gradient(var(--gold), var(--gold));
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.11em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.sub {
+  max-width: 50ch;
+  margin-top: 14px;
+  color: var(--ink-soft);
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+@media (min-width: 900px) { .sub { font-size: 16.5px; } }
+
+/* ---- the four stages -----------------------------------------------
+   The same rail the course page runs for the 60-day journey: numbers down
+   the left on a connecting line, a card each. This page IS week one of that
+   program, so it should read in the same language rather than invent a
+   second shape for the same idea.
+
+   What is different: the rail here is not lit by scrolling. Week one is
+   filled and the rest are open, because the point is not how far the reader
+   has scrolled — it is where in the program the thing they are buying sits. */
+.stages {
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 900px) { .stages { margin-top: 34px; gap: 16px; } }
+
+.stage { display: grid; grid-template-columns: 44px 1fr; gap: 14px; }
+
+@media (min-width: 700px) { .stage { gap: 18px; } }
+
+.marker { position: relative; padding-top: 10px; }
+
+.num {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1.5px solid rgba(40, 8, 32, 0.16);
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Week one: the part being bought on this page. */
+.numNow { background: var(--flame); border-color: var(--flame); color: #fff; }
+
+/* The line to the next number. */
+.marker::after {
+  content: '';
+  position: absolute;
+  left: 22px;
+  top: 54px;
+  bottom: -14px;
+  width: 2px;
+  transform: translateX(-50%);
+  background: rgba(40, 8, 32, 0.16);
+}
+
+.stage:last-child .marker::after { display: none; }
+
+.card {
+  min-width: 0;
+  padding: 18px 18px 20px;
+  border-radius: 20px;
+  background: var(--paper);
+  border: 1px solid rgba(40, 8, 32, 0.1);
+  box-shadow: 0 14px 30px -26px rgba(40, 8, 32, 0.45);
+}
+
+@media (min-width: 700px) { .card { padding: 20px 22px 22px; } }
+
+/* The one being sold sits slightly forward, the way the course page lifts
+   the step you are reading. */
+.cardNow {
+  border-color: rgba(248, 88, 48, 0.4);
+  box-shadow: 0 22px 46px -28px rgba(248, 88, 48, 0.65);
+}
+
+.stageLabel { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+
+.labelText,
+.labelNow {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.labelNow { color: var(--flame); }
+
+.here {
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  background: var(--flame);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.stageTitle {
+  margin-top: 7px;
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  line-height: 1.24;
+}
+
+.stageBody {
+  margin-top: 6px;
+  color: var(--ink-soft);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+/* The fee adjustment. Green, because on both pages green only ever means
+   money the student does not spend. */
+.note {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
+  background: rgba(30, 122, 79, 0.09);
+  color: var(--money);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}

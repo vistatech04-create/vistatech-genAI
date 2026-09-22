@@ -1,0 +1,291 @@
+/* One student at a time, on an office ID card.
+   The card is the outcome made physical: the thing you get handed on day one
+   at a company you could not get an interview at before. */
+.section {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  padding-block: 52px;
+}
+
+@media (min-width: 900px) { .section { padding-block: 78px; } }
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.heading {
+  max-width: 24ch;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(27px, 4.4vw, 42px);
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
+
+.accent {
+  font-weight: 600;
+  background-image: linear-gradient(var(--gold), var(--gold));
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.11em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* ---- the stack -----------------------------------------------------
+   One card in front, two set back behind it. Every card sits in the same
+   grid cell, so the stack is exactly as tall as its tallest card and needs
+   no fixed height. The transforms move them visually without touching
+   layout.                                                              */
+.stage {
+  --card-w: min(86vw, 330px);
+  --spread: 0%;   /* how far the ones behind slide out from centre */
+  --fade: 1;      /* 1 hides them completely, which is what a phone wants */
+  display: grid;
+  justify-items: center;
+  margin-top: 32px;
+  padding-inline: var(--gutter);
+}
+
+@media (min-width: 900px) {
+  .stage { --card-w: 340px; --spread: 56%; --fade: 0.58; margin-top: 48px; }
+}
+
+/* The badge and its lanyard travel together. The wrapper carries the stack
+   transform so the strap can hang outside the card's clipped, rounded box.
+
+   --d is the card's distance from the front, signed. --ad is that same
+   distance without the sign. Both are set by the component. */
+.item {
+  grid-area: 1 / 1;
+  width: var(--card-w);
+  transform:
+    translate(calc(var(--d) * var(--spread)), calc(var(--ad) * 12px))
+    scale(calc(1 - var(--ad) * 0.15));
+  opacity: calc(1 - var(--ad) * var(--fade));
+  z-index: calc(10 - var(--ad));
+  transition: transform 0.55s var(--ease), opacity 0.55s var(--ease);
+}
+
+/* Anything further back than one place is not drawn at all. */
+.behind { opacity: 0; pointer-events: none; }
+
+/* A card at the back is a target for a click. Its play button is not. */
+.inactive { cursor: pointer; }
+.inactive .photo { pointer-events: none; }
+
+/* ---- the lanyard ---------------------------------------------------
+   Two straps running up and out of frame, a metal clip, and the card
+   hanging off it. The straps fade out at the top rather than stopping at
+   a hard edge, so they read as carrying on up around someone's neck.   */
+.lanyard {
+  position: relative;
+  height: 88px;
+  /* Nothing here should ever eat a click meant for the card. */
+  pointer-events: none;
+}
+
+.strap {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  width: 21px;
+  height: 116px;
+  transform-origin: bottom center;
+  background: linear-gradient(90deg, #1f0619 0 34%, var(--gold) 34% 48%, #2f0f28 48% 100%);
+  border-radius: 2px;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 46%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 46%);
+}
+
+.strapLeft { transform: translateX(-50%) rotate(-25deg); }
+.strapRight { transform: translateX(-50%) rotate(25deg); }
+
+/* The metal crimp the strap threads into. */
+.clip {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 38px;
+  height: 20px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #efeae1 0%, #c3bbaf 45%, #a89f92 60%, #ddd6ca 100%);
+  box-shadow: 0 2px 5px -1px rgba(40, 8, 32, 0.35);
+}
+
+/* The slit in the crimp that the card's punched slot hooks onto. */
+.clip::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: rgba(40, 8, 32, 0.42);
+}
+
+/* ---- the card ------------------------------------------------------ */
+.card {
+  position: relative;
+  width: 100%;
+  border-radius: 22px;
+  background: var(--paper);
+  border: 1px solid rgba(40, 8, 32, 0.1);
+  box-shadow: 0 26px 50px -30px rgba(40, 8, 32, 0.55);
+  overflow: hidden;
+}
+
+/* The coloured band across the top of every office badge. */
+.band {
+  height: 7px;
+  background: linear-gradient(
+    90deg,
+    var(--flame) 0 38%,
+    var(--gold) 38% 62%,
+    var(--ink) 62% 100%
+  );
+}
+
+/* The punched slot the lanyard clips through. */
+.slot {
+  width: 54px;
+  height: 9px;
+  margin: 14px auto 0;
+  border-radius: var(--radius-pill);
+  background: #efe7dc;
+  box-shadow: inset 0 1px 2px rgba(40, 8, 32, 0.28);
+}
+
+.company {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.photo { padding: 14px 14px 0; }
+
+.identity { padding: 16px 18px 0; text-align: center; }
+
+.name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 21px;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+/* Two lines of room, so every card in the stack is the same height and the
+   stack does not jump as it turns. */
+.role {
+  min-height: 2.8em;
+  margin-top: 4px;
+  font-size: 14.5px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+/* The two fields where an employee number sits on a real badge. */
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 4px 18px 0;
+  padding-top: 14px;
+  border-top: 1px dashed rgba(40, 8, 32, 0.18);
+}
+
+.field { text-align: left; }
+.field:last-child { text-align: right; }
+
+.key {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.val {
+  min-height: 2.6em;
+  margin-top: 3px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.3;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 18px 16px;
+}
+
+.bars { display: flex; align-items: flex-end; gap: 2px; height: 22px; }
+.bars i { display: block; height: 100%; background: var(--ink); opacity: 0.8; }
+
+.issued {
+  font-size: 10.5px;
+  color: var(--ink-faint);
+  text-align: right;
+  line-height: 1.3;
+}
+
+/* ---- controls ------------------------------------------------------ */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.arrow {
+  width: 46px;
+  height: 46px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1.5px solid rgba(40, 8, 32, 0.18);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.16s var(--ease), border-color 0.16s var(--ease);
+}
+
+.arrow:hover { background: var(--flame-wash); border-color: var(--flame); }
+
+.dots { display: flex; gap: 8px; }
+
+.dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(40, 8, 32, 0.2);
+  cursor: pointer;
+  transition: background 0.2s var(--ease), width 0.2s var(--ease);
+}
+
+.dotOn { width: 22px; border-radius: var(--radius-pill); background: var(--flame); }
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+}

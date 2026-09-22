@@ -1,0 +1,42 @@
+/* ------------------------------------------------------------------
+   Vista Tech design tokens.
+   Colours are sampled from the logo artwork, not guessed.
+   Change a value here and it changes everywhere on every page.
+   ------------------------------------------------------------------ */
+:root {
+  color-scheme: light;
+
+  /* Colour ------------------------------------------------------- */
+  --ink: #280820;            /* arrow body. all headings and text     */
+  --ink-soft: #6a4a61;       /* secondary text                        */
+  --ink-faint: #9b869a;      /* captions                              */
+  --flame: #f85830;          /* arrow tips. THE action colour         */
+  --flame-dark: #de3f19;     /* flame, pressed                        */
+  --flame-wash: #fff6f2;     /* palest flame, for soft fills          */
+  --gold: #d8b820;           /* the peak. highlights, never a button  */
+  --gold-wash: #fdf6dc;      /* palest gold, for badge pills          */
+  --money: #1e7a4f;          /* only ever money saved                 */
+  --paper: #ffffff;
+  --sand: #faf5ec;           /* the soft ground that follows the white hero */
+  --ink-deep: #1c0616;       /* the video frame, darker than ink            */
+  --rule: rgba(40, 8, 32, 0.12);
+
+  /* Type --------------------------------------------------------- */
+  --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-body: 'Figtree', system-ui, -apple-system, sans-serif;
+  --font-tamil: 'Noto Sans Tamil', 'Figtree', sans-serif;
+
+  /* Layout ------------------------------------------------------- */
+  --max-width: 1140px;
+  --gutter: 20px;
+  --radius-lg: 30px;
+  --radius-md: 18px;
+  --radius-pill: 999px;
+
+  /* Motion ------------------------------------------------------- */
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+@media (min-width: 900px) {
+  :root { --gutter: 24px; }
+}

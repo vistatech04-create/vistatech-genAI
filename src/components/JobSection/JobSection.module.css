@@ -1,0 +1,56 @@
+/* Proof on the left, the objection answered on the right, one pair of
+   actions underneath that belongs to both.
+
+   Same white ground as the hero and no top padding of its own: the headline,
+   this band and the buttons are meant to read as one continuous section. */
+.section {
+  position: relative;
+  z-index: 1;
+  background: none;
+  padding-block: 0 52px;
+}
+
+@media (min-width: 900px) { .section { padding-block: 0 76px; } }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (min-width: 920px) {
+  .grid { grid-template-columns: 0.86fr 1.14fr; gap: 48px; align-items: center; }
+}
+
+/* ---- right column ------------------------------------------------- */
+/* Same typographic move as the hero: light question, weighted answer. */
+.player { width: 100%; }
+
+/* ---- the actions, shared by both columns --------------------------- */
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 44px;
+}
+
+@media (min-width: 900px) { .actions { margin-top: 56px; } }
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+@media (min-width: 601px) { .buttons { width: auto; } }
+
+.tamil {
+  margin-top: 14px;
+  font-family: var(--font-tamil);
+  font-size: 15px;
+  color: var(--ink-soft);
+  text-align: center;
+}

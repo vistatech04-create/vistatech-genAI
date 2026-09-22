@@ -1,0 +1,113 @@
+/* The way in for someone who is not ready for the full program.
+   Portrait video on one side, what the week contains on the other.
+
+   The receipt above this is also sand, so without the rule the two
+   sections read as one very long block. */
+.section {
+  position: relative;
+  z-index: 1;
+  background: var(--sand);
+  border-top: 1px solid var(--rule);
+  padding-block: 52px;
+}
+
+@media (min-width: 900px) { .section { padding-block: 80px; } }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .grid { grid-template-columns: 0.82fr 1.18fr; gap: 52px; }
+}
+
+.grid > * { min-width: 0; }
+
+/* Video first on a phone: it is the hook, and it is what they asked to see. */
+.video { max-width: 360px; width: 100%; margin-inline: auto; }
+
+@media (min-width: 900px) { .video { max-width: none; } }
+
+.joinStrip { margin-bottom: 14px; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 15px;
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  border: 1px solid rgba(40, 8, 32, 0.1);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.heading {
+  max-width: 19ch;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(26px, 4vw, 38px);
+  letter-spacing: -0.025em;
+  line-height: 1.14;
+}
+
+.accent {
+  font-weight: 600;
+  background-image: linear-gradient(var(--gold), var(--gold));
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.11em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.sub {
+  max-width: 48ch;
+  margin-top: 14px;
+  font-size: clamp(15px, 1.8vw, 16.5px);
+  color: var(--ink-soft);
+}
+
+.benefits {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+@media (min-width: 620px) {
+  .benefits { grid-template-columns: 1fr 1fr; gap: 16px 22px; }
+}
+
+.benefit { display: grid; grid-template-columns: 38px 1fr; gap: 12px; }
+
+.glyph {
+  width: 38px;
+  height: 38px;
+  padding: 8px;
+  border-radius: 11px;
+  background: var(--paper);
+  border: 1px solid rgba(40, 8, 32, 0.08);
+  color: var(--ink);
+}
+
+.benefitTitle {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15.5px;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.benefitBody { margin-top: 3px; font-size: 14px; line-height: 1.45; color: var(--ink-soft); }
+
+.actions { margin-top: 28px; }
+.note { margin-top: 11px; font-size: 13px; color: var(--ink-faint); }
+
+@media (max-width: 600px) { .actions, .note { text-align: center; } }
