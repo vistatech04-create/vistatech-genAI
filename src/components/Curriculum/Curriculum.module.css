@@ -226,12 +226,12 @@
 
 .tools {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   margin-top: 18px;
 }
 
-@media (min-width: 700px) { .tools { grid-template-columns: repeat(6, 1fr); gap: 14px; } }
+@media (min-width: 700px) { .tools { grid-template-columns: repeat(10, 1fr); gap: 14px; } }
 
 /* Icon over name, centred. Reads as a strip of tools rather than a list.
 
@@ -260,6 +260,10 @@
 .tool:nth-child(4) { animation-duration: 7.3s; animation-delay: -3.4s; }
 .tool:nth-child(5) { animation-duration: 5.9s; animation-delay: -5.2s; }
 .tool:nth-child(6) { animation-duration: 6.5s; animation-delay: -1.6s; }
+.tool:nth-child(7) { animation-duration: 7.1s; animation-delay: -3.8s; }
+.tool:nth-child(8) { animation-duration: 5.7s; animation-delay: -1.1s; }
+.tool:nth-child(9) { animation-duration: 6.4s; animation-delay: -4.6s; }
+.tool:nth-child(10) { animation-duration: 7.6s; animation-delay: -2.7s; }
 
 @keyframes floatTool {
   from { transform: translateY(-5px); }

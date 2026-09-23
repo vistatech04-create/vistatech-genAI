@@ -1,12 +1,13 @@
+import { SiPython, SiMysql, SiMiro, SiJira, SiConfluence } from 'react-icons/si'
+import { PiMicrosoftExcelLogo } from 'react-icons/pi'
+import { IoLogoTableau } from 'react-icons/io5'
+import { RiOpenaiFill } from 'react-icons/ri'
+
 /**
  * Small line glyphs for the tools taught in the course, drawn as vector so
- * they stay clean at any size and weigh nothing.
- *
- * These are generic marks, not brand logos. A real Excel or Power BI logo at
- * 30px and 25% opacity would be unreadable anyway, and a hand-drawn imitation
- * of someone's logo looks worse than an honest icon. If you want the actual
- * logos on the page, they belong in a proper tool row further down, at full
- * size and full colour, using the official SVG files.
+ * they stay clean at any size and weigh nothing. Used as a fallback when a
+ * name has no brand icon below (e.g. Power BI, which no icon set ships a
+ * logo for).
  */
 const PATHS = {
   // a spreadsheet, for Excel
@@ -74,7 +75,30 @@ const PATHS = {
   ),
 }
 
+/**
+ * Official brand marks, rendered single-colour via currentColor so they sit
+ * on the same monochrome black & white footing as the fallback glyphs above.
+ * Sourced from react-icons (Simple Icons / Phosphor / Ionicons / Remix).
+ * Power BI has no logo in any set react-icons bundles, so it keeps the
+ * fallback line glyph ('bars') instead of an entry here.
+ */
+const BRAND_ICONS = {
+  'excel-logo': PiMicrosoftExcelLogo,
+  'mysql-logo': SiMysql,
+  'python-logo': SiPython,
+  'openai-logo': RiOpenaiFill,
+  'tableau-logo': IoLogoTableau,
+  'confluence-logo': SiConfluence,
+  'jira-logo': SiJira,
+  'miro-logo': SiMiro,
+}
+
 export default function ToolGlyph({ name }) {
+  const BrandIcon = BRAND_ICONS[name]
+  if (BrandIcon) {
+    return <BrandIcon style={{ width: '100%', height: '100%' }} aria-hidden="true" focusable="false" />
+  }
+
   return (
     <svg
       viewBox="0 0 24 24"

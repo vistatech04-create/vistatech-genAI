@@ -63,7 +63,7 @@ export const curriculum = {
     {
       n: 'Module 2',
       days: 'Days 9 – 14',
-      title: 'Excel & Google Sheets for analytics',
+      title: 'Excel for analytics',
       outcome: 'Finish with a working sales dashboard built out of messy data.',
       topics: [
         'Excel basics, data types, formatting & tables',
@@ -77,7 +77,7 @@ export const curriculum = {
     {
       n: 'Module 3',
       days: 'Days 15 – 20',
-      title: 'SQL for business analysis',
+      title: 'SQL for analytics',
       outcome: 'Pull the exact numbers a manager asked for, out of a real database.',
       topics: [
         'Database fundamentals & introduction to SQL',
@@ -182,25 +182,37 @@ export const curriculum = {
 
   /**
    * Icon + name only. No explanation lines: by this point the reader has
-   * been told what the program does, and six blocks of copy here would
-   * slow the scroll for no gain.
+   * been told what the program does, and blocks of copy here would slow
+   * the scroll for no gain.
    *
-   * These six are the ones that go on a resume. The collaboration tools
-   * from the brochure's domains page — Jira, Trello, Miro, Whimsical,
-   * Confluence — are named inside module 08 instead, where a reader can
-   * see which day they land on.
+   * Business Analytics leads because module 1 does. Excel through Tableau
+   * are the six that go on a resume as hard skills. Documentation, Jira &
+   * Miro are the collaboration tools from module 08 (BA tools & career
+   * prep) — kept here too since a hiring manager scans this row first, but
+   * still named individually inside that module where a reader can see
+   * which day they land on.
+   *
+   * glyph: an official brand mark from react-icons (see ToolGlyph) where one
+   * exists, single-colour via currentColor. 'Business Analytics' and 'Power
+   * BI' have no single-vendor logo to use, so they keep the monochrome
+   * fallback line glyphs instead.
    *
    * icon: path to a colour logo in public/images/tools/, or null. While it
-   * is null the tile falls back to the monochrome glyph, so the layout can
-   * be judged before the assets land.
+   * is null the tile falls back to the glyph above, so the layout can be
+   * judged before the assets land.
    */
   tools: [
-    { name: 'Excel',    glyph: 'sheet',    icon: null },
-    { name: 'SQL',      glyph: 'database', icon: null },
-    { name: 'Python',   glyph: 'code',     icon: null },
-    { name: 'Gen AI',   glyph: 'spark',    icon: null },
-    { name: 'Power BI', glyph: 'bars',     icon: null },
-    { name: 'Tableau',  glyph: 'trend',    icon: null },
+   
+    { name: 'Excel',                             glyph: 'excel-logo',      icon: null },
+    { name: 'SQL',                               glyph: 'mysql-logo',      icon: null },
+    { name: 'Python',                            glyph: 'python-logo',     icon: null },
+    { name: 'Gen AI',                            glyph: 'openai-logo',     icon: null },
+    { name: 'Power BI',                          glyph: 'bars',            icon: null },
+    { name: 'Tableau',                           glyph: 'tableau-logo',    icon: null },
+     { name: 'Business Analytics',               glyph: 'funnel',          icon: null },
+    { name: ' Analytics Documentation',  glyph: 'confluence-logo', icon: null },
+    { name: 'Jira',                              glyph: 'jira-logo',       icon: null },
+    { name: 'Miro',                              glyph: 'miro-logo',       icon: null },
   ],
 
   outcome: {

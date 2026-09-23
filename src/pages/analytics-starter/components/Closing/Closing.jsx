@@ -72,7 +72,7 @@ export default function Closing() {
             ))}
           </p>
 
-          <p className={styles.legal}>{footer.legal}</p>
+          {/* <p className={styles.legal}>{footer.legal}</p> */}
         </div>
       </footer>
     </>

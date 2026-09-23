@@ -48,15 +48,15 @@ export const starterWeek = {
       title: 'A certificate',
       body: 'Awarded when you complete the seven days.',
     },
-    {
-      /* ⚠ This one is the conflict. On /analytics-starter the voucher and
-         the mentor call go to one winner per batch, not to everyone. */
-      glyph: 'voucher',
-      title: '₹1,000 voucher and a mentor call',
-      body:
-        'A voucher you can spend anywhere, and a one-to-one call with a ' +
-        'senior mentor about your own resume.',
-    },
+    // {
+    //   /* ⚠ This one is the conflict. On /analytics-starter the voucher and
+    //      the mentor call go to one winner per batch, not to everyone. */
+    //   glyph: 'voucher',
+    //   title: '₹1,000 voucher and a mentor call',
+    //   body:
+    //     'A voucher you can spend anywhere, and a one-to-one call with a ' +
+    //     'senior mentor about your own resume.',
+    // },
   ],
 
   cta: { label: 'Ask about the starter week', href: '#call' },

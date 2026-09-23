@@ -718,15 +718,15 @@ export const starter = {
   footer: {
     line: 'Vista Tech Solutions · IT training, digital marketing and HR consulting.',
     address: 'No.115, 7th Floor, Metro Towers, PH Road, Egmore, Chennai 600084',
-    phone: '098944 47857',
+    phone: '9894449002',
     email: 'support@vistatech.com',
     links: [
       { label: 'Terms', href: '#terms' },
       { label: 'Privacy', href: '#privacy' },
     ],
-    legal:
-      'No claim of guaranteed employment. Placement support continues until ' +
-      'your first offer.',
+    // legal:
+    //   'No claim of guaranteed employment. Placement support continues until ' +
+    //   'your first offer.',
   },
 
   /* The bar that follows you up the page on a phone. */

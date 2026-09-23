@@ -47,7 +47,7 @@
 export const pricing = {
   badge: 'No cost until you enrol. No hidden fees.',
 
-  heading: 'Half now. The other half',
+  heading: '50% now. The other 50%',
   headingAccent: 'after you are placed.',
 
   sub:
@@ -76,7 +76,7 @@ export const pricing = {
          be both wrong and pointless. */
       seats: { taken: 23, total: 30 },
       total: '₹29,998',
-      now: '₹14,999',
+      now: '₹15,000',
       points: [
         'All 60 days live with a mentor',
         'Excel, SQL, Python, Power BI, Tableau',
@@ -94,11 +94,11 @@ export const pricing = {
          so this is not the online number. CONFIRM the real room capacity. */
       seats: { taken: 11, total: 20 },
       total: '₹39,998',
-      now: '₹19,999',
+      now: '₹20,000',
       points: [
         'Everything in the online plan',
         'In the room with the mentor',
-        'Lab machines and a place to sit and work',
+        // 'Lab machines and a place to sit and work',
         'Chennai, Egmore',
       ],
       cta: { label: 'Ask about the classroom batch', href: '#call' },
