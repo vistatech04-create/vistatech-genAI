@@ -11,6 +11,7 @@ function PlayIcon() {
 
 export default function VideoPlayer({
   youtubeId,
+  videoSrc,
   poster,
   posterAlt,
   duration,
@@ -23,9 +24,34 @@ export default function VideoPlayer({
   // portrait frame at every width can just ask for one.
   const shape = ratio ? { '--ratio': ratio } : undefined
   const [playing, setPlaying] = useState(false)
-  const ready = Boolean(youtubeId)
+  // videoSrc is a direct file (e.g. an uploaded Cloudinary .mp4) — no embed,
+  // no other domain loading before the tap. youtubeId still goes through the
+  // nocookie iframe.
+  const ready = Boolean(youtubeId) || Boolean(videoSrc)
 
-  if (playing && ready) {
+  if (playing && videoSrc) {
+    return (
+      <div className={styles.frame} style={shape}>
+        <video
+          src={videoSrc}
+          controls
+          autoPlay
+          playsInline
+          aria-label={posterAlt}
+          // Several of these can be mounted at once (the testimonial
+          // stack). Starting one should stop whichever other one is
+          // already playing, not layer its audio on top.
+          onPlay={(event) => {
+            document.querySelectorAll('video').forEach((video) => {
+              if (video !== event.currentTarget) video.pause()
+            })
+          }}
+        />
+      </div>
+    )
+  }
+
+  if (playing && youtubeId) {
     return (
       <div className={styles.frame} style={shape}>
         <iframe
@@ -58,6 +84,10 @@ export default function VideoPlayer({
               className={`${styles.scrim} ${title ? '' : styles.scrimPlain}`}
             />
           </>
+        ) : ready ? (
+          // We have a real video but no still to show before it plays —
+          // a plain dark cover, not the "nothing added yet" placeholder.
+          <span className={`${styles.scrim} ${styles.scrimPlain}`} />
         ) : (
           <>
             <span className={styles.empty}>

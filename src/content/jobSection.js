@@ -11,19 +11,24 @@ export const jobSection = {
    * Roles and the 3.4 LPA figure came off vistatech.org; the rest are
    * placeholders.
    *
-   * MOCK: photos point at public/images/mock/, which holds stand-in
-   * portraits. They are not Vista Tech students. Delete that folder
-   * before launch.
+   * Ajay Krishna and Saravanan M. now use their real Cloudinary photos —
+   * they are the same two people in placements.js. Ramya S., Priyadharshini
+   * M. and Manikandan S. still point at public/images/mock/, stand-in
+   * portraits that are not Vista Tech students. Replace those three with
+   * real photos (or delete the mock folder) before launch.
    *
    * The list scrolls forever. Fewer than about eight rows and a visitor
    * notices the loop repeating, so this wants more real students, not fewer.
    */
   placed: [
-    { name: 'Ajay Krishna',      role: 'Junior Business Analyst',       pay: '3.4 LPA',    photo: '/images/mock/ajay.jpg' },
-    { name: 'Ramya S.',          role: 'Data Analytics Intern',         pay: '₹22K/month', photo: '/images/mock/ramya.jpg' },
-    { name: 'Priyadharshini M.', role: 'Power BI Developer',            pay: '3.6 LPA',    photo: '/images/mock/priya.jpg' },
-    { name: 'Saravanan M.',      role: 'MIS Analyst',                   pay: '3.0 LPA',    photo: '/images/mock/saravanan.jpg' },
-    { name: 'Manikandan S.',     role: 'Business Intelligence Analyst', pay: '4.2 LPA',    photo: '/images/mock/mani.jpg' },
+    { name: 'Ajay Krishna',      role: 'Junior Business Analyst',       pay: '3.4 LPA',    photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241678/Ajay_Krishna_-_powerbi.png' },
+    { name: 'Vignesh.',          role: 'Business Analyst',         pay: '₹22K/month', photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241678/vignesh_business_analyst.jpg' },
+    { name: 'Rajesh', role: 'Operation Analyst',            pay: '3.6 LPA',    photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241676/Rajesh-Operation_analyst.jpg' },
+    { name: 'Saravanan M.',      role: 'Data Analyst',                   pay: '3.0 LPA',    photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241678/saravnan_-_data_analyst.jpg' },
+    { name: 'Meghana.',     role: 'Data Scientist', pay: '4.2 LPA',    photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241677/Meghana-_Data_scientist.jpg' },
+    { name: 'Karthik.',     role: 'Operation Analyst', pay: '4.0 LPA',    photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241677/karthik-operation_Analyst.jpg' },
+    { name: 'Arjun.',     role: 'Data Scientist', pay: '4.5 LPA',    photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241677/Arjun-Data_Scientist.jpg' },
+    { name: 'Prakash.',     role: 'Data Analyst', pay: '4.5 LPA',    photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241678/Rohit_Prakash-Data_anlyst.png' },
   ],
 
   /* ---- right column: just the video -------------------------------- */

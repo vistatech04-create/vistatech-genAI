@@ -1,9 +1,19 @@
+import { useLeadModal } from '../LeadModal/LeadModalContext.jsx'
 import styles from './Button.module.css'
+
+// Mirrors footer.phone in content/closing.js and content/starter.js — the
+// one number printed everywhere else on the site.
+const PHONE = '9894449002'
 
 /**
  * The only two button shapes on the site.
  * variant="primary"   the one action we want
  * variant="secondary" the softer step
+ *
+ * Two hrefs are wired centrally here, so every button that uses them gets
+ * the behaviour without its label or destination being touched:
+ *   '#enroll' opens the lead popup (LeadModal) instead of navigating.
+ *   '#call'   goes straight to a phone call — a tel: link needs no popup.
  */
 export default function Button({
   href,
@@ -12,10 +22,23 @@ export default function Button({
   size = 'default',
   fullOnMobile = true,
   as,
+  onClick,
   ...rest
 }) {
-  // A link by default, a real button when it has to submit a form.
-  const Tag = as === 'button' || !href ? 'button' : 'a'
+  const { openModal } = useLeadModal()
+
+  const opensModal = href === '#enroll'
+  const resolvedHref = href === '#call' ? `tel:${PHONE}` : href
+
+  // A link by default, a real button when it has to submit a form or open
+  // the popup.
+  const Tag = as === 'button' || !resolvedHref || opensModal ? 'button' : 'a'
+
+  const handleClick = (event) => {
+    if (opensModal) openModal()
+    onClick?.(event)
+  }
+
   const className = [
     styles.btn,
     styles[variant],
@@ -26,7 +49,12 @@ export default function Button({
     .join(' ')
 
   return (
-    <Tag className={className} href={Tag === 'a' ? href : undefined} {...rest}>
+    <Tag
+      className={className}
+      href={Tag === 'a' ? resolvedHref : undefined}
+      onClick={handleClick}
+      {...rest}
+    >
       {children}
     </Tag>
   )

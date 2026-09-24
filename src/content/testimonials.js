@@ -5,14 +5,13 @@
  * an office ID card is the thing you actually get handed on day one. It is
  * the proof a fresher is imagining when they picture the outcome.
  *
- * TODO before launch: every card must be a real placed student, filmed with
- * their permission, with the company and package confirmed.
+ * Real videos, uploaded to Cloudinary and played as direct files (videoSrc),
+ * not YouTube embeds — see VideoPlayer.jsx. poster is Cloudinary's own
+ * auto-generated thumbnail: same public id, .jpg instead of .mp4 — no
+ * separate still was uploaded for these.
  *
- * The stills in public/images/students/ are GENERATED people, in place so the
- * design can be judged. They are cropped to 4:5, which is the shape the card
- * shows, so nothing is cut off. Real students replace them before any ad runs.
- * youtubeId stays null until the real videos exist: the play button then does
- * nothing, which is the honest state for a video we do not have yet.
+ * `placed` (the batch line under "Trained at Vista Tech") is left blank
+ * rather than guessed — none of the four gave a batch number.
  */
 export const testimonials = {
   heading: 'Hear from people who actually',
@@ -20,48 +19,48 @@ export const testimonials = {
 
   items: [
     {
-      id: 'ajay',
-      name: 'Ajay Krishna',
-      role: 'Junior Business Analyst',
-      company: 'Digil Technologies',
-      pay: '3.4 LPA',
-      placed: 'Batch 07',
-      background: 'B.Com graduate',
-      youtubeId: null,
-      poster: '/images/students/ajay.jpg',
-    },
-    {
-      id: 'ramya',
-      name: 'Ramya S.',
-      role: 'Data Analytics Intern',
-      company: 'Zillion Technologies',
-      pay: '₹22K/month',
-      placed: 'Batch 06',
-      background: 'Final year student',
-      youtubeId: null,
-      poster: '/images/students/ramya.jpg',
-    },
-    {
-      id: 'priya',
-      name: 'Priyadharshini M.',
-      role: 'Power BI Developer',
-      company: 'Orion Systems',
-      pay: '3.6 LPA',
-      placed: 'Batch 05',
-      background: 'Career switch from BPO',
-      youtubeId: null,
-      poster: '/images/students/priya.jpg',
-    },
-    {
-      id: 'mani',
-      name: 'Manikandan S.',
-      role: 'Business Intelligence Analyst',
-      company: 'Hansiba Technologies',
+      id: 'vasikaramani',
+      name: 'Vasikaramani.M',
+      role: 'Data Processing Analyst',
+      company: 'Roop Namyang',
       pay: '4.2 LPA',
-      placed: 'Batch 05',
-      background: 'B.Sc Maths',
-      youtubeId: null,
-      poster: '/images/students/mani.jpg',
+      placed: '',
+      background: 'Carrier gap',
+      videoSrc: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790241023/WhatsApp_Video_2026-09-24_at_2.38.03_PM.mp4',
+      poster: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790241023/WhatsApp_Video_2026-09-24_at_2.38.03_PM.jpg',
+    },
+    {
+      id: 'monish',
+      name: 'Monish',
+      role: 'Business Analyst',
+      company: 'Ifluids Engineering',
+      pay: '3 LPA',
+      placed: '',
+      background: 'Fresher',
+      videoSrc: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790240956/VID_20260923_133449.mp4',
+      poster: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790240956/VID_20260923_133449.jpg',
+    },
+    {
+      id: 'jamuna',
+      name: 'Jamuna',
+      role: 'Technical Analyst',
+      company: 'Citi',
+      pay: '4.9 LPA',
+      placed: '',
+      background: 'Career gap',
+      videoSrc: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790240933/yellow_shirt_girl-1.mp4',
+      poster: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790240933/yellow_shirt_girl-1.jpg',
+    },
+    {
+      id: 'yamini',
+      name: 'Yamini',
+      role: 'Data Analyst',
+      company: 'Citi',
+      pay: '4.9 LPA',
+      placed: '',
+      background: '2025 passed out',
+      videoSrc: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790240837/yamini-1.mp4',
+      poster: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790240837/yamini-1.jpg',
     },
   ],
 }

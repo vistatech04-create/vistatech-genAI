@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import Button from '../Button/Button.jsx'
 import { leadForm } from '../../content/leadForm.js'
+import { integrations } from '../../content/integrations.js'
 import styles from './LeadForm.module.css'
 
 const EMPTY = { name: '', phone: '', email: '', salary: '' }
@@ -36,6 +37,13 @@ function Tick() {
 }
 
 export default function LeadForm() {
+  // The popup and the inline copy (Companies.jsx) can both be mounted at
+  // once, so field ids need a per-instance prefix — two <input id="lead-name">
+  // on the same page would break both the label association and the
+  // getElementById focus-jump below.
+  const uid = useId()
+  const fieldId = (name) => `lead-${uid}-${name}`
+
   const [values, setValues] = useState(EMPTY)
   const [errors, setErrors] = useState({})
   const [sent, setSent] = useState(false)
@@ -52,10 +60,38 @@ export default function LeadForm() {
     setErrors(found)
     if (Object.keys(found).length > 0) {
       // Put the cursor on the first thing that needs fixing.
-      document.getElementById(`lead-${Object.keys(found)[0]}`)?.focus()
+      document.getElementById(fieldId(Object.keys(found)[0]))?.focus()
       return
     }
-    // TODO send `values` somewhere real, and fire the Meta Pixel Lead event.
+
+    if (integrations.googleSheetEndpoint) {
+      // URLSearchParams, not FormData: FormData posts as multipart/form-data,
+      // and Apps Script's e.parameter does not reliably parse that — the
+      // request "succeeds" but doPost sees empty fields. url-encoded is what
+      // e.parameter is actually built for.
+      const body = new URLSearchParams({
+        name: values.name.trim(),
+        phone: values.phone.trim(),
+        email: values.email.trim(),
+        salary: values.salary,
+        page: window.location.pathname,
+      })
+
+      // Apps Script Web Apps don't send back CORS headers a browser can
+      // read, so this fires the request without waiting on a response —
+      // the script still runs and appends the row on its end either way.
+      fetch(integrations.googleSheetEndpoint, { method: 'POST', mode: 'no-cors', body }).catch(() => {})
+    } else if (import.meta.env.DEV) {
+      console.warn('[LeadForm] integrations.googleSheetEndpoint is empty — this lead was not saved anywhere.')
+    }
+
+    // Fires once the lead is captured — the same moment the "Got it" card
+    // below replaces the form. Guarded because an ad blocker or a page the
+    // pixel snippet hasn't loaded on yet just means window.fbq is missing,
+    // not an error worth breaking the submission over.
+    if (typeof window.fbq === 'function') {
+      window.fbq('track', 'Lead')
+    }
     setSent(true)
   }
 
@@ -82,10 +118,10 @@ export default function LeadForm() {
 
       <div className={styles.fields}>
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="lead-name">Your name</label>
+          <label className={styles.label} htmlFor={fieldId('name')}>Your name</label>
           <input
             className={styles.input}
-            id="lead-name"
+            id={fieldId('name')}
             name="name"
             type="text"
             autoComplete="name"
@@ -93,18 +129,18 @@ export default function LeadForm() {
             value={values.name}
             onChange={set('name')}
             aria-invalid={Boolean(errors.name)}
-            aria-describedby={errors.name ? 'lead-name-error' : undefined}
+            aria-describedby={errors.name ? fieldId('name-error') : undefined}
           />
           {errors.name && (
-            <p className={styles.error} id="lead-name-error">{errors.name}</p>
+            <p className={styles.error} id={fieldId('name-error')}>{errors.name}</p>
           )}
         </div>
 
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="lead-phone">Phone number</label>
+          <label className={styles.label} htmlFor={fieldId('phone')}>Phone number</label>
           <input
             className={styles.input}
-            id="lead-phone"
+            id={fieldId('phone')}
             name="phone"
             type="tel"
             inputMode="numeric"
@@ -113,18 +149,18 @@ export default function LeadForm() {
             value={values.phone}
             onChange={set('phone')}
             aria-invalid={Boolean(errors.phone)}
-            aria-describedby={errors.phone ? 'lead-phone-error' : undefined}
+            aria-describedby={errors.phone ? fieldId('phone-error') : undefined}
           />
           {errors.phone && (
-            <p className={styles.error} id="lead-phone-error">{errors.phone}</p>
+            <p className={styles.error} id={fieldId('phone-error')}>{errors.phone}</p>
           )}
         </div>
 
         <div className={styles.field}>
-          <label className={styles.label} htmlFor="lead-email">Email</label>
+          <label className={styles.label} htmlFor={fieldId('email')}>Email</label>
           <input
             className={styles.input}
-            id="lead-email"
+            id={fieldId('email')}
             name="email"
             type="email"
             autoComplete="email"
@@ -132,10 +168,10 @@ export default function LeadForm() {
             value={values.email}
             onChange={set('email')}
             aria-invalid={Boolean(errors.email)}
-            aria-describedby={errors.email ? 'lead-email-error' : undefined}
+            aria-describedby={errors.email ? fieldId('email-error') : undefined}
           />
           {errors.email && (
-            <p className={styles.error} id="lead-email-error">{errors.email}</p>
+            <p className={styles.error} id={fieldId('email-error')}>{errors.email}</p>
           )}
         </div>
 
@@ -146,7 +182,7 @@ export default function LeadForm() {
               <button
                 type="button"
                 key={option}
-                id={option === leadForm.salaryOptions[0] ? 'lead-salary' : undefined}
+                id={option === leadForm.salaryOptions[0] ? fieldId('salary') : undefined}
                 className={`${styles.chip} ${values.salary === option ? styles.chipOn : ''}`}
                 aria-pressed={values.salary === option}
                 onClick={() => {

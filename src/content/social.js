@@ -9,14 +9,13 @@
  *    visitor can check this by ringing up and asking how many seats are
  *    left, so a stale number is not a small embarrassment.
  *
- * 2. `roster` is the faces. THESE ARE GENERATED PEOPLE RIGHT NOW — the
- *    same placeholder stills as the testimonials, see the note at the top
- *    of testimonials.js. Publishing invented faces as students is a
- *    misrepresentation on its own, whatever the caption says, so these
- *    have to be swapped for real students who have agreed to be shown
- *    before any of this goes live. placements.js already lists fifteen
- *    real placed students by name; photographs of those people, with
- *    their permission, is what belongs here.
+ * 2. `roster` is the faces. Ajay Krishna and Saravanan M. use their real
+ *    photos (the same ones in placements.js). Ramya S., Priyadharshini M.
+ *    and Manikandan S. have no real photo yet, so photo is null rather
+ *    than a generated stand-in — Avatar.jsx falls back to their initial.
+ *    Publishing an invented face as a named student is a misrepresentation
+ *    on its own, whatever the caption says, so an initial is the honest
+ *    placeholder until a real photo replaces it.
  *
  * WHAT THE STRIP DOES, AND WHAT IT DELIBERATELY DOES NOT DO.
  * The faces rotate and the count animates up to `seatsTaken` when the
@@ -50,11 +49,11 @@ export const social = {
    * photograph yet still looks deliberate.
    */
   roster: [
-    { name: 'Ramya S.',          photo: '/images/mock/ramya.jpg' },
-    { name: 'Ajay Krishna',      photo: '/images/mock/ajay.jpg' },
-    { name: 'Priyadharshini M.', photo: '/images/mock/priya.jpg' },
-    { name: 'Saravanan M.',      photo: '/images/mock/saravanan.jpg' },
-    { name: 'Manikandan S.',     photo: '/images/mock/mani.jpg' },
+    { name: 'Rohit prakash',          photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241678/Rohit_Prakash-Data_anlyst.png' },
+    { name: 'Ajay Krishna',      photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241678/Ajay_Krishna_-_powerbi.png' },
+    { name: 'Vikram', photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241679/Vikram_-_Powerbi.png' },
+    { name: 'Saravanan M.',      photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241678/saravnan_-_data_analyst.jpg' },
+    { name: 'Rajesh',     photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241676/Rajesh-Operation_analyst.jpg' },
   ],
 
   /**

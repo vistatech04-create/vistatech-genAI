@@ -19,6 +19,12 @@
 
 .frame iframe { width: 100%; height: 100%; border: 0; display: block; }
 
+/* contain, not cover: these are real uploaded clips (phone-shot, mixed
+   aspect ratios), and cropping one to fill the 4:5 frame cuts off the
+   person in it. Letterboxing against --ink-deep looks intentional; a
+   cropped face does not. */
+.frame video { width: 100%; height: 100%; display: block; object-fit: contain; background: var(--ink-deep); }
+
 .cover {
   position: absolute;
   inset: 0;

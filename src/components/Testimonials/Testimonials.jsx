@@ -56,6 +56,7 @@ function Card({ person, offset, onFocusCard, onPlay }) {
       <div className={styles.photo}>
         <VideoPlayer
           youtubeId={person.youtubeId}
+          videoSrc={person.videoSrc}
           poster={person.poster}
           posterAlt={`${person.name}, ${person.role} at ${person.company}`}
           ratio="4 / 5"

@@ -226,12 +226,12 @@
 
 .tools {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   margin-top: 18px;
 }
 
-@media (min-width: 700px) { .tools { grid-template-columns: repeat(10, 1fr); gap: 14px; } }
+@media (min-width: 700px) { .tools { grid-template-columns: repeat(10, 1fr); gap: 12px; } }
 
 /* Icon over name, centred. Reads as a strip of tools rather than a list.
 
@@ -239,12 +239,14 @@
    durations and offset starts mean they never fall into step with each
    other, which is what would make it look mechanical. */
 .tool {
+  aspect-ratio: 1 / 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 18px 10px;
-  border-radius: 16px;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 6px;
+  border-radius: 14px;
   border: 1px solid rgba(40, 8, 32, 0.1);
   background: var(--paper);
   text-align: center;
@@ -274,16 +276,17 @@
   .tool { animation: none; }
 }
 
-@media (min-width: 700px) { .tool { padding: 22px 12px; gap: 12px; } }
+@media (min-width: 700px) { .tool { padding: 10px 8px; gap: 8px; } }
 
 .icon {
-  width: 42px;
-  height: 42px;
+  width: 28px;
+  height: 28px;
   display: grid;
   place-items: center;
+  flex-shrink: 0;
 }
 
-@media (min-width: 700px) { .icon { width: 48px; height: 48px; } }
+@media (min-width: 700px) { .icon { width: 32px; height: 32px; } }
 
 .icon img { width: 100%; height: 100%; object-fit: contain; }
 
@@ -291,8 +294,8 @@
 .glyph {
   width: 100%;
   height: 100%;
-  padding: 7px;
-  border-radius: 11px;
+  padding: 5px;
+  border-radius: 9px;
   background: var(--gold-wash);
   color: var(--ink);
 }
@@ -300,13 +303,17 @@
 .toolName {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 14px;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
+  font-size: 11px;
+  letter-spacing: -0.005em;
+  line-height: 1.15;
   color: var(--ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-@media (min-width: 700px) { .toolName { font-size: 15px; } }
+@media (min-width: 700px) { .toolName { font-size: 12px; } }
 
 /* ---- what you walk away with ---------------------------------------- */
 .outcome {

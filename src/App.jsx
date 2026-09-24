@@ -13,6 +13,8 @@ import Pricing from './components/Pricing/Pricing.jsx'
 import ValueStack from './components/ValueStack/ValueStack.jsx'
 import Faq from './components/Faq/Faq.jsx'
 import Closing from './components/Closing/Closing.jsx'
+import { LeadModalProvider } from './components/LeadModal/LeadModalContext.jsx'
+import LeadModal from './components/LeadModal/LeadModal.jsx'
 
 /**
  * / — the 60-day program: pay half now, half once you are placed.
@@ -49,16 +51,16 @@ import Closing from './components/Closing/Closing.jsx'
  * alternative to something the reader cannot yet price. Money is kept out
  * of sections 01–09 entirely — see the note at the top of journey.js.
  *
- * STILL MISSING, and it is the one thing holding the page back: there is no
- * #enroll or #call target anywhere on the page. Every button on every
- * section — including the hero's — points at an anchor that does not
- * exist, so pressing one does nothing. LeadForm and leadForm.js are built
- * and unused; dropping LeadForm in with id="enroll" is what turns this page
- * into something worth spending on.
+ * '#enroll' and '#call' are not scroll anchors — Button.jsx wires them
+ * centrally. '#enroll' opens <LeadModal>, the popup rendered once here;
+ * '#call' becomes a tel: link straight to the phone. See Button.jsx for
+ * both. The Companies section also keeps its own inline <LeadForm> — the
+ * popup does not replace it, it just gives every other button the same
+ * form.
  */
 export default function App() {
   return (
-    <>
+    <LeadModalProvider>
       <div className="top-stage">
         <HeroBackdrop />
         <Header />
@@ -78,6 +80,7 @@ export default function App() {
         </main>
         <Closing />
       </div>
-    </>
+      <LeadModal />
+    </LeadModalProvider>
   )
 }
