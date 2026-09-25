@@ -10,16 +10,7 @@ export default function StarterWeek() {
   return (
     <section className={styles.section} data-section="starter-week">
       <div className={`container ${styles.grid}`}>
-        <div className={styles.video}>
-          <VideoPlayer
-            youtubeId={starterWeek.youtubeId}
-            poster={starterWeek.poster}
-            posterAlt={starterWeek.posterAlt}
-            ratio="4 / 5"
-          />
-        </div>
-
-        <div>
+        <div className={styles.info}>
           <div className={styles.joinStrip}>
             <JoinStrip line={social.lines.starter} offset={1} />
           </div>
@@ -46,9 +37,26 @@ export default function StarterWeek() {
               </li>
             ))}
           </ul>
+        </div>
 
+        {/* Its own grid area (see StarterWeek.module.css): on a phone this
+            sits between the benefits and the button, not stranded above
+            everything — the badge and heading are what a scroller reads
+            first. On desktop it's back to sitting beside the text, spanning
+            both the info and actions areas as it always did. */}
+        <div className={styles.video}>
+          <VideoPlayer
+            youtubeId={starterWeek.youtubeId}
+            embedSrc={starterWeek.embedSrc}
+            autoplayPreview
+            posterAlt={starterWeek.posterAlt}
+            ratio="9 / 16"
+          />
+        </div>
+
+        <div className={styles.actionsWrap}>
           <div className={styles.actions}>
-            <Button href={starterWeek.cta.href} variant="secondary">
+            <Button href={starterWeek.cta.href}>
               {starterWeek.cta.label}
             </Button>
           </div>

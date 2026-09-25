@@ -13,23 +13,38 @@
 
 @media (min-width: 900px) { .section { padding-block: 80px; } }
 
+/* Three named areas, not two implicit ones, so the video can sit in a
+   different spot in the reading order on a phone (between the benefits
+   and the button) than it does on desktop (beside all of it, spanning
+   both rows) without duplicating any markup. */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-areas: 'info' 'video' 'actions';
   gap: 32px;
-  align-items: center;
 }
 
 @media (min-width: 900px) {
-  .grid { grid-template-columns: 0.82fr 1.18fr; gap: 52px; }
+  .grid {
+    grid-template-columns: 0.82fr 1.18fr;
+    grid-template-areas: 'video info' 'video actions';
+    gap: 52px;
+    align-items: center;
+  }
 }
 
 .grid > * { min-width: 0; }
 
-/* Video first on a phone: it is the hook, and it is what they asked to see. */
-.video { max-width: 360px; width: 100%; margin-inline: auto; }
+.info { grid-area: info; }
+.actionsWrap { grid-area: actions; }
 
-@media (min-width: 900px) { .video { max-width: none; } }
+/* A 9:16 clip at the old 360px width (desktop: uncapped, filling the whole
+   grid column) came out 640px+ tall — taller than the text beside it and
+   most of the screen on a phone. Capped narrower so the height it implies
+   at 9:16 stays reasonable instead of dictating the section's height. */
+.video { grid-area: video; max-width: 280px; width: 100%; margin-inline: auto; }
+
+@media (min-width: 900px) { .video { max-width: 300px; } }
 
 .joinStrip { margin-bottom: 14px; }
 

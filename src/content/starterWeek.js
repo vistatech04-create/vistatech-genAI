@@ -27,9 +27,16 @@ export const starterWeek = {
     'One week, seven live classes, the same mentors who teach the 60 days. ' +
     'You see exactly how it is taught before you enrol in anything.',
 
-  /** Portrait video. Nothing loads from YouTube until someone taps play. */
+  /**
+   * Portrait video (9:16). No poster, no title overlay, no play button of
+   * the usual kind: StarterWeek.jsx passes autoplayPreview, so this starts
+   * muted as soon as the page loads and only switches to sound once the
+   * viewer clicks the centred play button — see VideoPlayer.jsx. No
+   * metadata-video-title / video-title params either, so Mux's own player
+   * has no label to show — same treatment as the hero video in jobSection.js.
+   */
   youtubeId: null,
-  poster: null,
+  embedSrc: 'https://player.mux.com/4ABeWzWiyhZUlhz01q01MRk9S9PZ2rw01rCWYjquf3afsk',
   posterAlt: 'A student talking about the seven day starter week',
 
   benefits: [
@@ -59,6 +66,6 @@ export const starterWeek = {
     // },
   ],
 
-  cta: { label: 'Ask about the starter week', href: '#enroll' },
+  cta: { label: 'Enroll for the one week program', href: '#enroll' },
   note: 'A mentor will talk you through it on the call. No payment now.',
 }

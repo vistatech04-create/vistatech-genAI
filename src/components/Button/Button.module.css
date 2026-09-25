@@ -22,6 +22,12 @@
 .btn:hover { transform: translateY(-2px); }
 .btn:active { transform: translateY(0); }
 
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
 /* Primary is the only flame-coloured thing on the page. If it is flame, it is clickable. */
 .primary {
   background: var(--flame);

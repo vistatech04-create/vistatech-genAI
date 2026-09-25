@@ -6,6 +6,10 @@ import styles from './LeadForm.module.css'
 
 const EMPTY = { name: '', phone: '', email: '', salary: '' }
 
+// Mirrors footer.phone in content/closing.js and content/starter.js — see
+// the same note on PHONE in Button.jsx.
+const PHONE = '9894449002'
+
 /* Plain, forgiving checks. The point is to catch a typo, not to police. */
 function validate(values) {
   const errors = {}
@@ -46,7 +50,10 @@ export default function LeadForm({ source }) {
 
   const [values, setValues] = useState(EMPTY)
   const [errors, setErrors] = useState({})
-  const [sent, setSent] = useState(false)
+  // idle -> submitting -> sent, or back to idle (with a banner) on failure.
+  // Kept as one state machine rather than a `sent` bool plus a `submitting`
+  // bool so the UI can't land in an impossible combination of the two.
+  const [status, setStatus] = useState('idle')
 
   const set = (key) => (event) => {
     setValues((v) => ({ ...v, [key]: event.target.value }))
@@ -54,7 +61,7 @@ export default function LeadForm({ source }) {
     setErrors((e) => ({ ...e, [key]: undefined }))
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
     const found = validate(values)
     setErrors(found)
@@ -63,6 +70,8 @@ export default function LeadForm({ source }) {
       document.getElementById(fieldId(Object.keys(found)[0]))?.focus()
       return
     }
+
+    setStatus('submitting')
 
     if (integrations.googleSheetEndpoint) {
       // URLSearchParams, not FormData: FormData posts as multipart/form-data,
@@ -81,10 +90,22 @@ export default function LeadForm({ source }) {
         section: source || 'unknown',
       })
 
-      // Apps Script Web Apps don't send back CORS headers a browser can
-      // read, so this fires the request without waiting on a response —
-      // the script still runs and appends the row on its end either way.
-      fetch(integrations.googleSheetEndpoint, { method: 'POST', mode: 'no-cors', body }).catch(() => {})
+      try {
+        // Apps Script Web Apps don't send back CORS headers a browser can
+        // read, so mode: 'no-cors' is required and the response is always
+        // opaque — this can confirm the request LEFT the browser, not that
+        // Apps Script did anything with it. That residual gap is the price
+        // of posting straight to Apps Script with no server of our own in
+        // between; what this can and does catch is offline, DNS failure, or
+        // a blocked request — the failure modes that used to show "Got it"
+        // while silently losing the lead. No artificial timeout here: the
+        // button just stays "Sending…" for as long as the request actually
+        // takes, rather than guessing a cutoff.
+        await fetch(integrations.googleSheetEndpoint, { method: 'POST', mode: 'no-cors', body })
+      } catch {
+        setStatus('error')
+        return
+      }
     } else if (import.meta.env.DEV) {
       console.warn('[LeadForm] integrations.googleSheetEndpoint is empty — this lead was not saved anywhere.')
     }
@@ -96,10 +117,10 @@ export default function LeadForm({ source }) {
     if (typeof window.fbq === 'function') {
       window.fbq('track', 'Lead')
     }
-    setSent(true)
+    setStatus('sent')
   }
 
-  if (sent) {
+  if (status === 'sent') {
     return (
       <div className={styles.card}>
         <div className={styles.done}>
@@ -119,6 +140,13 @@ export default function LeadForm({ source }) {
     <form className={styles.card} onSubmit={handleSubmit} noValidate>
       <p className={styles.heading}>{leadForm.heading}</p>
       <p className={styles.sub}>{leadForm.sub}</p>
+
+      {status === 'error' && (
+        <p className={styles.submitError} role="alert">
+          <strong>{leadForm.errorHeading}</strong> {leadForm.errorBody}{' '}
+          <a className={styles.submitErrorLink} href={`tel:${PHONE}`}>{PHONE}</a>.
+        </p>
+      )}
 
       <div className={styles.fields}>
         <div className={styles.field}>
@@ -203,7 +231,9 @@ export default function LeadForm({ source }) {
       </div>
 
       <div className={styles.submit}>
-        <Button as="button" type="submit">{leadForm.submitLabel}</Button>
+        <Button as="button" type="submit" disabled={status === 'submitting'}>
+          {status === 'submitting' ? leadForm.submitLabelBusy : leadForm.submitLabel}
+        </Button>
       </div>
       <p className={styles.note}>{leadForm.note}</p>
     </form>

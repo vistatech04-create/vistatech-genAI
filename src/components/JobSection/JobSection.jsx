@@ -6,7 +6,7 @@ import styles from './JobSection.module.css'
 
 export default function JobSection() {
   return (
-    <section className={styles.section} data-section="job-section">
+    <section className={styles.section} data-section="hero">
       <div className="container">
         <div className={styles.grid}>
           <PlacedMarquee
@@ -20,6 +20,7 @@ export default function JobSection() {
               embedSrc={jobSection.embedSrc}
               autoplayPreview
               posterAlt={jobSection.posterAlt}
+              ratio="16 / 9"
             />
           </div>
         </div>
