@@ -44,17 +44,6 @@ export const closing = {
 
   cta: { label: 'Start your job training', href: '#enroll' },
 
-  /**
-   * The second action is the phone, not another anchor.
-   *
-   * Two reasons. A tel: link is the only button on this page that works
-   * today — #enroll and #call have no target yet — and in this market a
-   * person deciding on ₹14,999 of training would usually rather ring and
-   * ask than fill a form. `href` is built from footer.phone, so the number
-   * cannot drift out of step with the one printed below it.
-   */
-  callLabel: 'Call',
-
   note: 'A mentor calls you within 24 hours. No payment now.',
 
   /* Qualitative on purpose. Every count on this page (students trained,

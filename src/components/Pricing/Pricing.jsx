@@ -11,7 +11,7 @@ const { labels } = pricing
  *
  * Each card states the full fee plainly, then breaks it in half underneath.
  * That order matters: the value stack up the page already closed on the
- * full ₹29,998, so repeating it here keeps the page honest — the number
+ * full ₹29,999, so repeating it here keeps the page honest — the number
  * does not shrink as the reader gets closer to the button — and the split
  * arrives as the answer to the price rather than a way of dodging it.
  *
@@ -90,7 +90,7 @@ function Plan({ plan }) {
 
 export default function Pricing() {
   return (
-    <section className={styles.section} id="fees">
+    <section className={styles.section} id="fees" data-section="pricing">
       <div className="container">
         <div className={styles.head}>
           <p className={styles.badge}>{pricing.badge}</p>

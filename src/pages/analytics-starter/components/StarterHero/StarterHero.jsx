@@ -47,9 +47,6 @@ export default function StarterHero() {
 
           <div className={`${styles.actions} ${styles.rise} ${styles.d5}`}>
             <Button href={hero.primaryCta.href}>{hero.primaryCta.label}</Button>
-            <Button href={hero.secondaryCta.href} variant="secondary">
-              {hero.secondaryCta.label}
-            </Button>
           </div>
 
           {/* The line the sticky bar watches: once the hero's own buttons

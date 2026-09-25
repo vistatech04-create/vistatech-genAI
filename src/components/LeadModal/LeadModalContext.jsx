@@ -8,17 +8,24 @@ import { createContext, useCallback, useContext, useState } from 'react'
  */
 const LeadModalContext = createContext({
   isOpen: false,
+  source: null,
   openModal: () => {},
   closeModal: () => {},
 })
 
 export function LeadModalProvider({ children }) {
   const [isOpen, setIsOpen] = useState(false)
-  const openModal = useCallback(() => setIsOpen(true), [])
+  // Which section's button opened the popup (see Button.jsx) — carried
+  // through to LeadForm so the submission records where the lead came from.
+  const [source, setSource] = useState(null)
+  const openModal = useCallback((s) => {
+    setSource(s || 'unknown')
+    setIsOpen(true)
+  }, [])
   const closeModal = useCallback(() => setIsOpen(false), [])
 
   return (
-    <LeadModalContext.Provider value={{ isOpen, openModal, closeModal }}>
+    <LeadModalContext.Provider value={{ isOpen, source, openModal, closeModal }}>
       {children}
     </LeadModalContext.Provider>
   )

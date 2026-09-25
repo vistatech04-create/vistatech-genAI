@@ -32,30 +32,20 @@ export const jobSection = {
   ],
 
   /* ---- right column: just the video -------------------------------- */
-  /* The question now sits on the thumbnail itself. Written over the image in
-     HTML rather than baked into it, so it stays sharp at every size, reflows
-     on a phone, and can be edited without regenerating the picture. */
-  videoTitle: 'Can you get the Job in',
-  videoTitleAccent: '60 Days?',
-
-  /** YouTube id only. Nothing loads from YouTube until someone taps play. */
-  youtubeId: null,
   /**
-   * The still shown before play. One file serves both shapes: 16:9 from
-   * tablet up, 4:5 on a phone. The crop is held at 66% across so she stays
-   * in frame when it goes portrait, and the upper left stays clear for the
-   * question written over it.
-   *
-   * MOCK: a generated person, in place so the design can be judged.
+   * No poster, no title overlay, no play button of the usual kind:
+   * JobSection.jsx passes autoplayPreview, so this starts muted as soon as
+   * the page loads and only switches to sound once the viewer clicks the
+   * centred play button — see VideoPlayer.jsx. No metadata-video-title /
+   * video-title params either, so Mux's own player has no label to show.
    */
-  poster: '/images/hero-video.jpg',
+  youtubeId: null,
+  embedSrc: 'https://player.mux.com/9WMeNFahYLy4gTYVX43BMRHb8aaj3rhxonUm1mNSNAE',
   posterAlt:
     'Can you get the Job in 60 Days? A Vista Tech student talks about how ' +
     'they got placed',
-  duration: '3 minutes',
 
-  /* ---- the section's two actions ---------------------------------- */
+  /* ---- the section's action ---------------------------------------- */
   primaryCta: { label: 'Start your job training', href: '#enroll' },
-  secondaryCta: { label: 'Talk to our team', href: '#call' },
   tamil: 'தமிழில் கற்றுக்கொள்ளுங்கள்.',
 }

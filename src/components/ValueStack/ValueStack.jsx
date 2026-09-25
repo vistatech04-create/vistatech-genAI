@@ -16,7 +16,7 @@ import styles from './ValueStack.module.css'
  * The card steps down once and then stops: what it all adds up to, then
  * the full fee. It does NOT show what is due today — half now, half after
  * placement is the fee section's reveal, three sections further down, and
- * it only lands as relief on a reader who has already swallowed ₹29,998.
+ * it only lands as relief on a reader who has already swallowed ₹29,999.
  * Read the note at the top of valueStack.js before adding a number here.
  *
  * Every line is something Vista Tech can hand over and every value is one
@@ -36,7 +36,7 @@ function Row({ item }) {
 
 export default function ValueStack() {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} data-section="value-stack">
       <div className="container">
         <div className={styles.head}>
           <JoinStrip line={social.lines.value} offset={0} />

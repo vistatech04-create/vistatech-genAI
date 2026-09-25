@@ -4,7 +4,7 @@ import styles from './Hero.module.css'
 
 export default function Hero() {
   return (
-    <section className={styles.hero}>
+    <section className={styles.hero} data-section="hero">
       <div className="container">
         <div className={styles.copy}>
           <p className={`${styles.badge} ${styles.rise} ${styles.d1}`}>

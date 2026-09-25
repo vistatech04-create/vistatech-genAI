@@ -37,7 +37,7 @@ import LeadModal from './components/LeadModal/LeadModal.jsx'
  * THE ORDER OF 09, 10 AND 11 IS THE WHOLE CONVERSION ARGUMENT, and none of
  * the three works moved:
  *
- *   09  itemises ₹78,500 of value and then names the full ₹29,998. The
+ *   09  itemises ₹78,500 of value and then names the full ₹29,999. The
  *       price is anchored against the list, not against nothing. It says
  *       NOTHING about how the fee is paid.
  *   10  catches whoever that number just frightened and offers them a week

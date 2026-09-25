@@ -9,7 +9,7 @@ import styles from './LeadModal.module.css'
  * App.jsx.
  */
 export default function LeadModal() {
-  const { isOpen, closeModal } = useLeadModal()
+  const { isOpen, closeModal, source } = useLeadModal()
 
   // A fresh key each time the popup opens, so reopening it after a
   // submission shows the blank form again instead of the "Got it" card.
@@ -47,7 +47,7 @@ export default function LeadModal() {
             <path d="M5 5 19 19M19 5 5 19" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" />
           </svg>
         </button>
-        <LeadForm key={instance} />
+        <LeadForm key={instance} source={source} />
       </div>
     </div>
   )

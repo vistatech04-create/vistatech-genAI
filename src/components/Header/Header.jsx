@@ -8,7 +8,9 @@ import styles from './Header.module.css'
  */
 export default function Header({ cta = hero.primaryCta }) {
   return (
-    <header className={styles.header}>
+    // data-section="hero": this bar is the only place the hero's CTA is
+    // actually clickable (Hero.jsx itself has no button) — see Button.jsx.
+    <header className={styles.header} data-section="hero">
       <div className={`container ${styles.inner}`}>
         <img className={styles.logo} src="/images/logo.png" alt="Vista Tech" />
         <span className={styles.action}>

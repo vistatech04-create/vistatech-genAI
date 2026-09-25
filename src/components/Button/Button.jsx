@@ -35,7 +35,13 @@ export default function Button({
   const Tag = as === 'button' || !resolvedHref || opensModal ? 'button' : 'a'
 
   const handleClick = (event) => {
-    if (opensModal) openModal()
+    if (opensModal) {
+      // Which section this button lives in, so the submission says where it
+      // came from instead of every lead reading the same "/" (see the
+      // data-section attributes on each section's root element).
+      const section = event.currentTarget.closest('[data-section]')?.dataset.section
+      openModal(section || 'unknown')
+    }
     onClick?.(event)
   }
 

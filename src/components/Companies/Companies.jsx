@@ -66,7 +66,7 @@ export default function Companies() {
             <p className={styles.footnote}>{companies.footnote}</p>
           </div>
 
-          <LeadForm />
+          <LeadForm source="companies-inline" />
         </div>
       </div>
     </section>

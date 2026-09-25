@@ -42,7 +42,6 @@ export const starter = {
     ],
 
     primaryCta: { label: 'Book my 7 day training', href: '#book' },
-    secondaryCta: { label: 'Talk to our team', href: '#call' },
 
     /* The three objections that stop a person mid-scroll, answered early. */
     reassure: 'No coding needed. Any degree. Classes after work hours.',
@@ -339,9 +338,6 @@ export const starter = {
     },
 
     cta: { label: 'Book my 7 day training', href: '#book' },
-    /* "Our team", not "my team" — the page is Vista Tech speaking to the
-       reader, and it matches the hero's second button word for word. */
-    secondaryCta: { label: 'Talk to our team', href: '#call' },
     note: '₹999, paid once. Seven live classes in Tamil.',
   },
 
@@ -594,7 +590,6 @@ export const starter = {
       'are priced from the 60-day group program, pro rata for one week.',
 
     cta: { label: 'Book my 7 day training', href: '#book' },
-    secondaryCta: { label: 'Talk to our team', href: '#call' },
   },
 
   /* ---- section 08: questions --------------------------------------- */
@@ -699,7 +694,6 @@ export const starter = {
       'Job-ready in 60 days is the whole point of this program, and it ' +
       'starts with seven live classes you can book right now for ₹999.',
     cta: { label: 'Start my training now', href: '#book' },
-    secondaryCta: { label: 'Talk to our team', href: '#call' },
     note:
       'Seven live classes in Tamil. ₹999, paid once, and it comes off your ' +
       'course fee if you carry on.',

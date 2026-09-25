@@ -89,6 +89,28 @@
 
 .play svg { margin-left: 4px; }
 
+/* Sits over the muted autoplay preview, centred like any other play
+   button on the site. Only the corner strip behind it darkens slightly,
+   so the video underneath still reads as the cover, not a fully dimmed
+   still. Clicking it swaps the embed to an unmuted, sound-on load. */
+.soundPlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.soundPlay:hover .play { transform: scale(1.07); }
+.soundPlay:focus-visible { outline: 3px solid var(--flame); outline-offset: 4px; }
+
+.soundToggle:hover { background: rgba(28, 6, 22, 0.8); }
+
 .duration {
   position: absolute;
   right: 14px;
@@ -117,6 +139,9 @@
   color: #fff;
   text-align: left;
   text-wrap: balance;
+  /* Covers the autoplay-preview case, which has no .scrim behind it — a
+     live video has no guaranteed dark patch for white text to sit on. */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
 }
 
 @media (min-width: 700px) {

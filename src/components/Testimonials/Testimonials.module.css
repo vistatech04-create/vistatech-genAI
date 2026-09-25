@@ -42,13 +42,17 @@
    no fixed height. The transforms move them visually without touching
    layout.                                                              */
 .stage {
-  --card-w: min(86vw, 330px);
+  /* On a phone the side cards are fully hidden (--fade: 1 below) — there is
+     nothing behind the front card to save horizontal room for, so it can
+     use nearly the full width instead of the old 86vw, which left a wide
+     gap either side and made the card read as shrunken. */
+  --card-w: min(94vw, 360px);
   --spread: 0%;   /* how far the ones behind slide out from centre */
   --fade: 1;      /* 1 hides them completely, which is what a phone wants */
   display: grid;
   justify-items: center;
   margin-top: 32px;
-  padding-inline: var(--gutter);
+  padding-inline: 12px;
 }
 
 @media (min-width: 900px) {

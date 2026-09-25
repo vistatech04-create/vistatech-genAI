@@ -8,7 +8,7 @@ import styles from './StarterWeek.module.css'
 
 export default function StarterWeek() {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} data-section="starter-week">
       <div className={`container ${styles.grid}`}>
         <div className={styles.video}>
           <VideoPlayer

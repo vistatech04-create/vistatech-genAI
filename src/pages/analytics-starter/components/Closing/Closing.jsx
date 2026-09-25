@@ -25,9 +25,6 @@ export default function Closing() {
 
           <div className={styles.buttons}>
             <Button href={closing.cta.href}>{closing.cta.label}</Button>
-            <Button href={closing.secondaryCta.href} variant="secondary">
-              {closing.secondaryCta.label}
-            </Button>
           </div>
 
           <p className={styles.note}>{closing.note}</p>

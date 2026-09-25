@@ -59,6 +59,6 @@ export const starterWeek = {
     // },
   ],
 
-  cta: { label: 'Ask about the starter week', href: '#call' },
+  cta: { label: 'Ask about the starter week', href: '#enroll' },
   note: 'A mentor will talk you through it on the call. No payment now.',
 }

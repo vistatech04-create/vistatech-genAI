@@ -62,9 +62,6 @@ export default function OfferStack() {
         <div className={styles.actions}>
           <div className={styles.buttons}>
             <Button href={stack.cta.href}>{stack.cta.label}</Button>
-            <Button href={stack.secondaryCta.href} variant="secondary">
-              {stack.secondaryCta.label}
-            </Button>
           </div>
           <p className={styles.footnote}>{stack.footnote}</p>
         </div>

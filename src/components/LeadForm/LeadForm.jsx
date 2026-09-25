@@ -36,7 +36,7 @@ function Tick() {
   )
 }
 
-export default function LeadForm() {
+export default function LeadForm({ source }) {
   // The popup and the inline copy (Companies.jsx) can both be mounted at
   // once, so field ids need a per-instance prefix — two <input id="lead-name">
   // on the same page would break both the label association and the
@@ -75,6 +75,10 @@ export default function LeadForm() {
         email: values.email.trim(),
         salary: values.salary,
         page: window.location.pathname,
+        // Which section's CTA opened this — 'companies-inline' for the copy
+        // embedded directly in the page, a data-section value (see
+        // Button.jsx) for everything opened through the popup.
+        section: source || 'unknown',
       })
 
       // Apps Script Web Apps don't send back CORS headers a browser can

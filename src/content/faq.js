@@ -30,9 +30,9 @@ export const faq = {
     {
       q: 'What exactly do I pay, and when?',
       a:
-        '₹14,999 to start your training on the group online plan, and ' +
+        '₹15,000 to start your training on the group online plan, and ' +
         '₹14,999 once you have an offer letter. That is the whole fee: ' +
-        '₹29,998 across both halves, and nothing else. Between those two ' +
+        '₹29,999 across both halves, and nothing else. Between those two ' +
         'moments you are not asked for anything, whether that gap is two ' +
         'months or six.',
     },
@@ -108,10 +108,4 @@ export const faq = {
     },
   ],
 
-  /* A person with a question that is not on this list is a lead, not a
-     dead end. */
-  more: {
-    text: 'Still have a question we have not answered here?',
-    cta: { label: 'Talk to our consultant', href: '#call' },
-  },
 }

@@ -1,4 +1,3 @@
-import Button from '../Button/Button.jsx'
 import { faq } from '../../content/faq.js'
 import styles from './Faq.module.css'
 
@@ -34,13 +33,6 @@ export default function Faq() {
           ))}
         </ul>
 
-        {/* A question that is not on the list is a lead, not a dead end. */}
-        <div className={styles.more}>
-          <p className={styles.moreText}>{faq.more.text}</p>
-          <Button href={faq.more.cta.href} variant="secondary" size="small" fullOnMobile={false}>
-            {faq.more.cta.label}
-          </Button>
-        </div>
       </div>
     </section>
   )

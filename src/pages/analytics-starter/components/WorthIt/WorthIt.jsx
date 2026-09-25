@@ -62,9 +62,6 @@ export default function WorthIt() {
         <div className={styles.actions}>
           <div className={styles.buttons}>
             <Button href={worth.cta.href}>{worth.cta.label}</Button>
-            <Button href={worth.secondaryCta.href} variant="secondary">
-              {worth.secondaryCta.label}
-            </Button>
           </div>
           <p className={styles.note}>{worth.note}</p>
         </div>

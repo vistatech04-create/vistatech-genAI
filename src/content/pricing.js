@@ -2,7 +2,7 @@
  * Section 11. What it costs, and when.
  *
  * This is the payoff of the run-up. Section 09 itemised ₹78,500 of value
- * and closed on the full ₹29,998 without breathing a word about how it is
+ * and closed on the full ₹29,999 without breathing a word about how it is
  * paid; section 10 offered the trial week to anyone that number frightened.
  * So a reader arriving here has already accepted the price. What is left to
  * tell them is the part that no competitor can match: half of it is not due
@@ -14,8 +14,8 @@
  * asking, and this page has spent two sections earning the right to say the
  * number out loud.
  *
- *   Group online     ₹14,999 to start, remaining 50% after placement  (₹29,998)
- *   Group in person  ₹19,999 to start, remaining 50% after placement  (₹39,998)
+ *   Group online     ₹15,000 to start, remaining 50% after placement  (₹29,999)
+ *   Group in person  ₹20,000 to start, remaining 50% after placement  (₹39,999)
  *
  * ONLY ONE RUPEE FIGURE IN THE SPLIT, AND IT IS THE ONE YOU PAY TODAY.
  * Printing both halves as numbers put ₹14,999 on the card twice, and two
@@ -33,10 +33,11 @@
  * CONFIRM before launch:
  *  - ⚠ THE IN-PERSON PRICE IS MY CONSTRUCTION. The audited enroll page has
  *    ₹20,000 + ₹20,000 = ₹40,000 (research/existing-site-audit.md). Online
- *    was given to me as ₹14,999 + ₹14,999, so in person is carried across
- *    on the same convention as ₹19,999 + ₹19,999. If the client wants a
- *    round ₹20,000 there, say so — but a round ₹40,000 sitting beside a
- *    charm-priced ₹29,998 reads as a typo on the more expensive option.
+ *    is ₹15,000 to start plus ₹14,999 after placement (₹29,999 total), so
+ *    in person is carried across the same way: ₹20,000 to start plus
+ *    ₹19,999 after placement (₹39,999 total). If the client wants a round
+ *    ₹40,000 there, say so — but a round ₹40,000 sitting beside a
+ *    charm-priced ₹29,999 reads as a typo on the more expensive option.
  *  - whether GST applies on top, and on which half. The live site does not
  *    say, and a fee section that turns out to be plus-tax is the fastest
  *    way to lose a paid lead at the payment page.
@@ -75,7 +76,7 @@ export const pricing = {
          card carries its own count; showing the same number on both would
          be both wrong and pointless. */
       seats: { taken: 23, total: 30 },
-      total: '₹29,998',
+      total: '₹29,999',
       now: '₹15,000',
       points: [
         'All 60 days live with a mentor',
@@ -93,7 +94,7 @@ export const pricing = {
       /* ⚠ PLACEHOLDER. A classroom holds fewer people than a video call,
          so this is not the online number. CONFIRM the real room capacity. */
       seats: { taken: 11, total: 20 },
-      total: '₹39,998',
+      total: '₹39,999',
       now: '₹20,000',
       points: [
         'Everything in the online plan',
@@ -101,7 +102,7 @@ export const pricing = {
         // 'Lab machines and a place to sit and work',
         'Chennai, Egmore',
       ],
-      cta: { label: 'Ask about the classroom batch', href: '#call' },
+      cta: { label: 'Start your job training', href: '#enroll' },
     },
   ],
 

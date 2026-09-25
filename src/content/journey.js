@@ -61,7 +61,4 @@ export const journey = {
     lead: 'Between enrolling and your offer letter,',
     strong: 'you pay nothing more.',
   },
-
-  // The label names the step it drops you into, so pressing it is not a leap.
-  cta: { label: 'Step 1: Talk to our consultant', href: '#call' },
 }

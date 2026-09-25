@@ -6,7 +6,7 @@ import styles from './JobSection.module.css'
 
 export default function JobSection() {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} data-section="job-section">
       <div className="container">
         <div className={styles.grid}>
           <PlacedMarquee
@@ -17,11 +17,9 @@ export default function JobSection() {
           <div className={styles.player}>
             <VideoPlayer
               youtubeId={jobSection.youtubeId}
-              poster={jobSection.poster}
+              embedSrc={jobSection.embedSrc}
+              autoplayPreview
               posterAlt={jobSection.posterAlt}
-              duration={jobSection.duration}
-              title={jobSection.videoTitle}
-              titleAccent={jobSection.videoTitleAccent}
             />
           </div>
         </div>
@@ -30,9 +28,6 @@ export default function JobSection() {
           <div className={styles.buttons}>
             <Button href={jobSection.primaryCta.href}>
               {jobSection.primaryCta.label}
-            </Button>
-            <Button href={jobSection.secondaryCta.href} variant="secondary">
-              {jobSection.secondaryCta.label}
             </Button>
           </div>
           <p className={styles.tamil}>{jobSection.tamil}</p>

@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import Button from '../Button/Button.jsx'
 import { journey } from '../../content/journey.js'
 import styles from './Journey.module.css'
 
@@ -107,10 +106,6 @@ export default function Journey() {
         <p className={styles.summary} ref={summary}>
           {journey.summary.lead} <b>{journey.summary.strong}</b>
         </p>
-
-        <div className={styles.cta}>
-          <Button href={journey.cta.href}>{journey.cta.label}</Button>
-        </div>
       </div>
     </section>
   )

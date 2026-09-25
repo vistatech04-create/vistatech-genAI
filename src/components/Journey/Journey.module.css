@@ -42,6 +42,13 @@
    card. The line is what makes it read as one journey rather than six
    unrelated boxes.                                                       */
 .steps {
+  /* It's an <ol> for the semantics (screen readers announce "item 2 of 6"
+     etc.), but the numbers are drawn ourselves in .num — the browser's own
+     40px marker indent has nothing to make room for and was just pushing
+     the whole rail right, worse on a narrow screen where 40px is a third
+     of the padding. */
+  list-style: none;
+  padding: 0;
   width: 100%;
   max-width: 720px;
   margin: 36px auto 0;

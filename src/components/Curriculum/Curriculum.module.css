@@ -224,14 +224,21 @@
 
 @media (min-width: 900px) { .toolsLabel { margin-top: 62px; } }
 
+/* Flex-wrap, not a fixed column count: a rigid repeat(10, 1fr) forces ten
+   columns the moment the 700px breakpoint hits, which is fine on a wide
+   desktop but crushes every tile on a mid-width screen (a small laptop,
+   a tablet) where ten columns don't actually fit comfortably. Wrapping
+   lets the row become two whenever it needs to, and centring keeps a
+   short last row looking deliberate instead of stranded on the left. */
 .tools {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
   margin-top: 18px;
 }
 
-@media (min-width: 700px) { .tools { grid-template-columns: repeat(10, 1fr); gap: 12px; } }
+@media (min-width: 700px) { .tools { gap: 12px; } }
 
 /* Icon over name, centred. Reads as a strip of tools rather than a list.
 
@@ -239,6 +246,7 @@
    durations and offset starts mean they never fall into step with each
    other, which is what would make it look mechanical. */
 .tool {
+  flex: 0 1 92px;
   aspect-ratio: 1 / 1;
   display: flex;
   flex-direction: column;
@@ -253,6 +261,8 @@
   will-change: transform;
   animation: floatTool 6s ease-in-out infinite alternate;
 }
+
+@media (min-width: 700px) { .tool { flex-basis: 100px; } }
 
 /* Negative delays start every tile mid-drift, so the row is already alive
    on the first frame rather than settling into motion. */

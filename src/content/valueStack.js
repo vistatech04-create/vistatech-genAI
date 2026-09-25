@@ -6,7 +6,7 @@
  * program is.
  *
  * THIS SECTION IS THE PRICE ANCHOR, AND IT DELIBERATELY STOPS SHORT.
- * The order down the page is: this list, then the full ₹29,998, then the
+ * The order down the page is: this list, then the full ₹29,999, then the
  * trial week for anyone who flinched at it, and only then the section that
  * reveals half is due now and half after placement.
  *
@@ -20,7 +20,7 @@
  * actually hand a student, and every value is what that piece would cost
  * bought on its own in Chennai. The total comes to roughly two and a half
  * times the full fee — not twenty times. A stack that claims "₹4,00,000 of
- * value for ₹29,998" reads as a lie and takes the real argument down with
+ * value for ₹29,999" reads as a lie and takes the real argument down with
  * it. If a value below cannot be defended out loud on a sales call, cut the
  * line rather than keep the number.
  *
@@ -110,10 +110,10 @@ export const valueStack = {
   total: '₹78,500',
 
   /* The reveal. The full fee, whole, with nothing softening it — a reader
-     who is going to balk at ₹29,998 should balk here, three sections before
+     who is going to balk at ₹29,999 should balk here, three sections before
      we ask for anything, not at a payment page. */
   feeLabel: 'Full course fee, everything above included',
-  fee: '₹29,998',
+  fee: '₹29,999',
 
   /* Green, because on both pages green only ever means money not spent.
      Points forward without naming the number: enough to keep a reader

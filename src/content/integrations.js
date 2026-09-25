@@ -13,5 +13,5 @@ export const integrations = {
    * Left blank, submitting the form still shows the on-screen confirmation
    * — it just does not save anywhere, and a warning prints to the console.
    */
-  googleSheetEndpoint: 'https://script.google.com/macros/s/AKfycbyCWm1nteVxNjsu9mfXq0gsc7QHxGrDoGRrifvBxMDo9RHWZCHWA_w3ia8j9OS_oDdMYg/exec',
+  googleSheetEndpoint: 'https://script.google.com/macros/s/AKfycbwhdi5nfvbJL5tlrHBPUZZcBrxXwXyihBWwnYL--_aFU5zwyTbVUA7yiasYaUeleNte/exec',
 }

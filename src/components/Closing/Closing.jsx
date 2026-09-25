@@ -34,7 +34,9 @@ const tel = `tel:${footer.phone.replace(/\s/g, '')}`
 export default function Closing() {
   return (
     <>
-      <section className={styles.section} id="start">
+      {/* data-section="footer": the last CTA on the page, immediately above
+          the actual <footer> tag below — which itself has no #enroll button. */}
+      <section className={styles.section} id="start" data-section="footer">
         {/* The warm wash, and the tools going up the way they do behind
             the headline at the top of the page. */}
         <span className={styles.wash} aria-hidden="true" />
@@ -64,9 +66,6 @@ export default function Closing() {
 
           <div className={styles.buttons}>
             <Button href={closing.cta.href}>{closing.cta.label}</Button>
-            <Button href={tel} variant="secondary">
-              {closing.callLabel} {footer.phone}
-            </Button>
           </div>
 
           <p className={styles.note}>{closing.note}</p>

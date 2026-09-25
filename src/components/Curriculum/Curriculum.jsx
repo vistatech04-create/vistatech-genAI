@@ -26,7 +26,7 @@ function Tick() {
 
 export default function Curriculum() {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} data-section="curriculum">
       <div className="container">
         <div className={styles.head}>
           <h2 className={styles.heading}>
