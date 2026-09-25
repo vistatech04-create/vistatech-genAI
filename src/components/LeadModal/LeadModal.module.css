@@ -26,23 +26,38 @@
    needs to size and centre it, plus give the close button somewhere to sit. */
 .dialog > * { margin: 0; }
 
+/* The visible circle is still 34x34 (::before, below) — the button's own
+   box is grown to the ~44px minimum tap-target size and repositioned so
+   that circle lands in exactly the same spot on screen. Nothing about the
+   button's appearance changes; only its invisible, actually-tappable
+   area gets bigger. */
 .close {
   position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 34px;
-  height: 34px;
+  top: 1px;
+  right: 1px;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
   border: 0;
-  border-radius: 50%;
-  background: var(--sand);
+  background: none;
   color: var(--ink-soft);
   cursor: pointer;
-  transition: background 0.16s var(--ease), color 0.16s var(--ease);
 }
 
-.close:hover { background: var(--gold-wash); color: var(--ink); }
+.close::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: var(--sand);
+  transition: background 0.16s var(--ease);
+}
+
+.close svg { position: relative; }
+
+.close:hover { color: var(--ink); }
+.close:hover::before { background: var(--gold-wash); }
 
 @keyframes fadeIn {
   from { opacity: 0; }

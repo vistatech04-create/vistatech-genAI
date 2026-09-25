@@ -12,7 +12,7 @@ export default function Header({ cta = hero.primaryCta }) {
     // actually clickable (Hero.jsx itself has no button) — see Button.jsx.
     <header className={styles.header} data-section="hero">
       <div className={`container ${styles.inner}`}>
-        <img className={styles.logo} src="/images/logo.png" alt="Vista Tech" />
+        <img className={styles.logo} src="/images/logo.png" alt="Vista Tech" width="234" height="173" />
         <span className={styles.action}>
           <Button href={cta.href} size="small" fullOnMobile={false}>
             {cta.label}

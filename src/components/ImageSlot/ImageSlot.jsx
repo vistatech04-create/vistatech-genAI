@@ -4,7 +4,7 @@ export default function ImageSlot({ src, alt, label, hint }) {
   return (
     <div className={styles.slot}>
       {src ? (
-        <img className={styles.image} src={src} alt={alt} />
+        <img className={styles.image} src={src} alt={alt} width="400" height="400" />
       ) : (
         <div className={styles.empty}>
           <div>

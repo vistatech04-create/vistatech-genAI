@@ -61,6 +61,7 @@ function Card({ person, offset, onFocusCard, onPlay }) {
           posterAlt={`${person.name}, ${person.role} at ${person.company}`}
           ratio="4 / 5"
           onPlay={onPlay}
+          focusable={active}
         />
       </div>
 

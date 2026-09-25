@@ -277,7 +277,13 @@
 
 .dots { display: flex; gap: 8px; }
 
+/* The visible dot stays 8px (22px once active) so the row's compact look
+   doesn't change, but a button that small is hard to tap accurately — an
+   invisible ::after extends the actual hit area to ~44px. It's positioned
+   absolutely, so it takes up no layout space and never pushes neighbouring
+   dots apart. */
 .dot {
+  position: relative;
   width: 8px;
   height: 8px;
   padding: 0;
@@ -286,6 +292,12 @@
   background: rgba(40, 8, 32, 0.2);
   cursor: pointer;
   transition: background 0.2s var(--ease), width 0.2s var(--ease);
+}
+
+.dot::after {
+  content: '';
+  position: absolute;
+  inset: -18px;
 }
 
 .dotOn { width: 22px; border-radius: var(--radius-pill); background: var(--flame); }

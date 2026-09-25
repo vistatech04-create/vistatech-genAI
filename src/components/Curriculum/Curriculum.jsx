@@ -88,7 +88,7 @@ export default function Curriculum() {
             <article className={styles.tool} key={tool.name}>
               <span className={styles.icon}>
                 {tool.icon ? (
-                  <img src={tool.icon} alt="" />
+                  <img src={tool.icon} alt="" width="32" height="32" />
                 ) : (
                   <span className={styles.glyph}>
                     <ToolGlyph name={tool.glyph} />

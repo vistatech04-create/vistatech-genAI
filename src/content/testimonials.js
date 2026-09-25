@@ -30,7 +30,7 @@ export const testimonials = {
       placed: '',
       background: '2025 passed out',
       videoSrc: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790240837/yamini-1.mp4',
-      poster: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790240837/yamini-1.jpg',
+      poster: 'https://res.cloudinary.com/zmdfv4o7/video/upload/f_auto,q_auto,w_400/v1790240837/yamini-1.jpg',
     },{
       id: 'jamuna',
       name: 'Jamuna',
@@ -40,7 +40,7 @@ export const testimonials = {
       placed: '',
       background: 'Career gap',
       videoSrc: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790240933/yellow_shirt_girl-1.mp4',
-      poster: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790240933/yellow_shirt_girl-1.jpg',
+      poster: 'https://res.cloudinary.com/zmdfv4o7/video/upload/f_auto,q_auto,w_400/v1790240933/yellow_shirt_girl-1.jpg',
     },{
       id: 'vasikaramani',
       name: 'Vasikaramani.M',
@@ -50,7 +50,7 @@ export const testimonials = {
       placed: '',
       background: 'Carrier gap',
       videoSrc: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790241023/WhatsApp_Video_2026-09-24_at_2.38.03_PM.mp4',
-      poster: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790241023/WhatsApp_Video_2026-09-24_at_2.38.03_PM.jpg',
+      poster: 'https://res.cloudinary.com/zmdfv4o7/video/upload/f_auto,q_auto,w_400/v1790241023/WhatsApp_Video_2026-09-24_at_2.38.03_PM.jpg',
     },{
       id: 'monish',
       name: 'Monish',
@@ -60,7 +60,7 @@ export const testimonials = {
       placed: '',
       background: 'Fresher',
       videoSrc: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790240956/VID_20260923_133449.mp4',
-      poster: 'https://res.cloudinary.com/zmdfv4o7/video/upload/v1790240956/VID_20260923_133449.jpg',
+      poster: 'https://res.cloudinary.com/zmdfv4o7/video/upload/f_auto,q_auto,w_400/v1790240956/VID_20260923_133449.jpg',
     },
   ],
 }

@@ -49,11 +49,11 @@ export const social = {
    * photograph yet still looks deliberate.
    */
   roster: [
-    { name: 'Rohit prakash',          photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241678/Rohit_Prakash-Data_anlyst.png' },
-    { name: 'Ajay Krishna',      photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241678/Ajay_Krishna_-_powerbi.png' },
-    { name: 'Vikram', photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241679/Vikram_-_Powerbi.png' },
-    { name: 'Saravanan M.',      photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241678/saravnan_-_data_analyst.jpg' },
-    { name: 'Rajesh',     photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/v1790241676/Rajesh-Operation_analyst.jpg' },
+    { name: 'Rohit prakash',          photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/f_auto,q_auto,w_60/v1790241678/Rohit_Prakash-Data_anlyst.png' },
+    { name: 'Ajay Krishna',      photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/f_auto,q_auto,w_60/v1790241678/Ajay_Krishna_-_powerbi.png' },
+    { name: 'Vikram', photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/f_auto,q_auto,w_60/v1790241679/Vikram_-_Powerbi.png' },
+    { name: 'Saravanan M.',      photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/f_auto,q_auto,w_60/v1790241678/saravnan_-_data_analyst.jpg' },
+    { name: 'Rajesh',     photo: 'https://res.cloudinary.com/zmdfv4o7/image/upload/f_auto,q_auto,w_60/v1790241676/Rajesh-Operation_analyst.jpg' },
   ],
 
   /**

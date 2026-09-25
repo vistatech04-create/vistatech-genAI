@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './VideoPlayer.module.css'
 
 function PlayIcon() {
@@ -22,6 +22,7 @@ export default function VideoPlayer({
   titleAccent,
   ratio,
   onPlay,
+  focusable = true,
 }) {
   // An inline custom property beats the stylesheet, so a card that needs a
   // portrait frame at every width can just ask for one.
@@ -37,6 +38,37 @@ export default function VideoPlayer({
   // treatment as the other two, unless autoplayPreview says otherwise.
   const ready = Boolean(youtubeId) || Boolean(videoSrc) || Boolean(embedSrc)
 
+  // The muted preview is a cross-origin iframe (Mux), which is one of the
+  // heavier things this page fetches. Mounting it only once its frame is
+  // in (or near) view — instead of the instant the component renders —
+  // keeps that fetch off the critical path for first paint without
+  // changing what the visitor sees: an above-fold frame like the hero's
+  // still crosses the intersection threshold within a frame or two of
+  // load, so the preview starts just as it always did; a below-fold one
+  // (StarterWeek) simply doesn't fetch until the visitor scrolls near it.
+  const frameRef = useRef(null)
+  const [previewMounted, setPreviewMounted] = useState(false)
+
+  useEffect(() => {
+    if (!autoplayPreview || !embedSrc) return
+    const node = frameRef.current
+    if (!node || typeof IntersectionObserver === 'undefined') {
+      setPreviewMounted(true)
+      return
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setPreviewMounted(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '200px' },
+    )
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [autoplayPreview, embedSrc])
+
   if (autoplayPreview && embedSrc) {
     // No poster, no title overlay: the video itself is the cover, muted so
     // the browser allows it to start on its own as a silent preview. The
@@ -50,14 +82,16 @@ export default function VideoPlayer({
       : `${embedSrc}${join}autoplay=muted&muted=true&loop=true`
 
     return (
-      <div className={styles.frame} style={shape}>
-        <iframe
-          key={withSound ? 'sound' : 'muted'}
-          src={src}
-          title={posterAlt}
-          allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen
-        />
+      <div className={styles.frame} style={shape} ref={frameRef}>
+        {previewMounted && (
+          <iframe
+            key={withSound ? 'sound' : 'muted'}
+            src={src}
+            title={posterAlt}
+            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+          />
+        )}
         {!withSound && (
           <button
             type="button"
@@ -137,10 +171,11 @@ export default function VideoPlayer({
           onPlay?.()
         }}
         aria-label={ready ? 'Play the video' : 'Video not added yet'}
+        tabIndex={focusable ? undefined : -1}
       >
         {poster ? (
           <>
-            <img className={styles.poster} src={poster} alt={posterAlt} />
+            <img className={styles.poster} src={poster} alt={posterAlt} width="800" height="1000" />
             <span
               className={`${styles.scrim} ${title ? '' : styles.scrimPlain}`}
             />

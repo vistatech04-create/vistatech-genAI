@@ -64,7 +64,7 @@ function Card({ review }) {
     <figure className={styles.card}>
       <header className={styles.who}>
         {review.photo ? (
-          <img className={styles.photo} src={review.photo} alt="" />
+          <img className={styles.photo} src={review.photo} alt="" width="38" height="38" />
         ) : (
           <span
             className={styles.avatar}
