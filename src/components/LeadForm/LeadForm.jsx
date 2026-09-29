@@ -61,6 +61,18 @@ export default function LeadForm({ source }) {
     setErrors((e) => ({ ...e, [key]: undefined }))
   }
 
+  // Phone only ever holds digits, and never more than ten of them — so
+  // there's nothing to type that could make it invalid except being short.
+  const setPhone = (event) => {
+    const digits = event.target.value.replace(/\D/g, '').slice(0, 10)
+    setValues((v) => ({ ...v, phone: digits }))
+    setErrors((e) => ({ ...e, phone: undefined }))
+  }
+
+  // The submit button only lights up once every field actually passes —
+  // same checks as handleSubmit, just read without touching error state.
+  const isComplete = Object.keys(validate(values)).length === 0
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     const found = validate(values)
@@ -178,8 +190,9 @@ export default function LeadForm({ source }) {
             inputMode="numeric"
             autoComplete="tel"
             placeholder="98765 43210"
+            maxLength={10}
             value={values.phone}
-            onChange={set('phone')}
+            onChange={setPhone}
             aria-invalid={Boolean(errors.phone)}
             aria-describedby={errors.phone ? fieldId('phone-error') : undefined}
           />
@@ -231,7 +244,7 @@ export default function LeadForm({ source }) {
       </div>
 
       <div className={styles.submit}>
-        <Button as="button" type="submit" disabled={status === 'submitting'}>
+        <Button as="button" type="submit" disabled={status === 'submitting' || !isComplete}>
           {status === 'submitting' ? leadForm.submitLabelBusy : leadForm.submitLabel}
         </Button>
       </div>

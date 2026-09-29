@@ -73,10 +73,20 @@ export default function RoadmapCard() {
     setErrors((e) => ({ ...e, [key]: undefined }))
   }
 
+  // Phone only ever holds digits, and never more than ten of them.
+  const setPhone = (event) => {
+    const digits = event.target.value.replace(/\D/g, '').slice(0, 10)
+    setValues((v) => ({ ...v, phone: digits }))
+    setErrors((e) => ({ ...e, phone: undefined }))
+  }
+
   const pick = (key) => (option) => {
     setValues((v) => ({ ...v, [key]: option }))
     setErrors((e) => ({ ...e, [key]: undefined }))
   }
+
+  // The submit button only lights up once every field passes.
+  const isComplete = Object.keys(validate(values)).length === 0
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -167,8 +177,9 @@ export default function RoadmapCard() {
               inputMode="numeric"
               autoComplete="tel"
               placeholder={roadmap.phonePlaceholder}
+              maxLength={10}
               value={values.phone}
-              onChange={set('phone')}
+              onChange={setPhone}
               aria-invalid={Boolean(errors.phone)}
               aria-describedby={errors.phone ? 'roadmap-phone-error' : undefined}
             />
@@ -220,7 +231,7 @@ export default function RoadmapCard() {
             onPick={pick('stage')}
           />
 
-          <Button as="button" type="submit" variant="secondary">
+          <Button as="button" type="submit" variant="secondary" disabled={!isComplete}>
             {roadmap.submitLabel}
           </Button>
           <p className={styles.note}>{roadmap.note}</p>
