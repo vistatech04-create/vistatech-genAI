@@ -17,7 +17,6 @@ function validate(values) {
 
   const digits = values.phone.replace(/\D/g, '')
   if (!digits) errors.phone = 'We need a number to send it to.'
-  else if (digits.length < 10) errors.phone = 'That looks short. 10 digits please.'
 
   if (!values.email.trim()) errors.email = 'Please add your email.'
   else if (!/^\S+@\S+\.\S+$/.test(values.email)) errors.email = 'Check the email address.'
@@ -73,9 +72,9 @@ export default function RoadmapCard() {
     setErrors((e) => ({ ...e, [key]: undefined }))
   }
 
-  // Phone only ever holds digits, and never more than ten of them.
+  // Phone only ever holds digits, any length.
   const setPhone = (event) => {
-    const digits = event.target.value.replace(/\D/g, '').slice(0, 10)
+    const digits = event.target.value.replace(/\D/g, '')
     setValues((v) => ({ ...v, phone: digits }))
     setErrors((e) => ({ ...e, phone: undefined }))
   }
@@ -177,7 +176,6 @@ export default function RoadmapCard() {
               inputMode="numeric"
               autoComplete="tel"
               placeholder={roadmap.phonePlaceholder}
-              maxLength={10}
               value={values.phone}
               onChange={setPhone}
               aria-invalid={Boolean(errors.phone)}
