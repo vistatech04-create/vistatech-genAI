@@ -121,8 +121,10 @@
   list-style: none;
 }
 
-/* Two cards, held to a width where each still reads as a card rather than
-   a banner, and centred in the container.
+/* One or two cards, held to a width where each still reads as a card rather
+   than a banner, and centred in the container. auto-fit collapses unused
+   tracks, so a lone card sits in the middle instead of the left column;
+   with two, each is the same 380px as before.
 
    align-items: stretch is the grid default, and it is stated here because
    it is load bearing: it makes both cards the height of the taller one, so
@@ -131,7 +133,8 @@
    bottom of that shared height. */
 @media (min-width: 760px) {
   .plans {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 380px));
+    justify-content: center;
     gap: 20px;
     max-width: 780px;
     margin: 26px auto 0;

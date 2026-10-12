@@ -113,7 +113,7 @@ export const valueStack = {
      who is going to balk at ₹29,999 should balk here, three sections before
      we ask for anything, not at a payment page. */
   feeLabel: 'Full course fee, everything above included',
-  fee: '₹29,999',
+  fee: '₹39,999',
 
   /* Green, because on both pages green only ever means money not spent.
      Points forward without naming the number: enough to keep a reader

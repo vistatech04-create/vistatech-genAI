@@ -76,8 +76,8 @@ export const pricing = {
          card carries its own count; showing the same number on both would
          be both wrong and pointless. */
       seats: { taken: 23, total: 30 },
-      total: '₹29,999',
-      now: '₹15,000',
+      total: '₹39,999',
+      now: '₹20,000',
       points: [
         'All 60 days live with a mentor',
         'Excel, SQL, Python, Power BI, Tableau',
@@ -86,24 +86,24 @@ export const pricing = {
       ],
       cta: { label: 'Start your job training', href: '#enroll' },
     },
-    {
-      id: 'offline',
-      name: 'Group · In person',
-      note: 'The same batch, in the Chennai classroom.',
-      featured: false,
-      /* ⚠ PLACEHOLDER. A classroom holds fewer people than a video call,
-         so this is not the online number. CONFIRM the real room capacity. */
-      seats: { taken: 11, total: 20 },
-      total: '₹39,999',
-      now: '₹20,000',
-      points: [
-        'Everything in the online plan',
-        'In the room with the mentor',
-        // 'Lab machines and a place to sit and work',
-        'Chennai, Egmore',
-      ],
-      cta: { label: 'Start your job training', href: '#enroll' },
-    },
+    // {
+    //   id: 'offline',
+    //   name: 'Group · In person',
+    //   note: 'The same batch, in the Chennai classroom.',
+    //   featured: false,
+    //   /* ⚠ PLACEHOLDER. A classroom holds fewer people than a video call,
+    //      so this is not the online number. CONFIRM the real room capacity. */
+    //   seats: { taken: 11, total: 20 },
+    //   total: '₹39,999',
+    //   now: '₹20,000',
+    //   points: [
+    //     'Everything in the online plan',
+    //     'In the room with the mentor',
+    //     // 'Lab machines and a place to sit and work',
+    //     'Chennai, Egmore',
+    //   ],
+    //   cta: { label: 'Start your job training', href: '#enroll' },
+    // },
   ],
 
   /* Kept out of the plan objects so both cards are guaranteed to read the

@@ -38,7 +38,7 @@ Elsewhere the main site also sells: Full Stack Python, Full Stack Java, Data Sci
 ## Pricing found on the live enroll page — THREE SKUs, not one
 | SKU | Before placement | After placement | Total |
 |---|---|---|---|
-| Group Session (Online) | ₹15,000 | ₹15,000 | ₹30,000 |
+| Group Session (Online) | ₹20,000 | ₹19,999 | ₹39,999 |
 | Group Session (Offline, in-person) | ₹20,000 | ₹20,000 | ₹40,000 |
 | 1:1 Dedicated mentor | ₹20,000 | ₹20,000 | ₹40,000 |
 

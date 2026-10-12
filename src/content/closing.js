@@ -38,7 +38,7 @@ export const closing = {
    */
   recap: [
     { big: '60 days', small: 'live, with a mentor' },
-    { big: '₹15,000', small: 'to start training' },
+    { big: '₹20,000', small: 'to start training' },
     { big: 'The rest', small: 'only once you are placed' },
   ],
 

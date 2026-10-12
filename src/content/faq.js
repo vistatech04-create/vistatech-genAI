@@ -30,9 +30,9 @@ export const faq = {
     {
       q: 'What exactly do I pay, and when?',
       a:
-        '₹15,000 to start your training on the group online plan, and ' +
-        '₹14,999 once you have an offer letter. That is the whole fee: ' +
-        '₹29,999 across both halves, and nothing else. Between those two ' +
+        '₹20,000 to start your training on the group online plan, and ' +
+        '₹19,999 once you have an offer letter. That is the whole fee: ' +
+        '₹39,999 across both halves, and nothing else. Between those two ' +
         'moments you are not asked for anything, whether that gap is two ' +
         'months or six.',
     },

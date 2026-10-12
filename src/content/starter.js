@@ -639,8 +639,8 @@ export const starter = {
       {
         q: 'What happens to my ₹999 if I do join?',
         a:
-          'It comes off the course fee. You pay ₹14,000 to start instead of ' +
-          '₹15,000, and the second half only after you are placed. So the ' +
+          'It comes off the course fee. You pay ₹20,000 to start instead of ' +
+          '₹19,000, and the second half only after you are placed. So the ' +
           'week costs you nothing if you carry on.',
       },
       {
