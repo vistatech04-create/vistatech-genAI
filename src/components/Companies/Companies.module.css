@@ -10,8 +10,10 @@
 
 @media (min-width: 900px) { .section { padding-block: 72px; } }
 
-/* Proof on the left, the form on the right. Stacked on a phone, with the
-   form last, so someone reads the evidence before being asked for a number. */
+/* Proof on the left, the form on the right. Stacked on a phone, the form now
+   comes FIRST and the proof second (requested: the ask leads on a small
+   screen). Only the visual order changes, via `order`; the markup is
+   unchanged, and from 940px up the proof is back on the left. */
 .split {
   display: grid;
   grid-template-columns: 1fr;
@@ -19,8 +21,11 @@
   align-items: start;
 }
 
+.proof { order: 2; }
+
 @media (min-width: 940px) {
   .split { grid-template-columns: 1.08fr 0.92fr; gap: 52px; }
+  .proof { order: 0; }
 }
 
 /* A grid column will not shrink below its content by default, and the

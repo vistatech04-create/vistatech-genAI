@@ -44,7 +44,7 @@ export default function Companies() {
     <section className={styles.section}>
       <div className="container">
         <div className={styles.split}>
-          <div>
+          <div className={styles.proof}>
             <div className={styles.head}>
               <h2 className={styles.heading}>
                 Companies hiring through <b>our placement partners</b>
